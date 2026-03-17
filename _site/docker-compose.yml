@@ -1,0 +1,15 @@
+services:
+  jekyll:
+    image: jekyll/jekyll:latest
+    container_name: github_io_jekyll
+    working_dir: /srv/jekyll
+    command: sh -c "bundle install && bundle exec jekyll serve --host 0.0.0.0 --port 4000 --no-watch"
+    ports:
+      - "4002:4000"
+    volumes:
+      - "D:/DOCKER/GitHub_IO:/srv/jekyll"
+    environment:
+      JEKYLL_ENV: development
+      PAGES_REPO_NWO: akawamorita/akawamorita.github.io
+    stdin_open: true
+    tty: true
