@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% if page.title %}{{ page.title }} | {% endif %}Alexandre Kawamorita Pinto</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <style>
+      body {
+        background-color: #F4FAFF;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.6;
+      }
+
+      h1, h2, h3 {
+        margin-top: 28px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin: 20px 0;
+      }
+
+      .social-links a {
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      ul.links-list li {
+        margin-bottom: 8px;
+      }
+
+      .section {
+        margin-top: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      {{ content }}
+    </main>
+  </body>
+</html>

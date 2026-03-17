@@ -1,4 +1,6 @@
-title: Alexandre Kawamorita
-description: Portfólio técnico
+title:
+description:
 theme: jekyll-theme-minimal
 repository: akawamorita/akawamorita.github.io
+lang: en
+show_downloads: false

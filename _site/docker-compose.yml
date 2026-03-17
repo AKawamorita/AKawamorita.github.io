@@ -3,7 +3,7 @@ services:
     image: jekyll/jekyll:latest
     container_name: github_io_jekyll
     working_dir: /srv/jekyll
-    command: sh -c "bundle install && bundle exec jekyll serve --host 0.0.0.0 --port 4000 --no-watch"
+    command: sh -c "bundle install && bundle exec jekyll serve --host 0.0.0.0 --port 4000 --no-watch --force_polling --livereload"
     ports:
       - "4002:4000"
     volumes:
