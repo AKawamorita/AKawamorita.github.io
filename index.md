@@ -25,6 +25,10 @@ Profissional de tecnologia com forte background em desenvolvimento de sistemas e
     <i class="fa-brands fa-linkedin"></i> LinkedIn
   </a>
 
+  <a href="https://akawamorita.github.io/#portfolio-tecnico" target="_blank" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px;">
+    <i class="fa-brands fa-github"></i> GitHub
+  </a>
+
   <a href="https://medium.com/@alexkpinto" target="_blank" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px;">
     <i class="fa-brands fa-medium"></i> Medium
   </a>
@@ -44,7 +48,7 @@ Profissional de tecnologia com forte background em desenvolvimento de sistemas e
 
 ## Machine Learning
 
-Projetos focados em classificação, fraude, NLP, modelos ensemble e avaliação em cenários desbalanceados.
+Projetos focados em classificação, fraude, NLP, RUL, modelos ensemble e avaliação em cenários desbalanceados.
 
 [Ver projetos de Machine Learning](#portfolio-tecnico)
 
@@ -63,9 +67,62 @@ Desenvolvimento de APIs com Flask e FastAPI para publicação de modelos e solu�
 ## Portfólio técnico
 
 Alguns exemplos de projetos e estudos aplicados:
+<li><a href="https://github.com/AKawamorita/fraud-detection-xgboost" target="_blank">[Credit Card Fraud Detection]</a></li>
+    🧠 Machine Learning
+        Binary Classification
+        Imbalanced Learning (Class Weight)
+        Logistic Regression (Baseline)
+        XGBoost (Final Model)
+        Threshold Optimization
 
-- Credit Card Fraud Detection
-- Email Classification with AI
-- NLP aplicado a processos corporativos
-- APIs de inferência com Python
-- Estudos em Deep Learning e visão computacional
+    📊 Metrics & Evaluation
+        Precision • Recall  
+        ROC-AUC • PR-AUC
+        Precision-Recall Curve
+
+    🎯 Key Concepts
+        Avoiding Accuracy Trap
+        Business-driven metrics
+        Model comparison strategy
+
+<li><a href="https://github.com/AKawamorita/api_fraud-detection-xgboost" target="_blank">[APIs de inferência com Python]</a></li> 
+    🧩 MLOps & Engineering
+        REST API (FastAPI / Flask)
+        Model Deployment (XGBoost JSON)
+        Docker & Containerization
+
+    🔐 API Design
+            Endpoint Design (/predict)
+            Input Validation (JSON)
+            Error Handling
+
+    📊 Production Practices
+            Structured Logging (model version)
+            API Documentation (Swagger/OpenAPI)
+            Authentication (JWT)
+
+<li><a href="https://github.com/AKawamorita/NASABearing-Dataset" target="_blank">[Run-to-Failure Data (RTF)]</a></li> 
+    Bearing Dataset (NASA / IMS)
+
+    🧠 Signal Processing
+        Vibration Analysis
+        RMS • Kurtosis • Skewness
+        FFT (frequency domain)
+
+    ⚙️ Feature Engineering
+        Sliding Window
+        Statistical Feature Extraction
+        Degradation Trend Modeling
+
+    🔍 Anomaly Detection
+        Autoencoders
+        Reconstruction Error
+        Threshold-based detection
+
+    ⏱️ Time Series & Degradation
+        Run-to-Failure (RTF)
+        Health Index (HI)
+        Degradation Patterns
+
+- Email Classification with AI (projeto em produção)
+- Estudos em Deep Learning e visão computacional (em breve)
