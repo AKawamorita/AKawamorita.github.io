@@ -1,176 +1,248 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Início | Alexandre Kawamorita Pinto</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>Início | Alexandre Kawamorita</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
     <style>
-      body {
-        background-color: #F4FAFF;
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 40px 20px;
-        font-family: Arial, Helvetica, sans-serif;
-        line-height: 1.6;
-      }
+        body {
+            background-color: #F8F9FA;
+            /* Cinza bem claro para um look clean */
+            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-      h1, h2, h3 {
-        margin-top: 28px;
-      }
+        .header-section {
+            background-color: #ffffff;
+            border-bottom: 1px solid #dee2e6;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
 
-      .social-links {
-        display: flex;
-        gap: 18px;
-        flex-wrap: wrap;
-        margin: 20px 0;
-      }
+        .card {
+            border: none;
+            border-radius: 12px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            height: 100%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
 
-      .social-links a {
-        text-decoration: none;
-        font-weight: bold;
-      }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
 
-      ul.links-list li {
-        margin-bottom: 8px;
-      }
+        .tech-badge {
+            background-color: #e9ecef;
+            color: #495057;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
 
-      .section {
-        margin-top: 36px;
-      }
+        .section-title {
+            border-left: 5px solid #0d6efd;
+            padding-left: 15px;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .contact-link {
+            transition: color 0.2s;
+        }
+
+        .contact-link:hover {
+            color: #0d6efd !important;
+        }
+
+        pre {
+            background: #f1f3f5;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
     </style>
-  </head>
-  <body>
-    <main>
-      <h1 id="alexandre-kawamorita-pinto">Alexandre Kawamorita Pinto</h1>
+</head>
 
-<p>Profissional de tecnologia com forte background em desenvolvimento de sistemas e experiência em projetos de Machine Learning e NLP aplicados a problemas reais. Atua no desenvolvimento de soluções em Python, incluindo APIs REST para disponibilização e integração de modelos de ML. Possui formação em Ciência de Dados e conhecimentos em pipelines de dados, Docker e implantação de soluções voltadas à automação e análise inteligente.</p>
+<body>
 
-<h2 id="contatos">Contatos</h2>
+    <header class="header-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold">Alexandre Kawamorita</h1>
+                    <p class="lead text-muted">
+                        Machine Learning | Data Science | Python | SQL | NLP | Data Visualization | Statistical Analysis
+                        | Deep Learning | TinyML
+                    </p>
+                    <p>
+                        Profissional de tecnologia com forte background em desenvolvimento de sistemas e experiência em
+                        projetos de Machine Learning e NLP aplicados a problemas reais.
+                        Especialista em Python, APIs REST e soluções de automação inteligente.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 mt-4">
+                        <a href="mailto:alexkpinto@gmail.com" class="text-dark text-decoration-none contact-link">
+                            <i class="fa-solid fa-envelope text-primary"></i> alexkpinto@gmail.com
+                        </a>
+                        <a href="https://www.linkedin.com/in/alexandre-kawamorita/" target="_blank"
+                            class="text-dark text-decoration-none contact-link">
+                            <i class="fa-brands fa-linkedin text-primary"></i> LinkedIn
+                        </a>
+                        <a href="https://github.com/AKawamorita" target="_blank"
+                            class="text-dark text-decoration-none contact-link">
+                            <i class="fa-brands fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <main class="container mb-5">
 
-<div style="display: flex; flex-direction: column; gap: 12px; margin: 20px 0;">
+        <h2 class="section-title" id="portfolio-tecnico">Portifólio Técnico</h2>
 
-  <a href="https://wa.me/5519998081086" target="_blank" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px;">
-    <i class="fa-brands fa-whatsapp"></i> +55 19 99808-1086
-  </a>
+        <div class="row g-4">
 
-  <a href="mailto:alexkpinto@gmail.com" target="_blank" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px;">
-    <i class="fa-solid fa-envelope"></i> alexkpinto@gmail.com
-  </a>
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary">
+                            <i class="fa-solid fa-microchip"></i> Credit Card Fraud Detection
+                        </h5>
+                        <p class="card-text text-muted small">Detecção de fraude usando XGBoost e estratégias para dados
+                            desbalanceados.</p>
 
-  <a href="https://www.linkedin.com/in/alexandre-kawamorita/" target="_blank" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px;">
-    <i class="fa-brands fa-linkedin"></i> LinkedIn
-  </a>
+                        <div class="mb-3">
+                            <span class="tech-badge">Binary Classification</span>
+                            <span class="tech-badge">Imbalanced Learning (Class Weight)</span>
+                            <span class="tech-badge">Precision-Recall</span>
+                            <span class="tech-badge">Logistic Regression (Baseline)</span>
+                            <span class="tech-badge">XGBoost</span>
+                            <span class="tech-badge">Threshold Optimization</span>
+                        </div>
 
-  <a href="https://akawamorita.github.io/#portfolio-tecnico" target="_blank" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px;">
-    <i class="fa-brands fa-github"></i> GitHub
-  </a>
+                        <a href="https://github.com/AKawamorita/api_fraud-detection-xgboost" target="_blank"
+                            class="btn btn-outline-primary btn-sm">
+                            <i class="fa-brands fa-github"></i> Código Fonte
+                        </a>
+                        <a href="https://github.com/AKawamorita/api_fraud-detection-xgboost" target="_blank"
+                            class="btn btn-outline-secondary btn-sm">
+                            <i class="fa-brands fa-medium"></i> Artigo no Medium
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-  <a href="https://medium.com/@alexkpinto" target="_blank" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px;">
-    <i class="fa-brands fa-medium"></i> Medium
-  </a>
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary">
+                            <i class="fa-solid fa-gears"></i> NASA Bearing Dataset (RTF)
+                        </h5>
+                        <p class="card-text text-muted small">Análise de falhas e Health Index (HI) baseado em
+                            processamento de sinais e vibração.</p>
 
-</div>
+                        <div class="mb-3">
+                            <span class="tech-badge">Signal Processing</span>
+                            <span class="tech-badge">RMS • Kurtosis • Skewness</span>
+                            <span class="tech-badge">Predictive Maintenance</span>
+                            <span class="tech-badge">Time Series</span>
+                            <span class="tech-badge">Sliding Window</span>
+                            <span class="tech-badge">Statistical Feature Extraction</span>
+                            <span class="tech-badge">Degradation Trend Modeling</span>
+                        </div>
 
-<h2 id="áreas-de-atuação">Áreas de atuação</h2>
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="https://akawamorita.github.io/NOME-DO-REPO/site/" target="_blank"
+                                class="btn btn-outline-primary btn-sm">
+                                <i class="fa-brands fa-github"></i> Código Fonte
+                            </a>
+                            <a href="NASABearing-Dataset/index.html" target="_blank"
+                                class="btn btn-outline-secondary btn-sm">
+                                <i class="fa-solid fa-book"></i> Documentação
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<ul>
-  <li><a href="#machine-learning">Machine Learning</a></li>
-  <li><a href="#data-science">Data Science</a></li>
-  <li><a href="#apis-em-python">APIs em Python</a></li>
-  <li><a href="#portfolio-tecnico">Portfólio técnico</a></li>
-</ul>
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary">
+                            <i class="fa-solid fa-server"></i> APIs de Inferência de ML
+                        </h5>
+                        <p class="card-text text-muted small">Deploy de modelos com FastAPI/Flask e Dockerização de
+                            ambientes de produção.</p>
 
-<hr />
+                        <div class="mb-3">
+                            <span class="tech-badge">REST API (FastAPI / Flask)</span>
+                            <span class="tech-badge">Docker & Containerization</span>
+                            <span class="tech-badge">API Documentation (Swagger/OpenAPI)</span>
+                            <span class="tech-badge">Model Serving</span>
+                            <span class="tech-badge">Authentication (JWT)</span>
+                        </div>
 
-<h2 id="machine-learning">Machine Learning</h2>
+                        <a href="https://github.com/AKawamorita/api_fraud-detection-xgboost" target="_blank"
+                            class="btn btn-outline-primary btn-sm">
+                            <i class="fa-brands fa-github"></i> Código Fonte
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-<p>Projetos focados em classificação, fraude, NLP, RUL, modelos ensemble e avaliação em cenários desbalanceados.</p>
+            <div class="col-md-6">
+                <div class="card p-4 bg-light border-dashed">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                        <i class="fa-solid fa-code fa-2x mb-2 text-muted"></i>
+                        <h5 class="card-title fw-bold text-muted">Próximos Projetos</h5>
+                        <p class="card-text text-muted small">Deep Learning e Visão Computacional em breve.</p>
+                    </div>
+                </div>
+            </div>
 
-<p><a href="#portfolio-tecnico">Ver projetos de Machine Learning</a></p>
+        </div>
 
-<h2 id="data-science">Data Science</h2>
-
-<p>Exploração de dados, análise estatística, visualização, engenharia de atributos e apoio à tomada de decisão.</p>
-
-<p><a href="#portfolio-tecnico">Ver projetos de Data Science</a></p>
-
-<h2 id="apis-em-python">APIs em Python</h2>
-
-<p>Desenvolvimento de APIs com Flask e FastAPI para publicação de modelos e soluções de IA em produção.</p>
-
-<p><a href="#portfolio-tecnico">Ver projetos de APIs</a></p>
-
-<h2 id="portfólio-técnico">Portfólio técnico</h2>
-
-<p>Alguns exemplos de projetos e estudos aplicados:</p>
-<li><a href="https://github.com/AKawamorita/fraud-detection-xgboost" target="_blank">[Credit Card Fraud Detection]</a></li>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>🧠 Machine Learning
-    Binary Classification
-    Imbalanced Learning (Class Weight)
-    Logistic Regression (Baseline)
-    XGBoost (Final Model)
-    Threshold Optimization
-
-📊 Metrics &amp; Evaluation
-    Precision • Recall  
-    ROC-AUC • PR-AUC
-    Precision-Recall Curve
-
-🎯 Key Concepts
-    Avoiding Accuracy Trap
-    Business-driven metrics
-    Model comparison strategy
-</code></pre></div></div>
-
-<li><a href="https://github.com/AKawamorita/api_fraud-detection-xgboost" target="_blank">[APIs de inferência com Python]</a></li>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>🧩 MLOps &amp; Engineering
-    REST API (FastAPI / Flask)
-    Model Deployment (XGBoost JSON)
-    Docker &amp; Containerization
-
-🔐 API Design
-        Endpoint Design (/predict)
-        Input Validation (JSON)
-        Error Handling
-
-📊 Production Practices
-        Structured Logging (model version)
-        API Documentation (Swagger/OpenAPI)
-        Authentication (JWT)
-</code></pre></div></div>
-
-<li><a href="https://github.com/AKawamorita/NASABearing-Dataset" target="_blank">[Run-to-Failure Data (RTF)]</a></li>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Bearing Dataset (NASA / IMS)
-
-🧠 Signal Processing
-    Vibration Analysis
-    RMS • Kurtosis • Skewness
-    FFT (frequency domain)
-
-⚙️ Feature Engineering
-    Sliding Window
-    Statistical Feature Extraction
-    Degradation Trend Modeling
-
-🔍 Anomaly Detection
-    Autoencoders
-    Reconstruction Error
-    Threshold-based detection
-
-⏱️ Time Series &amp; Degradation
-    Run-to-Failure (RTF)
-    Health Index (HI)
-    Degradation Patterns
-</code></pre></div></div>
-
-<ul>
-  <li>Email Classification with AI (projeto em produção)</li>
-  <li>Estudos em Deep Learning e visão computacional (em breve)</li>
-</ul>
+        <div class="mt-5 pt-4">
+            <h2 class="section-title">Áreas de Atuação</h2>
+            <div class="row text-center">
+                <div class="col-md-4 mb-3">
+                    <div class="p-3 border rounded shadow-sm bg-white">
+                        <i class="fa-solid fa-brain fa-2x text-primary mb-2"></i>
+                        <h6>Machine Learning</h6>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="p-3 border rounded shadow-sm bg-white">
+                        <i class="fa-solid fa-chart-line fa-2x text-primary mb-2"></i>
+                        <h6>Data Science</h6>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="p-3 border rounded shadow-sm bg-white">
+                        <i class="fa-solid fa-flask fa-2x text-primary mb-2"></i>
+                        <h6>Research & Dev</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
-  </body>
+
+    <footer class="text-center py-4 text-muted border-top bg-white">
+        <small>&copy; 2026 Alexandre K</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>
