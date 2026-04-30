@@ -1,0 +1,2273 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the Beverage Sales project">
+      
+      
+        <meta name="author" content="Alexandre Kawamorita">
+      
+      
+      
+        <link rel="prev" href="../DataFeatures/">
+      
+      
+        <link rel="next" href="../IsolationForestAnalyzer/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Data Quality Features - Beverage Sales</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dataqualityfeatures" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Beverage Sales" class="md-header__button md-logo" aria-label="Beverage Sales" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Beverage Sales
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data Quality Features
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Beverage Sales" class="md-nav__button md-logo" aria-label="Beverage Sales" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Beverage Sales
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notebooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loaders
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Loaders
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CSVLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSV Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataQuality Class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataFeatures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Quality Features
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Quality Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-input-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Input Columns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Constructor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dataqualityfeaturesdf-date_colorder_date-group_colsnone-fill_missing_daystrue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DataQualityFeatures(df, date_col="Order_Date", group_cols=None, fill_missing_days=True)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generated-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generated Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generated Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base-daily-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base Daily Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calendar-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calendar Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rolling-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rolling Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deviation-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deviation Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#future-quantity-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future Quantity Targets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#history-flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        History Flags
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Public Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build_base_daily_features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        build_base_daily_features()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fill_missing_days_by_group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fill_missing_days_by_group()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_calendar_features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_calendar_features()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_rolling_features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_rolling_features()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_future_quantity_targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_future_quantity_targets()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_history_flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_history_flags()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fill_initial_feature_nans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fill_initial_feature_nans()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build_all_features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        build_all_features()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feature-quality-analysis-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feature Quality Analysis Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Feature Quality Analysis Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analyze_missing_feature_values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_missing_feature_values()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_negative_base_metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_negative_base_metrics()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_invalid_calendar_features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_invalid_calendar_features()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run_full_analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run_full_analysis()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fix-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fix Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fix Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_missing_feature_values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_missing_feature_values()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rebuild_calendar_features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rebuild_calendar_features()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rebuild_rolling_features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rebuild_rolling_features()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rebuild_history_flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rebuild_history_flags()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reporting-and-access-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reporting and Access Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reporting and Access Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate_executive_summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        generate_executive_summary()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_feature_dataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_feature_dataframe()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset_to_original" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        reset_to_original()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Usage
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Models
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IsolationForestAnalyzer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Isolation Forest Analyzer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LightGBMRegressorModels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LightGBM Regressor Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Repository
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ParquetRepository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parquet Repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    XAI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    XAI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LightGBMShapInterpreter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LightGBMShapInterpreter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Results
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beverage Sales - Test Set Analysis by Anomaly Segment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shap_results_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shap results analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-input-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Input Columns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Constructor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dataqualityfeaturesdf-date_colorder_date-group_colsnone-fill_missing_daystrue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DataQualityFeatures(df, date_col="Order_Date", group_cols=None, fill_missing_days=True)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generated-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generated Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generated Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base-daily-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base Daily Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calendar-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calendar Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rolling-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rolling Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deviation-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deviation Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#future-quantity-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future Quantity Targets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#history-flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        History Flags
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Public Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build_base_daily_features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        build_base_daily_features()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fill_missing_days_by_group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fill_missing_days_by_group()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_calendar_features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_calendar_features()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_rolling_features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_rolling_features()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_future_quantity_targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_future_quantity_targets()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_history_flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_history_flags()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fill_initial_feature_nans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fill_initial_feature_nans()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build_all_features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        build_all_features()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feature-quality-analysis-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feature Quality Analysis Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Feature Quality Analysis Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analyze_missing_feature_values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_missing_feature_values()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_negative_base_metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_negative_base_metrics()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_invalid_calendar_features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_invalid_calendar_features()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run_full_analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run_full_analysis()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fix-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fix Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fix Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_missing_feature_values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_missing_feature_values()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rebuild_calendar_features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rebuild_calendar_features()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rebuild_rolling_features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rebuild_rolling_features()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rebuild_history_flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rebuild_history_flags()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reporting-and-access-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reporting and Access Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reporting and Access Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate_executive_summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        generate_executive_summary()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_feature_dataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_feature_dataframe()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset_to_original" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        reset_to_original()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Usage
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dataqualityfeatures">DataQualityFeatures<a class="headerlink" href="#dataqualityfeatures" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p><code>DataQualityFeatures</code> is a utility class used to build and validate time-based sales features for anomaly detection and temporal analysis.</p>
+<p>This class helps transform raw transactional sales data into daily aggregated metrics, calendar features, rolling-window features, deviation features, future quantity targets, and quality checks.</p>
+<p>It was designed to keep feature generation, validation, and correction separated, which makes the pipeline easier to understand and maintain.</p>
+<hr />
+<h2 id="main-purpose">Main Purpose<a class="headerlink" href="#main-purpose" title="Permanent link">&para;</a></h2>
+<p>The class supports the following tasks:</p>
+<ul>
+<li>Aggregate transactional sales data into daily metrics by business group</li>
+<li>Create rolling features using only past data</li>
+<li>Avoid data leakage with <code>shift(1)</code> in historical windows</li>
+<li>Detect missing derived feature values</li>
+<li>Validate calendar and aggregated business metrics</li>
+<li>Rebuild or fix generated features when needed</li>
+<li>Provide a compact executive summary of feature quality</li>
+</ul>
+<hr />
+<h2 id="expected-input-columns">Expected Input Columns<a class="headerlink" href="#expected-input-columns" title="Permanent link">&para;</a></h2>
+<p>The input DataFrame should contain these columns:</p>
+<ul>
+<li><code>Order_ID</code></li>
+<li><code>Customer_ID</code></li>
+<li><code>Customer_Type</code></li>
+<li><code>Product</code></li>
+<li><code>Category</code></li>
+<li><code>Unit_Price</code></li>
+<li><code>Quantity</code></li>
+<li><code>Discount</code></li>
+<li><code>Total_Price</code></li>
+<li><code>Region</code></li>
+<li><code>Order_Date</code></li>
+</ul>
+<hr />
+<h2 id="constructor">Constructor<a class="headerlink" href="#constructor" title="Permanent link">&para;</a></h2>
+<h3 id="dataqualityfeaturesdf-date_colorder_date-group_colsnone-fill_missing_daystrue"><code>DataQualityFeatures(df, date_col="Order_Date", group_cols=None, fill_missing_days=True)</code><a class="headerlink" href="#dataqualityfeaturesdf-date_colorder_date-group_colsnone-fill_missing_daystrue" title="Permanent link">&para;</a></h3>
+<p>Create a new instance of the class.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>df</code> (<code>pd.DataFrame</code>): Input transactional DataFrame.</li>
+<li><code>date_col</code> (<code>str</code>, optional): Name of the date column. Default is <code>"Order_Date"</code>.</li>
+<li><code>group_cols</code> (<code>list | None</code>, optional): Columns used to group the data. If <code>None</code>, the default is <code>[</code>Product<code>,</code>Region<code>]</code>.</li>
+<li><code>fill_missing_days</code> (<code>bool</code>, optional): If <code>True</code>, missing calendar days inside each group are added before creating rolling features. Default is <code>True</code>.</li>
+</ul>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><code>original_df</code>: Original copy of the input DataFrame.</li>
+<li><code>df</code>: Working copy of the input DataFrame.</li>
+<li><code>features_df</code>: DataFrame with generated features.</li>
+<li><code>report</code>: DataFrame with quality analysis results.</li>
+<li><code>date_col</code>: Name of the date column.</li>
+<li><code>group_cols</code>: Grouping columns.</li>
+<li><code>fill_missing_days</code>: Flag used in the full pipeline.</li>
+</ul>
+<hr />
+<h2 id="generated-features">Generated Features<a class="headerlink" href="#generated-features" title="Permanent link">&para;</a></h2>
+<h3 id="base-daily-features">Base Daily Features<a class="headerlink" href="#base-daily-features" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>quantity_sum</code></li>
+<li><code>total_price_sum</code></li>
+<li><code>unit_price_mean</code></li>
+<li><code>discount_mean</code></li>
+<li><code>order_count</code></li>
+<li><code>customer_count</code></li>
+<li><code>avg_ticket</code></li>
+</ul>
+<h3 id="calendar-features">Calendar Features<a class="headerlink" href="#calendar-features" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>day_of_week</code></li>
+<li><code>month</code></li>
+<li><code>year</code></li>
+<li><code>is_weekend</code></li>
+</ul>
+<h3 id="rolling-features">Rolling Features<a class="headerlink" href="#rolling-features" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>quantity_sum_mean_7d</code></li>
+<li><code>quantity_sum_std_7d</code></li>
+<li><code>quantity_sum_sum_7d</code></li>
+<li><code>total_price_sum_mean_7d</code></li>
+<li><code>total_price_sum_std_7d</code></li>
+<li><code>total_price_sum_mean_30d</code></li>
+<li><code>unit_price_mean_mean_7d</code></li>
+<li><code>discount_mean_mean_14d</code></li>
+</ul>
+<h3 id="deviation-features">Deviation Features<a class="headerlink" href="#deviation-features" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>quantity_vs_mean_7d</code></li>
+<li><code>total_price_vs_mean_30d</code></li>
+<li><code>quantity_pct_vs_mean_7d</code></li>
+</ul>
+<h3 id="future-quantity-targets">Future Quantity Targets<a class="headerlink" href="#future-quantity-targets" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>quantity_sum_next_7d</code></li>
+<li><code>quantity_sum_next_14d</code></li>
+<li><code>quantity_sum_next_30d</code></li>
+</ul>
+<h3 id="history-flags">History Flags<a class="headerlink" href="#history-flags" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>history_less_than_7d</code></li>
+<li><code>history_less_than_30d</code></li>
+</ul>
+<hr />
+<h2 id="public-methods">Public Methods<a class="headerlink" href="#public-methods" title="Permanent link">&para;</a></h2>
+<h3 id="build_base_daily_features"><code>build_base_daily_features()</code><a class="headerlink" href="#build_base_daily_features" title="Permanent link">&para;</a></h3>
+<p>Aggregate the raw transactional data into daily business metrics.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: DataFrame with daily aggregated features.</li>
+</ul>
+<p><strong>What it does</strong></p>
+<ul>
+<li>Validates required columns</li>
+<li>Parses the date column</li>
+<li>Converts numeric columns safely</li>
+<li>Groups data by business keys and date</li>
+<li>Creates daily metrics such as quantity, revenue, and ticket average</li>
+</ul>
+<hr />
+<h3 id="fill_missing_days_by_group"><code>fill_missing_days_by_group()</code><a class="headerlink" href="#fill_missing_days_by_group" title="Permanent link">&para;</a></h3>
+<p>Fill missing calendar days inside each group.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: DataFrame with continuous daily rows for each group.</li>
+</ul>
+<p><strong>What it does</strong></p>
+<ul>
+<li>Builds a complete daily calendar between the minimum and maximum date of each group</li>
+<li>Reindexes missing dates</li>
+<li>Fills base metric columns with zero</li>
+</ul>
+<p><strong>Why it is useful</strong></p>
+<p>This step helps rolling windows work on continuous daily timelines.</p>
+<hr />
+<h3 id="create_calendar_features"><code>create_calendar_features()</code><a class="headerlink" href="#create_calendar_features" title="Permanent link">&para;</a></h3>
+<p>Create simple calendar-based features.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: DataFrame with calendar columns.</li>
+</ul>
+<p><strong>Generated columns</strong></p>
+<ul>
+<li><code>day_of_week</code></li>
+<li><code>month</code></li>
+<li><code>year</code></li>
+<li><code>is_weekend</code></li>
+</ul>
+<hr />
+<h3 id="create_rolling_features"><code>create_rolling_features()</code><a class="headerlink" href="#create_rolling_features" title="Permanent link">&para;</a></h3>
+<p>Create rolling-window features using only past information.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: DataFrame with rolling and deviation features.</li>
+</ul>
+<p><strong>What it does</strong></p>
+<ul>
+<li>Uses grouped rolling windows</li>
+<li>Applies <code>shift(1)</code> before rolling calculations</li>
+<li>Creates mean, standard deviation, and sum features</li>
+<li>Creates deviation and percentage deviation features</li>
+</ul>
+<p><strong>Important</strong></p>
+<p>The use of <code>shift(1)</code> avoids data leakage because the current row does not use its own value inside the historical window.</p>
+<hr />
+<h3 id="create_future_quantity_targets"><code>create_future_quantity_targets()</code><a class="headerlink" href="#create_future_quantity_targets" title="Permanent link">&para;</a></h3>
+<p>Create future quantity targets for supervised modeling.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: DataFrame with future quantity target columns.</li>
+</ul>
+<p><strong>Generated columns</strong></p>
+<ul>
+<li><code>quantity_sum_next_7d</code></li>
+<li><code>quantity_sum_next_14d</code></li>
+<li><code>quantity_sum_next_30d</code></li>
+</ul>
+<p><strong>Important</strong></p>
+<p>These columns look into the future and should not be used as input features for anomaly detection.</p>
+<hr />
+<h3 id="create_history_flags"><code>create_history_flags()</code><a class="headerlink" href="#create_history_flags" title="Permanent link">&para;</a></h3>
+<p>Create flags that indicate insufficient historical depth.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: DataFrame with history flag columns.</li>
+</ul>
+<p><strong>Generated columns</strong></p>
+<ul>
+<li><code>history_less_than_7d</code></li>
+<li><code>history_less_than_30d</code></li>
+</ul>
+<p><strong>Why it is useful</strong></p>
+<p>These flags help identify rows created with limited historical context.</p>
+<hr />
+<h3 id="fill_initial_feature_nans"><code>fill_initial_feature_nans()</code><a class="headerlink" href="#fill_initial_feature_nans" title="Permanent link">&para;</a></h3>
+<p>Fill missing values in derived temporal features caused by limited initial history.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: DataFrame with corrected missing values.</li>
+</ul>
+<p><strong>Strategy</strong></p>
+<ul>
+<li>Rolling means are filled with <code>0</code></li>
+<li>Rolling sums are filled with <code>0</code></li>
+<li>Rolling standard deviations are filled with <code>0</code></li>
+<li>Deviation values are filled with <code>0</code></li>
+<li>Percentage deviation values are filled with <code>0</code></li>
+</ul>
+<hr />
+<h3 id="build_all_features"><code>build_all_features()</code><a class="headerlink" href="#build_all_features" title="Permanent link">&para;</a></h3>
+<p>Run the full feature engineering pipeline.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: Final feature DataFrame.</li>
+</ul>
+<p><strong>Pipeline steps</strong></p>
+<ol>
+<li>Build base daily features</li>
+<li>Fill missing days by group, if enabled</li>
+<li>Create calendar features</li>
+<li>Create rolling features</li>
+<li>Create history flags</li>
+<li>Create future quantity targets</li>
+<li>Fill initial missing values in derived features</li>
+</ol>
+<hr />
+<h2 id="feature-quality-analysis-methods">Feature Quality Analysis Methods<a class="headerlink" href="#feature-quality-analysis-methods" title="Permanent link">&para;</a></h2>
+<h3 id="analyze_missing_feature_values"><code>analyze_missing_feature_values()</code><a class="headerlink" href="#analyze_missing_feature_values" title="Permanent link">&para;</a></h3>
+<p>Check whether derived feature columns still contain missing values.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>dict</code>: Report row with issue name, count, severity, and recommendation.</li>
+</ul>
+<hr />
+<h3 id="analyze_negative_base_metrics"><code>analyze_negative_base_metrics()</code><a class="headerlink" href="#analyze_negative_base_metrics" title="Permanent link">&para;</a></h3>
+<p>Check whether aggregated business metrics contain negative values.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>dict</code>: Report row with issue name, count, severity, and recommendation.</li>
+</ul>
+<p><strong>Checked columns</strong></p>
+<ul>
+<li><code>quantity_sum</code></li>
+<li><code>total_price_sum</code></li>
+<li><code>order_count</code></li>
+<li><code>customer_count</code></li>
+<li><code>avg_ticket</code></li>
+</ul>
+<hr />
+<h3 id="analyze_invalid_calendar_features"><code>analyze_invalid_calendar_features()</code><a class="headerlink" href="#analyze_invalid_calendar_features" title="Permanent link">&para;</a></h3>
+<p>Validate the expected ranges of calendar features.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>dict</code>: Report row with issue name, count, severity, and recommendation.</li>
+</ul>
+<p><strong>Validation rules</strong></p>
+<ul>
+<li><code>day_of_week</code> must be between <code>0</code> and <code>6</code></li>
+<li><code>month</code> must be between <code>1</code> and <code>12</code></li>
+<li><code>is_weekend</code> must be <code>0</code> or <code>1</code></li>
+</ul>
+<hr />
+<h3 id="run_full_analysis"><code>run_full_analysis()</code><a class="headerlink" href="#run_full_analysis" title="Permanent link">&para;</a></h3>
+<p>Run the complete feature quality analysis.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: Compact quality report.</li>
+</ul>
+<p><strong>Included checks</strong></p>
+<ul>
+<li>Missing derived feature values</li>
+<li>Negative aggregated metrics</li>
+<li>Invalid calendar features</li>
+</ul>
+<hr />
+<h2 id="fix-methods">Fix Methods<a class="headerlink" href="#fix-methods" title="Permanent link">&para;</a></h2>
+<h3 id="fix_missing_feature_values"><code>fix_missing_feature_values()</code><a class="headerlink" href="#fix_missing_feature_values" title="Permanent link">&para;</a></h3>
+<p>Reapply missing-value correction to derived temporal features.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: Corrected feature DataFrame.</li>
+</ul>
+<hr />
+<h3 id="rebuild_calendar_features"><code>rebuild_calendar_features()</code><a class="headerlink" href="#rebuild_calendar_features" title="Permanent link">&para;</a></h3>
+<p>Recompute calendar features.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: Feature DataFrame with rebuilt calendar columns.</li>
+</ul>
+<hr />
+<h3 id="rebuild_rolling_features"><code>rebuild_rolling_features()</code><a class="headerlink" href="#rebuild_rolling_features" title="Permanent link">&para;</a></h3>
+<p>Recompute rolling features and apply missing-value correction again.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: Updated feature DataFrame.</li>
+</ul>
+<hr />
+<h3 id="rebuild_history_flags"><code>rebuild_history_flags()</code><a class="headerlink" href="#rebuild_history_flags" title="Permanent link">&para;</a></h3>
+<p>Recompute historical depth flags.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: Updated feature DataFrame.</li>
+</ul>
+<hr />
+<h2 id="reporting-and-access-methods">Reporting and Access Methods<a class="headerlink" href="#reporting-and-access-methods" title="Permanent link">&para;</a></h2>
+<h3 id="generate_executive_summary"><code>generate_executive_summary()</code><a class="headerlink" href="#generate_executive_summary" title="Permanent link">&para;</a></h3>
+<p>Return a compact text summary of the quality checks.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>str</code>: Human-readable executive summary.</li>
+</ul>
+<p><strong>Summary includes</strong></p>
+<ul>
+<li>Number of evaluated rules</li>
+<li>Number of rules with detected issues</li>
+<li>Total issue count</li>
+<li>High-severity issue names</li>
+</ul>
+<hr />
+<h3 id="get_feature_dataframe"><code>get_feature_dataframe()</code><a class="headerlink" href="#get_feature_dataframe" title="Permanent link">&para;</a></h3>
+<p>Return the engineered feature DataFrame.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: Copy of the generated feature DataFrame.</li>
+</ul>
+<p><strong>Behavior</strong></p>
+<p>If features were not created yet, the method runs the full feature pipeline automatically.</p>
+<hr />
+<h3 id="reset_to_original"><code>reset_to_original()</code><a class="headerlink" href="#reset_to_original" title="Permanent link">&para;</a></h3>
+<p>Reset the object to its original state.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>None</code></li>
+</ul>
+<p><strong>What it resets</strong></p>
+<ul>
+<li>Working DataFrame</li>
+<li>Generated feature DataFrame</li>
+<li>Analysis report</li>
+</ul>
+<hr />
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">data_quality_features</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataQualityFeatures</span>
+
+<span class="n">feature_builder</span> <span class="o">=</span> <span class="n">DataQualityFeatures</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Build all features</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">feature_builder</span><span class="o">.</span><span class="n">build_all_features</span><span class="p">()</span>
+
+<span class="c1"># Run quality analysis</span>
+<span class="n">report</span> <span class="o">=</span> <span class="n">feature_builder</span><span class="o">.</span><span class="n">run_full_analysis</span><span class="p">()</span>
+
+<span class="c1"># Generate text summary</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">feature_builder</span><span class="o">.</span><span class="n">generate_executive_summary</span><span class="p">()</span>
+
+<span class="c1"># Fix missing derived values if needed</span>
+<span class="n">features_fixed</span> <span class="o">=</span> <span class="n">feature_builder</span><span class="o">.</span><span class="n">fix_missing_feature_values</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
