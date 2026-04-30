@@ -27,7 +27,7 @@
     
     
       
-        <title>Beverage Sales - Test Set Analysis by Anomaly Segment - Beverage Sales</title>
+        <title>Analysis by Anomaly Segment - Beverage Sales</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#beverage-sales-test-set-analysis-by-anomaly-segment" class="md-skip">
+        <a href="#analysis-by-anomaly-segment" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Beverage Sales - Test Set Analysis by Anomaly Segment
+              Analysis by Anomaly Segment
             
           </span>
         </div>
@@ -868,7 +868,7 @@
   <span class="md-ellipsis">
     
   
-    Beverage Sales - Test Set Analysis by Anomaly Segment
+    Analysis by Anomaly Segment
   
 
     
@@ -886,7 +886,7 @@
   <span class="md-ellipsis">
     
   
-    Beverage Sales - Test Set Analysis by Anomaly Segment
+    Analysis by Anomaly Segment
   
 
     
@@ -1155,28 +1155,6 @@
     <span class="md-ellipsis">
       
         Portfolio-Friendly Takeaway
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#suggested-summary-for-github-or-documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Suggested Summary for GitHub or Documentation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#final-assessment" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Final Assessment
       
     </span>
   </a>
@@ -1515,28 +1493,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#suggested-summary-for-github-or-documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Suggested Summary for GitHub or Documentation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#final-assessment" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Final Assessment
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#business-perspective" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1564,7 +1520,7 @@
 
 
 
-<h1 id="beverage-sales-test-set-analysis-by-anomaly-segment">Beverage Sales - Test Set Analysis by Anomaly Segment<a class="headerlink" href="#beverage-sales-test-set-analysis-by-anomaly-segment" title="Permanent link">&para;</a></h1>
+<h1 id="analysis-by-anomaly-segment">Analysis by Anomaly Segment<a class="headerlink" href="#analysis-by-anomaly-segment" title="Permanent link">&para;</a></h1>
 <p><img alt="Model Comparison" src="../img/ModelComparison45.png" /></p>
 <h2 id="project-context">Project Context<a class="headerlink" href="#project-context" title="Permanent link">&para;</a></h2>
 <p>This project evaluates a hybrid forecasting approach for the <strong>Beverage Sales</strong> dataset.</p>
@@ -1759,25 +1715,6 @@ They often represent rare combinations, unstable patterns, or unexpected local b
 <p>That makes the project stronger, not weaker.</p>
 <p>A realistic project does not need perfect results.<br />
 It needs clear reasoning, transparent evaluation, and a solid understanding of model behavior.</p>
-<hr />
-<h2 id="suggested-summary-for-github-or-documentation">Suggested Summary for GitHub or Documentation<a class="headerlink" href="#suggested-summary-for-github-or-documentation" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>On the test set, the anomaly-aware model showed small but consistent improvements for the regular majority segment (<code>anomaly_flag = 0</code>), reducing MAE, RMSE, median absolute error, and maximum error.<br />
-For the anomalous minority segment (<code>anomaly_flag = 1</code>), the results were mixed: the median absolute error improved, but MAE and RMSE slightly worsened.<br />
-Since anomalous records represent less than 1% of the test set, the global evaluation is strongly influenced by regular observations.<br />
-In addition, because the dataset is synthetic, a high R² should be interpreted carefully, as synthetic data often contains cleaner and more predictable patterns than real-world data.</p>
-</blockquote>
-<hr />
-<h2 id="final-assessment">Final Assessment<a class="headerlink" href="#final-assessment" title="Permanent link">&para;</a></h2>
-<p>From a portfolio perspective, this is a good result to present because it supports a more professional discussion:</p>
-<ul>
-<li>the anomaly-aware approach brings measurable value</li>
-<li>the gain is concentrated in the normal segment</li>
-<li>the anomaly segment remains difficult</li>
-<li>the evaluation is honest and technically grounded</li>
-</ul>
-<p>This shows a stronger level of analysis than simply saying the model is better.</p>
-<hr />
 <h2 id="business-perspective">Business Perspective<a class="headerlink" href="#business-perspective" title="Permanent link">&para;</a></h2>
 <p>From a business point of view, this hybrid approach can still be useful.</p>
 <p>Even if anomaly handling does not yet improve the rare anomaly segment clearly, it may still help the system become more aware of unusual sales behavior and create a better foundation for:</p>
