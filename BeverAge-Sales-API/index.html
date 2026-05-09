@@ -1,0 +1,1084 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the Beverage Sales project - API">
+      
+      
+        <meta name="author" content="Alexandre Kawamorita">
+      
+      
+      
+      
+        <link rel="next" href="documentation_ptbr/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Beverage Sales - API</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#documentacao-da-beverage-sales-api" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Beverage Sales - API" class="md-header__button md-logo" aria-label="Beverage Sales - API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Beverage Sales - API
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Beverage Sales - API" class="md-nav__button md-logo" aria-label="Beverage Sales - API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Beverage Sales - API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visão Geral
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-da-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo da API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints-identificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints Identificados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Endpoints Identificados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /health
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /login
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-predict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /predict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fluxo-interno-do-endpoint-predict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo interno do endpoint /predict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-de-resposta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de resposta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints-de-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints de Debug
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Endpoints de Debug">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-debugpaths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /debug/paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-debugmetadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /debug/metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-debugparquet-sample" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /debug/parquet-sample
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-debugmodels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /debug/models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-debugvalidate-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /debug/validate-schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-debugfull-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /debug/full-check
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencias-funcionais-observadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependências Funcionais Observadas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursos-de-arquivo-esperados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recursos de Arquivo Esperados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tratamento-de-erros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tratamento de Erros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitetura-logica-resumida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitetura Lógica Resumida
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="documentation_ptbr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentacao (PTBR)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="documentation_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="endpoints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Endpoints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visão Geral
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-da-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo da API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints-identificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints Identificados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Endpoints Identificados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /health
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /login
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-predict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /predict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fluxo-interno-do-endpoint-predict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo interno do endpoint /predict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-de-resposta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de resposta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints-de-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints de Debug
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Endpoints de Debug">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-debugpaths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /debug/paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-debugmetadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /debug/metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-debugparquet-sample" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /debug/parquet-sample
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-debugmodels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /debug/models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-debugvalidate-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /debug/validate-schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-debugfull-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /debug/full-check
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencias-funcionais-observadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependências Funcionais Observadas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursos-de-arquivo-esperados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recursos de Arquivo Esperados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tratamento-de-erros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tratamento de Erros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitetura-logica-resumida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitetura Lógica Resumida
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="documentacao-da-beverage-sales-api">Documentação da Beverage Sales API<a class="headerlink" href="#documentacao-da-beverage-sales-api" title="Permanent link">&para;</a></h1>
+<h2 id="visao-geral">Visão Geral<a class="headerlink" href="#visao-geral" title="Permanent link">&para;</a></h2>
+<p>A Beverage Sales API é uma aplicação baseada em <strong>FastAPI</strong> para expor um serviço de inferência de machine learning com foco em <strong>previsão de vendas</strong> e <strong>sinais de anomalia</strong>.</p>
+<p>Com base nos arquivos enviados, a API utiliza:</p>
+<ul>
+<li>um modelo principal de predição carregado com <code>joblib</code></li>
+<li>um modelo de anomalia baseado em <strong>Isolation Forest</strong></li>
+<li>metadados do modelo carregados de um arquivo JSON</li>
+<li>dados históricos em formato parquet</li>
+<li>uma etapa de engenharia de atributos para preparar a entrada antes da predição</li>
+</ul>
+<h2 id="objetivo-da-api">Objetivo da API<a class="headerlink" href="#objetivo-da-api" title="Permanent link">&para;</a></h2>
+<p>O objetivo é receber uma nova observação de venda, localizar um histórico compatível por <code>Product</code> e <code>Region</code>, gerar features com base nesse histórico, calcular sinais de anomalia e então produzir a predição final.</p>
+<p>Em termos práticos, a API segue uma arquitetura de inferência híbrida:</p>
+<ol>
+<li>valida o payload recebido</li>
+<li>carrega o histórico de referência</li>
+<li>gera features temporais e agregadas</li>
+<li>calcula variáveis auxiliares para anomalia</li>
+<li>executa o modelo final de predição</li>
+<li>devolve o resultado em JSON</li>
+</ol>
+<h2 id="endpoints-identificados">Endpoints Identificados<a class="headerlink" href="#endpoints-identificados" title="Permanent link">&para;</a></h2>
+<h3 id="get-health"><code>GET /health</code><a class="headerlink" href="#get-health" title="Permanent link">&para;</a></h3>
+<p>Endpoint simples para verificação de disponibilidade da API.</p>
+<p><strong>Resposta esperada:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="post-login"><code>POST /login</code><a class="headerlink" href="#post-login" title="Permanent link">&para;</a></h3>
+<p>Endpoint de autenticação.</p>
+<p>Recebe:</p>
+<ul>
+<li><code>username</code></li>
+<li><code>password</code></li>
+</ul>
+<p>Se as credenciais forem válidas, retorna um token de acesso do tipo bearer.</p>
+<p><strong>Resposta esperada:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;access_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;token&gt;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;token_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bearer&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="post-predict"><code>POST /predict</code><a class="headerlink" href="#post-predict" title="Permanent link">&para;</a></h3>
+<p>Endpoint principal de predição.</p>
+<p>Este endpoint exige autenticação e recebe um payload com dados de pedido, cliente, produto, preço, quantidade, desconto, região e data do pedido.</p>
+<p>Campos esperados:</p>
+<ul>
+<li><code>Order_ID</code></li>
+<li><code>Customer_ID</code></li>
+<li><code>Customer_Type</code></li>
+<li><code>Product</code></li>
+<li><code>Category</code></li>
+<li><code>Unit_Price</code></li>
+<li><code>Quantity</code></li>
+<li><code>Discount</code></li>
+<li><code>Total_Price</code></li>
+<li><code>Region</code></li>
+<li><code>Order_Date</code></li>
+</ul>
+<h3 id="fluxo-interno-do-endpoint-predict">Fluxo interno do endpoint <code>/predict</code><a class="headerlink" href="#fluxo-interno-do-endpoint-predict" title="Permanent link">&para;</a></h3>
+<ol>
+<li>O payload é convertido para DataFrame.</li>
+<li>Os campos numéricos e de data são normalizados.</li>
+<li>O histórico parquet é carregado.</li>
+<li>O histórico é filtrado por <code>Product</code> e <code>Region</code>.</li>
+<li>Os dados históricos e o novo registro são combinados.</li>
+<li>A classe <code>DataQualityFeatures</code> gera as features.</li>
+<li>A linha correspondente à data de predição é selecionada.</li>
+<li>São criadas features auxiliares para o modelo de anomalia.</li>
+<li>O <code>Isolation Forest</code> gera:</li>
+<li><code>anomaly_flag</code></li>
+<li><code>anomaly_score</code></li>
+<li><code>anomaly_label</code></li>
+<li>O modelo LightGBM executa a predição final.</li>
+<li>A API retorna o valor previsto e informações adicionais.</li>
+</ol>
+<h3 id="exemplo-de-resposta">Exemplo de resposta<a class="headerlink" href="#exemplo-de-resposta" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;prediction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">134.27</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;quantity_sum&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;model_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;model_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Beverage Sales Hybrid Forecasting Model&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;anomaly&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;anomaly_flag&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;anomaly_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1842</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;anomaly_label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Normal&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;input_reference&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Order_ID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORD-1001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Product&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cola 350ml&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Region&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Baden-Württemberg&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Order_Date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2023-11-10&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="endpoints-de-debug">Endpoints de Debug<a class="headerlink" href="#endpoints-de-debug" title="Permanent link">&para;</a></h2>
+<p>Os arquivos enviados também mostram uma área de debug da API, útil para validação de ambiente e checagem dos recursos carregados.</p>
+<h3 id="get-debugpaths"><code>GET /debug/paths</code><a class="headerlink" href="#get-debugpaths" title="Permanent link">&para;</a></h3>
+<p>Verifica se os principais arquivos existem.</p>
+<p>Inclui checagem para:</p>
+<ul>
+<li>metadata</li>
+<li>parquet</li>
+<li>modelo LightGBM</li>
+<li>modelo de anomalia</li>
+</ul>
+<h3 id="get-debugmetadata"><code>GET /debug/metadata</code><a class="headerlink" href="#get-debugmetadata" title="Permanent link">&para;</a></h3>
+<p>Carrega e resume os metadados do modelo.</p>
+<p>Retorna, entre outros:</p>
+<ul>
+<li>status</li>
+<li>chaves do metadata</li>
+<li>target</li>
+<li>versão do modelo</li>
+<li>quantidade de raw features</li>
+<li>quantidade de model features</li>
+</ul>
+<h3 id="get-debugparquet-sample"><code>GET /debug/parquet-sample</code><a class="headerlink" href="#get-debugparquet-sample" title="Permanent link">&para;</a></h3>
+<p>Carrega uma pequena amostra do parquet histórico.</p>
+<p>Retorna:</p>
+<ul>
+<li>status</li>
+<li>número de linhas</li>
+<li>colunas</li>
+<li>registros de exemplo</li>
+</ul>
+<h3 id="get-debugmodels"><code>GET /debug/models</code><a class="headerlink" href="#get-debugmodels" title="Permanent link">&para;</a></h3>
+<p>Verifica se os modelos conseguem ser carregados.</p>
+<p>Retorna os tipos dos objetos carregados.</p>
+<h3 id="get-debugvalidate-schema"><code>GET /debug/validate-schema</code><a class="headerlink" href="#get-debugvalidate-schema" title="Permanent link">&para;</a></h3>
+<p>Compara as colunas do parquet com as features esperadas nos metadados.</p>
+<p>Retorna:</p>
+<ul>
+<li>quantidade de colunas no parquet</li>
+<li>quantidade de raw features</li>
+<li>quantidade de model features</li>
+<li>raw features ausentes</li>
+<li>model features ausentes</li>
+</ul>
+<h3 id="get-debugfull-check"><code>GET /debug/full-check</code><a class="headerlink" href="#get-debugfull-check" title="Permanent link">&para;</a></h3>
+<p>Executa uma validação completa dos recursos principais da API.</p>
+<p>Verifica ao mesmo tempo:</p>
+<ul>
+<li>metadata</li>
+<li>parquet</li>
+<li>modelo LightGBM</li>
+<li>modelo de anomalia</li>
+</ul>
+<h2 id="dependencias-funcionais-observadas">Dependências Funcionais Observadas<a class="headerlink" href="#dependencias-funcionais-observadas" title="Permanent link">&para;</a></h2>
+<p>Com base nos arquivos enviados, a API depende de alguns componentes internos que não foram incluídos no material:</p>
+<ul>
+<li><code>app.core.security</code></li>
+<li><code>app.src.config.src_config</code></li>
+<li><code>app.src.features.data_quality_features</code></li>
+</ul>
+<p>Isso significa que parte do comportamento foi documentada com base no uso observado no código.</p>
+<h2 id="recursos-de-arquivo-esperados">Recursos de Arquivo Esperados<a class="headerlink" href="#recursos-de-arquivo-esperados" title="Permanent link">&para;</a></h2>
+<p>A API espera a existência de arquivos locais, com paths vindos de <code>src_config</code>, como por exemplo:</p>
+<ul>
+<li>arquivo do modelo LightGBM</li>
+<li>arquivo do modelo de anomalia</li>
+<li>arquivo de metadados JSON</li>
+<li>parquet histórico</li>
+</ul>
+<p>Sem esses arquivos, a API pode responder com erro interno.</p>
+<h2 id="tratamento-de-erros">Tratamento de Erros<a class="headerlink" href="#tratamento-de-erros" title="Permanent link">&para;</a></h2>
+<p>O endpoint <code>/predict</code> trata os seguintes cenários:</p>
+<ul>
+<li>erro de validação de dados → HTTP 400</li>
+<li>arquivo ausente → HTTP 500</li>
+<li>erro inesperado → HTTP 500</li>
+</ul>
+<p>Além disso, se não houver histórico para o par <code>Product</code> + <code>Region</code>, a API retorna erro de validação.</p>
+<h2 id="arquitetura-logica-resumida">Arquitetura Lógica Resumida<a class="headerlink" href="#arquitetura-logica-resumida" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Cliente
+  ↓
+/login
+  ↓
+Token Bearer
+  ↓
+/predict
+  ↓
+Validação do payload
+  ↓
+Carga do histórico parquet
+  ↓
+Geração de features
+  ↓
+Cálculo de anomalia
+  ↓
+Predição com LightGBM
+  ↓
+Resposta JSON
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": [], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
