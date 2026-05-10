@@ -1,0 +1,2582 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the Beverage Sales project">
+      
+      
+        <meta name="author" content="Alexandre Kawamorita">
+      
+      
+      
+        <link rel="prev" href="../CSVLoader/">
+      
+      
+        <link rel="next" href="../DataFeatures/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>DataQuality Class - Beverage Sales</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-quality-validation-and-correction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Beverage Sales" class="md-header__button md-logo" aria-label="Beverage Sales" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Beverage Sales
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DataQuality Class
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Beverage Sales" class="md-nav__button md-logo" aria-label="Beverage Sales" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Beverage Sales
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notebooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loaders
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Loaders
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CSVLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSV Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataQuality Class
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataQuality Class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Goals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Class Definition
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Class Definition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#df" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        df
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analysis-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analysis Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analysis Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analyze_quantity_missing-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_quantity_missing() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_quantity_negative-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_quantity_negative() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_discount_missing-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_discount_missing() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_discount_negative-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_discount_negative() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_discount_above_one-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_discount_above_one() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_customer_type_invalid-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_customer_type_invalid() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_b2c_discount_rule-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_b2c_discount_rule() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_order_date_invalid-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_order_date_invalid() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_duplicates-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_duplicates() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_total_price_consistencytolerance-float-01-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_total_price_consistency(tolerance: float = 0.1) -&gt; dict
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="analyze_total_price_consistency(tolerance: float = 0.1) -&gt; dict">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tolerance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tolerance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run_full_analysistolerance-float-001-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run_full_analysis(tolerance: float = 0.01) -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="run_full_analysis(tolerance: float = 0.01) -&gt; pd.DataFrame">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tolerance_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tolerance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_total_price_inconsistencies_sampletolerance-float-01-n-int-20-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_total_price_inconsistencies_sample(tolerance: float = 0.1, n: int = 20) -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="get_total_price_inconsistencies_sample(tolerance: float = 0.1, n: int = 20) -&gt; pd.DataFrame">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tolerance_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tolerance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        n
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correction-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correction Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Correction Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_quantity_missing_with_zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_quantity_missing_with_zero()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_quantity_negative_with_zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_quantity_negative_with_zero()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_discount_missing_with_zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_discount_missing_with_zero()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_discount_negative_with_zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_discount_negative_with_zero()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_discount_clip_rangelower-float-0-upper-float-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_discount_clip_range(lower: float = 0, upper: float = 1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="fix_discount_clip_range(lower: float = 0, upper: float = 1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lower" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        lower
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        upper
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_b2c_discount_rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_b2c_discount_rule()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_order_date_parse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_order_date_parse()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_remove_duplicates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_remove_duplicates()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_total_price_recalculateround_digits-int-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_total_price_recalculate(round_digits: int = 2)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="fix_total_price_recalculate(round_digits: int = 2)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#round_digits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        round_digits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_sales_value_by_neighbor_meangroup_colsproduct-region-target_coltotal_price" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_sales_value_by_neighbor_mean(group_cols=("Product", "Region"), target_col="Total_Price")
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="fix_sales_value_by_neighbor_mean(group_cols=(&#34;Product&#34;, &#34;Region&#34;), target_col=&#34;Total_Price&#34;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#group_cols" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        group_cols
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#target_col" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        target_col
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply_all_fixesrecalc_total_price-bool-true" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apply_all_fixes(recalc_total_price: bool = True)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="apply_all_fixes(recalc_total_price: bool = True)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recalc_total_price" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        recalc_total_price
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reporting-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reporting Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reporting Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate_executive_summary-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        generate_executive_summary() -&gt; str
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_clean_dataframe-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_clean_dataframe() -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset_to_original" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        reset_to_original()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Usage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Columns
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataFeatures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataQualityFeatures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Quality Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Models
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IsolationForestAnalyzer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Isolation Forest Analyzer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LightGBMRegressorModels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LightGBM Regressor Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Repository
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ParquetRepository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parquet Repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    XAI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    XAI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LightGBMShapInterpreter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LightGBMShapInterpreter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Results
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beverage Sales - Test Set Analysis by Anomaly Segment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shap_results_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shap results analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Goals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Class Definition
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Class Definition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#df" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        df
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analysis-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analysis Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analysis Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analyze_quantity_missing-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_quantity_missing() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_quantity_negative-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_quantity_negative() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_discount_missing-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_discount_missing() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_discount_negative-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_discount_negative() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_discount_above_one-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_discount_above_one() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_customer_type_invalid-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_customer_type_invalid() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_b2c_discount_rule-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_b2c_discount_rule() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_order_date_invalid-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_order_date_invalid() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_duplicates-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_duplicates() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze_total_price_consistencytolerance-float-01-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        analyze_total_price_consistency(tolerance: float = 0.1) -&gt; dict
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="analyze_total_price_consistency(tolerance: float = 0.1) -&gt; dict">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tolerance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tolerance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run_full_analysistolerance-float-001-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run_full_analysis(tolerance: float = 0.01) -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="run_full_analysis(tolerance: float = 0.01) -&gt; pd.DataFrame">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tolerance_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tolerance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_total_price_inconsistencies_sampletolerance-float-01-n-int-20-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_total_price_inconsistencies_sample(tolerance: float = 0.1, n: int = 20) -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="get_total_price_inconsistencies_sample(tolerance: float = 0.1, n: int = 20) -&gt; pd.DataFrame">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tolerance_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tolerance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        n
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correction-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correction Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Correction Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_quantity_missing_with_zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_quantity_missing_with_zero()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_quantity_negative_with_zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_quantity_negative_with_zero()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_discount_missing_with_zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_discount_missing_with_zero()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_discount_negative_with_zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_discount_negative_with_zero()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_discount_clip_rangelower-float-0-upper-float-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_discount_clip_range(lower: float = 0, upper: float = 1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="fix_discount_clip_range(lower: float = 0, upper: float = 1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lower" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        lower
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        upper
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_b2c_discount_rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_b2c_discount_rule()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_order_date_parse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_order_date_parse()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_remove_duplicates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_remove_duplicates()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_total_price_recalculateround_digits-int-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_total_price_recalculate(round_digits: int = 2)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="fix_total_price_recalculate(round_digits: int = 2)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#round_digits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        round_digits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fix_sales_value_by_neighbor_meangroup_colsproduct-region-target_coltotal_price" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fix_sales_value_by_neighbor_mean(group_cols=("Product", "Region"), target_col="Total_Price")
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="fix_sales_value_by_neighbor_mean(group_cols=(&#34;Product&#34;, &#34;Region&#34;), target_col=&#34;Total_Price&#34;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#group_cols" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        group_cols
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#target_col" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        target_col
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply_all_fixesrecalc_total_price-bool-true" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apply_all_fixes(recalc_total_price: bool = True)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="apply_all_fixes(recalc_total_price: bool = True)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recalc_total_price" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        recalc_total_price
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reporting-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reporting Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reporting Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate_executive_summary-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        generate_executive_summary() -&gt; str
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_clean_dataframe-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_clean_dataframe() -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset_to_original" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        reset_to_original()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Usage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Columns
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="data-quality-validation-and-correction">Data Quality Validation and Correction<a class="headerlink" href="#data-quality-validation-and-correction" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p><code>DataQuality</code> is a Python class created to analyze and correct common data quality issues in beverage sales datasets.</p>
+<p>The class separates two main responsibilities:</p>
+<ul>
+<li><strong>Analysis</strong>: identify inconsistencies and generate a report</li>
+<li><strong>Correction</strong>: apply controlled fixes to the dataset</li>
+</ul>
+<p>It was designed to support data preparation workflows before feature engineering, anomaly detection, or machine learning modeling.</p>
+<hr />
+<h2 id="main-goals">Main Goals<a class="headerlink" href="#main-goals" title="Permanent link">&para;</a></h2>
+<p>This class helps with the following tasks:</p>
+<ul>
+<li>detect missing and invalid numeric values</li>
+<li>validate discount rules</li>
+<li>validate customer type values</li>
+<li>detect invalid dates</li>
+<li>detect duplicate rows</li>
+<li>validate <code>Total_Price</code> consistency</li>
+<li>apply corrections in a controlled way</li>
+<li>generate a simple executive summary of the results</li>
+</ul>
+<hr />
+<h2 id="class-definition">Class Definition<a class="headerlink" href="#class-definition" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">DataQuality</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
+<h4 id="df"><code>df</code><a class="headerlink" href="#df" title="Permanent link">&para;</a></h4>
+<p>A pandas DataFrame containing the beverage sales data to be analyzed.</p>
+<h3 id="behavior">Behavior<a class="headerlink" href="#behavior" title="Permanent link">&para;</a></h3>
+<p>When the class is initialized:</p>
+<ul>
+<li><code>original_df</code> stores a copy of the original dataset</li>
+<li><code>df</code> stores the working copy used for analysis and corrections</li>
+<li><code>report</code> starts as <code>None</code> and is filled after running the full analysis</li>
+</ul>
+<hr />
+<h2 id="public-methods">Public Methods<a class="headerlink" href="#public-methods" title="Permanent link">&para;</a></h2>
+<h2 id="analysis-methods">Analysis Methods<a class="headerlink" href="#analysis-methods" title="Permanent link">&para;</a></h2>
+<h3 id="analyze_quantity_missing-dict"><code>analyze_quantity_missing() -&gt; dict</code><a class="headerlink" href="#analyze_quantity_missing-dict" title="Permanent link">&para;</a></h3>
+<p>Checks whether the <code>Quantity</code> column has missing values.</p>
+<p><strong>Returns:</strong><br />
+A dictionary representing one analysis rule result with:</p>
+<ul>
+<li><code>rule_name</code></li>
+<li><code>issue_found</code></li>
+<li><code>issue_count</code></li>
+<li><code>severity</code></li>
+<li><code>recommendation</code></li>
+</ul>
+<p><strong>Rule meaning:</strong><br />
+Missing quantities may indicate incomplete sales records.</p>
+<hr />
+<h3 id="analyze_quantity_negative-dict"><code>analyze_quantity_negative() -&gt; dict</code><a class="headerlink" href="#analyze_quantity_negative-dict" title="Permanent link">&para;</a></h3>
+<p>Checks whether the <code>Quantity</code> column has negative values.</p>
+<p><strong>Returns:</strong><br />
+A dictionary with the analysis result.</p>
+<p><strong>Rule meaning:</strong><br />
+Negative quantity is usually invalid in this type of sales dataset and should be reviewed.</p>
+<hr />
+<h3 id="analyze_discount_missing-dict"><code>analyze_discount_missing() -&gt; dict</code><a class="headerlink" href="#analyze_discount_missing-dict" title="Permanent link">&para;</a></h3>
+<p>Checks whether the <code>Discount</code> column has missing values.</p>
+<p><strong>Returns:</strong><br />
+A dictionary with the analysis result.</p>
+<p><strong>Rule meaning:</strong><br />
+Missing discount values may be treated as zero depending on business rules.</p>
+<hr />
+<h3 id="analyze_discount_negative-dict"><code>analyze_discount_negative() -&gt; dict</code><a class="headerlink" href="#analyze_discount_negative-dict" title="Permanent link">&para;</a></h3>
+<p>Checks whether the <code>Discount</code> column has negative values.</p>
+<p><strong>Returns:</strong><br />
+A dictionary with the analysis result.</p>
+<p><strong>Rule meaning:</strong><br />
+Negative discounts are usually not valid and should be corrected.</p>
+<hr />
+<h3 id="analyze_discount_above_one-dict"><code>analyze_discount_above_one() -&gt; dict</code><a class="headerlink" href="#analyze_discount_above_one-dict" title="Permanent link">&para;</a></h3>
+<p>Checks whether the <code>Discount</code> column has values above <code>1</code>.</p>
+<p><strong>Returns:</strong><br />
+A dictionary with the analysis result.</p>
+<p><strong>Rule meaning:</strong><br />
+Discount is expected to be in the range <code>[0, 1]</code>, where <code>1</code> means 100%.</p>
+<hr />
+<h3 id="analyze_customer_type_invalid-dict"><code>analyze_customer_type_invalid() -&gt; dict</code><a class="headerlink" href="#analyze_customer_type_invalid-dict" title="Permanent link">&para;</a></h3>
+<p>Checks whether <code>Customer_Type</code> contains values outside the expected set:</p>
+<ul>
+<li><code>B2B</code></li>
+<li><code>B2C</code></li>
+</ul>
+<p><strong>Returns:</strong><br />
+A dictionary with the analysis result.</p>
+<p><strong>Rule meaning:</strong><br />
+Customer type values should be standardized for business consistency.</p>
+<hr />
+<h3 id="analyze_b2c_discount_rule-dict"><code>analyze_b2c_discount_rule() -&gt; dict</code><a class="headerlink" href="#analyze_b2c_discount_rule-dict" title="Permanent link">&para;</a></h3>
+<p>Checks whether a <code>B2C</code> record has a discount greater than zero.</p>
+<p><strong>Returns:</strong><br />
+A dictionary with the analysis result.</p>
+<p><strong>Rule meaning:</strong><br />
+According to the implemented business rule, <code>B2C</code> records should not have discount values above zero.</p>
+<hr />
+<h3 id="analyze_order_date_invalid-dict"><code>analyze_order_date_invalid() -&gt; dict</code><a class="headerlink" href="#analyze_order_date_invalid-dict" title="Permanent link">&para;</a></h3>
+<p>Checks whether <code>Order_Date</code> contains invalid or non-parsable dates.</p>
+<p><strong>Returns:</strong><br />
+A dictionary with the analysis result.</p>
+<p><strong>Rule meaning:</strong><br />
+Date values must be valid to support time-based analysis, rolling windows, and forecasting.</p>
+<hr />
+<h3 id="analyze_duplicates-dict"><code>analyze_duplicates() -&gt; dict</code><a class="headerlink" href="#analyze_duplicates-dict" title="Permanent link">&para;</a></h3>
+<p>Checks for exact duplicate rows in the dataset.</p>
+<p><strong>Returns:</strong><br />
+A dictionary with the analysis result.</p>
+<p><strong>Rule meaning:</strong><br />
+Duplicate rows may distort metrics, reports, and model training.</p>
+<hr />
+<h3 id="analyze_total_price_consistencytolerance-float-01-dict"><code>analyze_total_price_consistency(tolerance: float = 0.1) -&gt; dict</code><a class="headerlink" href="#analyze_total_price_consistencytolerance-float-01-dict" title="Permanent link">&para;</a></h3>
+<p>Validates whether <code>Total_Price</code> is consistent with:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Unit_Price</span> <span class="o">*</span> <span class="n">Quantity</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Discount</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters:</strong></p>
+<h4 id="tolerance"><code>tolerance</code><a class="headerlink" href="#tolerance" title="Permanent link">&para;</a></h4>
+<p>Maximum allowed difference between expected and actual total price.<br />
+Default is <code>0.1</code>.</p>
+<p><strong>Returns:</strong><br />
+A dictionary with the analysis result.</p>
+<p><strong>Rule meaning:</strong><br />
+This method checks whether the stored sales value matches the expected calculated value, allowing a small tolerance for rounding differences.</p>
+<hr />
+<h3 id="run_full_analysistolerance-float-001-pddataframe"><code>run_full_analysis(tolerance: float = 0.01) -&gt; pd.DataFrame</code><a class="headerlink" href="#run_full_analysistolerance-float-001-pddataframe" title="Permanent link">&para;</a></h3>
+<p>Runs all analysis methods and creates a full report.</p>
+<p><strong>Parameters:</strong></p>
+<h4 id="tolerance_1"><code>tolerance</code><a class="headerlink" href="#tolerance_1" title="Permanent link">&para;</a></h4>
+<p>Tolerance used in the <code>Total_Price</code> consistency validation.<br />
+Default is <code>0.01</code>.</p>
+<p><strong>Returns:</strong><br />
+A pandas DataFrame with the final analysis report.</p>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>one row is generated for each rule</li>
+<li>the <code>recommendation</code> column is removed from the final report</li>
+<li>the result is also stored in <code>self.report</code></li>
+</ul>
+<hr />
+<h3 id="get_total_price_inconsistencies_sampletolerance-float-01-n-int-20-pddataframe"><code>get_total_price_inconsistencies_sample(tolerance: float = 0.1, n: int = 20) -&gt; pd.DataFrame</code><a class="headerlink" href="#get_total_price_inconsistencies_sampletolerance-float-01-n-int-20-pddataframe" title="Permanent link">&para;</a></h3>
+<p>Returns a sample of rows where <code>Total_Price</code> is inconsistent with the expected value.</p>
+<p><strong>Parameters:</strong></p>
+<h4 id="tolerance_2"><code>tolerance</code><a class="headerlink" href="#tolerance_2" title="Permanent link">&para;</a></h4>
+<p>Maximum allowed difference between expected and actual total price.</p>
+<h4 id="n"><code>n</code><a class="headerlink" href="#n" title="Permanent link">&para;</a></h4>
+<p>Maximum number of rows to return.<br />
+Default is <code>20</code>.</p>
+<p><strong>Returns:</strong><br />
+A DataFrame containing selected inconsistent rows, including:</p>
+<ul>
+<li><code>Product</code></li>
+<li><code>Region</code></li>
+<li><code>Order_Date</code></li>
+<li>numeric versions of the price fields</li>
+<li><code>Expected_Total</code></li>
+<li><code>Diff</code></li>
+</ul>
+<p><strong>Use case:</strong><br />
+Useful for manual inspection and debugging of pricing issues.</p>
+<hr />
+<h2 id="correction-methods">Correction Methods<a class="headerlink" href="#correction-methods" title="Permanent link">&para;</a></h2>
+<h3 id="fix_quantity_missing_with_zero"><code>fix_quantity_missing_with_zero()</code><a class="headerlink" href="#fix_quantity_missing_with_zero" title="Permanent link">&para;</a></h3>
+<p>Replaces missing values in <code>Quantity</code> with <code>0</code>.</p>
+<p><strong>Returns:</strong><br />
+The corrected working DataFrame.</p>
+<p><strong>Use case:</strong><br />
+Useful when missing quantity means no units sold.</p>
+<hr />
+<h3 id="fix_quantity_negative_with_zero"><code>fix_quantity_negative_with_zero()</code><a class="headerlink" href="#fix_quantity_negative_with_zero" title="Permanent link">&para;</a></h3>
+<p>Replaces negative values in <code>Quantity</code> with <code>0</code>.</p>
+<p><strong>Returns:</strong><br />
+The corrected working DataFrame.</p>
+<hr />
+<h3 id="fix_discount_missing_with_zero"><code>fix_discount_missing_with_zero()</code><a class="headerlink" href="#fix_discount_missing_with_zero" title="Permanent link">&para;</a></h3>
+<p>Replaces missing values in <code>Discount</code> with <code>0</code>.</p>
+<p><strong>Returns:</strong><br />
+The corrected working DataFrame.</p>
+<hr />
+<h3 id="fix_discount_negative_with_zero"><code>fix_discount_negative_with_zero()</code><a class="headerlink" href="#fix_discount_negative_with_zero" title="Permanent link">&para;</a></h3>
+<p>Replaces negative values in <code>Discount</code> with <code>0</code>.</p>
+<p><strong>Returns:</strong><br />
+The corrected working DataFrame.</p>
+<hr />
+<h3 id="fix_discount_clip_rangelower-float-0-upper-float-1"><code>fix_discount_clip_range(lower: float = 0, upper: float = 1)</code><a class="headerlink" href="#fix_discount_clip_rangelower-float-0-upper-float-1" title="Permanent link">&para;</a></h3>
+<p>Clips <code>Discount</code> values to a valid range.</p>
+<p><strong>Parameters:</strong></p>
+<h4 id="lower"><code>lower</code><a class="headerlink" href="#lower" title="Permanent link">&para;</a></h4>
+<p>Lower allowed value. Default is <code>0</code>.</p>
+<h4 id="upper"><code>upper</code><a class="headerlink" href="#upper" title="Permanent link">&para;</a></h4>
+<p>Upper allowed value. Default is <code>1</code>.</p>
+<p><strong>Returns:</strong><br />
+The corrected working DataFrame.</p>
+<hr />
+<h3 id="fix_b2c_discount_rule"><code>fix_b2c_discount_rule()</code><a class="headerlink" href="#fix_b2c_discount_rule" title="Permanent link">&para;</a></h3>
+<p>Sets <code>Discount</code> to <code>0</code> for rows where <code>Customer_Type == "B2C"</code>.</p>
+<p><strong>Returns:</strong><br />
+The corrected working DataFrame.</p>
+<p><strong>Use case:</strong><br />
+Applies the business rule that B2C sales must not have discount.</p>
+<hr />
+<h3 id="fix_order_date_parse"><code>fix_order_date_parse()</code><a class="headerlink" href="#fix_order_date_parse" title="Permanent link">&para;</a></h3>
+<p>Converts <code>Order_Date</code> to datetime format using safe parsing.</p>
+<p><strong>Returns:</strong><br />
+The corrected working DataFrame.</p>
+<p><strong>Use case:</strong><br />
+Prepares the dataset for time series analysis and date filtering.</p>
+<hr />
+<h3 id="fix_remove_duplicates"><code>fix_remove_duplicates()</code><a class="headerlink" href="#fix_remove_duplicates" title="Permanent link">&para;</a></h3>
+<p>Removes exact duplicate rows.</p>
+<p><strong>Returns:</strong><br />
+The corrected working DataFrame.</p>
+<hr />
+<h3 id="fix_total_price_recalculateround_digits-int-2"><code>fix_total_price_recalculate(round_digits: int = 2)</code><a class="headerlink" href="#fix_total_price_recalculateround_digits-int-2" title="Permanent link">&para;</a></h3>
+<p>Recalculates <code>Total_Price</code> using:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Unit_Price</span> <span class="o">*</span> <span class="n">Quantity</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Discount</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters:</strong></p>
+<h4 id="round_digits"><code>round_digits</code><a class="headerlink" href="#round_digits" title="Permanent link">&para;</a></h4>
+<p>Number of decimal places used when rounding the recalculated value.<br />
+Default is <code>2</code>.</p>
+<p><strong>Returns:</strong><br />
+The corrected working DataFrame.</p>
+<hr />
+<h3 id="fix_sales_value_by_neighbor_meangroup_colsproduct-region-target_coltotal_price"><code>fix_sales_value_by_neighbor_mean(group_cols=("Product", "Region"), target_col="Total_Price")</code><a class="headerlink" href="#fix_sales_value_by_neighbor_meangroup_colsproduct-region-target_coltotal_price" title="Permanent link">&para;</a></h3>
+<p>Fills missing values in a target column using the mean of the previous and next values inside each group.</p>
+<p><strong>Parameters:</strong></p>
+<h4 id="group_cols"><code>group_cols</code><a class="headerlink" href="#group_cols" title="Permanent link">&para;</a></h4>
+<p>Columns used to define the grouping.<br />
+Default is <code>("Product", "Region")</code>.</p>
+<h4 id="target_col"><code>target_col</code><a class="headerlink" href="#target_col" title="Permanent link">&para;</a></h4>
+<p>Column to be corrected.<br />
+Default is <code>"Total_Price"</code>.</p>
+<p><strong>Returns:</strong><br />
+The corrected working DataFrame.</p>
+<p><strong>Important notes:</strong></p>
+<ul>
+<li>the method sorts the data by group columns and <code>Order_Date</code></li>
+<li>it requires a valid temporal order</li>
+<li>it is useful for local interpolation inside a product-region sequence</li>
+</ul>
+<hr />
+<h3 id="apply_all_fixesrecalc_total_price-bool-true"><code>apply_all_fixes(recalc_total_price: bool = True)</code><a class="headerlink" href="#apply_all_fixesrecalc_total_price-bool-true" title="Permanent link">&para;</a></h3>
+<p>Applies the main correction methods in sequence.</p>
+<p><strong>Parameters:</strong></p>
+<h4 id="recalc_total_price"><code>recalc_total_price</code><a class="headerlink" href="#recalc_total_price" title="Permanent link">&para;</a></h4>
+<p>If <code>True</code>, also recalculates <code>Total_Price</code>.<br />
+Default is <code>True</code>.</p>
+<p><strong>Returns:</strong><br />
+The corrected working DataFrame.</p>
+<p><strong>Fix sequence applied:</strong></p>
+<ol>
+<li>fill missing quantity</li>
+<li>fix negative quantity</li>
+<li>fill missing discount</li>
+<li>fix negative discount</li>
+<li>clip discount range</li>
+<li>apply B2C discount rule</li>
+<li>parse order date</li>
+<li>remove duplicates</li>
+<li>optionally recalculate total price</li>
+</ol>
+<hr />
+<h2 id="reporting-methods">Reporting Methods<a class="headerlink" href="#reporting-methods" title="Permanent link">&para;</a></h2>
+<h3 id="generate_executive_summary-str"><code>generate_executive_summary() -&gt; str</code><a class="headerlink" href="#generate_executive_summary-str" title="Permanent link">&para;</a></h3>
+<p>Generates a text summary of the data quality analysis.</p>
+<p><strong>Returns:</strong><br />
+A formatted string with:</p>
+<ul>
+<li>number of evaluated rules</li>
+<li>number of rules with issues</li>
+<li>total issue count</li>
+<li>list of high-severity issues</li>
+</ul>
+<p><strong>Behavior:</strong><br />
+If the report does not exist yet, the method automatically runs the full analysis first.</p>
+<hr />
+<h3 id="get_clean_dataframe-pddataframe"><code>get_clean_dataframe() -&gt; pd.DataFrame</code><a class="headerlink" href="#get_clean_dataframe-pddataframe" title="Permanent link">&para;</a></h3>
+<p>Returns a copy of the current working DataFrame.</p>
+<p><strong>Returns:</strong><br />
+A pandas DataFrame.</p>
+<p><strong>Use case:</strong><br />
+Useful after applying corrections, when you want to continue the pipeline safely.</p>
+<hr />
+<h3 id="reset_to_original"><code>reset_to_original()</code><a class="headerlink" href="#reset_to_original" title="Permanent link">&para;</a></h3>
+<p>Restores the working DataFrame to the original input state.</p>
+<p><strong>Returns:</strong><br />
+Nothing explicitly, but resets:</p>
+<ul>
+<li><code>self.df</code></li>
+<li><code>self.report</code></li>
+</ul>
+<p><strong>Use case:</strong><br />
+Useful when you want to discard all applied fixes and restart the analysis.</p>
+<hr />
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">data_quality</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataQuality</span>
+
+<span class="n">dq</span> <span class="o">=</span> <span class="n">DataQuality</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="n">report</span> <span class="o">=</span> <span class="n">dq</span><span class="o">.</span><span class="n">run_full_analysis</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dq</span><span class="o">.</span><span class="n">generate_executive_summary</span><span class="p">())</span>
+
+<span class="n">dq</span><span class="o">.</span><span class="n">apply_all_fixes</span><span class="p">()</span>
+<span class="n">df_clean</span> <span class="o">=</span> <span class="n">dq</span><span class="o">.</span><span class="n">get_clean_dataframe</span><span class="p">()</span>
+</code></pre></div>
+<p>This is the most common workflow:</p>
+<ol>
+<li>create the class</li>
+<li>run the analysis</li>
+<li>inspect the report</li>
+<li>apply the fixes</li>
+<li>export or continue with the cleaned dataset</li>
+</ol>
+<hr />
+<h2 id="expected-columns">Expected Columns<a class="headerlink" href="#expected-columns" title="Permanent link">&para;</a></h2>
+<p>This class expects the DataFrame to contain at least these columns:</p>
+<ul>
+<li><code>Quantity</code></li>
+<li><code>Discount</code></li>
+<li><code>Customer_Type</code></li>
+<li><code>Order_Date</code></li>
+<li><code>Unit_Price</code></li>
+<li><code>Total_Price</code></li>
+<li><code>Product</code></li>
+<li><code>Region</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

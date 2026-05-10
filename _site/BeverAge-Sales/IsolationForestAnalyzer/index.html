@@ -1,0 +1,2621 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the Beverage Sales project">
+      
+      
+        <meta name="author" content="Alexandre Kawamorita">
+      
+      
+      
+        <link rel="prev" href="../DataQualityFeatures/">
+      
+      
+        <link rel="next" href="../LightGBMRegressorModels/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Isolation Forest Analyzer - Beverage Sales</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#isolationforestanalyzer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Beverage Sales" class="md-header__button md-logo" aria-label="Beverage Sales" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Beverage Sales
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Isolation Forest Analyzer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Beverage Sales" class="md-nav__button md-logo" aria-label="Beverage Sales" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Beverage Sales
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notebooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loaders
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Loaders
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CSVLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSV Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataQuality Class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataFeatures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataQualityFeatures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Quality Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Models
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Isolation Forest Analyzer
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Isolation Forest Analyzer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-isolationforestanalyzer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Class: IsolationForestAnalyzer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Class: IsolationForestAnalyzer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Attributes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-input-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Input Signals
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Model Input Signals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#source-columns-used-to-create-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source columns used to create signals
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-and-utility-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration and Utility Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration and Utility Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set_base_pathbase_path-str-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_base_path(base_path: str = "data")
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter_dataframedf-pddataframe-product_filternone-region_filternone-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter_dataframe(df: pd.DataFrame, product_filter=None, region_filter=None) -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feature-creation-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feature Creation Method
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Feature Creation Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create_if_featuresdf-pddataframe-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_if_features(df: pd.DataFrame) -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required-input-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required input columns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-columns-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output columns created
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-and-prediction-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training and Prediction Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Training and Prediction Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fitdf-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fit(df: pd.DataFrame)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#predictdf-pddataframe-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        predict(df: pd.DataFrame) -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output columns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_best_params-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_best_params() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analysis-and-inspection-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analysis and Inspection Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analysis and Inspection Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#top_n_anomaliesdf_pred-pddataframe-n-int-10-product_filternone-region_filternone-columns_to_show-list-none-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        top_n_anomalies(df_pred: pd.DataFrame, n: int = 10, product_filter=None, region_filter=None, columns_to_show: list = None) -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anomaly_summarydf_pred-pddataframe-product_filternone-region_filternone-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        anomaly_summary(df_pred: pd.DataFrame, product_filter=None, region_filter=None) -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualization-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualization Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Visualization Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plot_anomalies_over_timedf_pred-pddataframe-date_col-str-order_date-value_col-str-total_price_sum-title-str-anomalies-over-time-figsize-tuple-14-6-product_filternone-region_filternone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        plot_anomalies_over_time(df_pred: pd.DataFrame, date_col: str = "Order_Date", value_col: str = "total_price_sum", title: str = "Anomalies Over Time", figsize: tuple = (14, 6), product_filter=None, region_filter=None)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plot_anomalies_subplotsdf_pred-pddataframe-group_by-str-product-date_col-str-order_date-value_col-str-total_price_sum-product_filternone-region_filternone-max_groups-int-6-figsize_per_plot-tuple-14-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        plot_anomalies_subplots(df_pred: pd.DataFrame, group_by: str = "Product", date_col: str = "Order_Date", value_col: str = "total_price_sum", product_filter=None, region_filter=None, max_groups: int = 6, figsize_per_plot: tuple = (14, 4))
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#export-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Export Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Export Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#export_anomaly_reportdf_pred-pddataframe-folder_path-str-reports-file_name-str-none-top_n-int-20-product_filternone-region_filternone-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        export_anomaly_report(df_pred: pd.DataFrame, folder_path: str = "reports", file_name: str = None, top_n: int = 20, product_filter=None, region_filter=None) -&gt; str
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-and-load-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Save and Load Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Save and Load Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#save_modelfolder_pathnone-file_namenone-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        save_model(folder_path=None, file_name=None) -&gt; str
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save_best_params_jsonfolder_pathnone-file_nameisolation_forest_best_paramsjson-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        save_best_params_json(folder_path=None, file_name="isolation_forest_best_params.json") -&gt; str
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_modelmodel_path-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_model(model_path: str)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Usage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#typical-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Typical Workflow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#important-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Considerations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Important Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-feature-engineering-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required feature engineering first
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unsupervised-tuning-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unsupervised tuning strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filtering support
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-persistence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model persistence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LightGBMRegressorModels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LightGBM Regressor Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Repository
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ParquetRepository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parquet Repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    XAI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    XAI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LightGBMShapInterpreter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LightGBMShapInterpreter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Results
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beverage Sales - Test Set Analysis by Anomaly Segment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shap_results_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shap results analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-isolationforestanalyzer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Class: IsolationForestAnalyzer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Class: IsolationForestAnalyzer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Attributes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-input-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Input Signals
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Model Input Signals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#source-columns-used-to-create-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source columns used to create signals
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-and-utility-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration and Utility Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration and Utility Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set_base_pathbase_path-str-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_base_path(base_path: str = "data")
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter_dataframedf-pddataframe-product_filternone-region_filternone-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter_dataframe(df: pd.DataFrame, product_filter=None, region_filter=None) -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feature-creation-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feature Creation Method
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Feature Creation Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create_if_featuresdf-pddataframe-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_if_features(df: pd.DataFrame) -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required-input-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required input columns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-columns-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output columns created
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-and-prediction-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training and Prediction Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Training and Prediction Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fitdf-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fit(df: pd.DataFrame)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#predictdf-pddataframe-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        predict(df: pd.DataFrame) -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output columns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_best_params-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_best_params() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analysis-and-inspection-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analysis and Inspection Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analysis and Inspection Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#top_n_anomaliesdf_pred-pddataframe-n-int-10-product_filternone-region_filternone-columns_to_show-list-none-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        top_n_anomalies(df_pred: pd.DataFrame, n: int = 10, product_filter=None, region_filter=None, columns_to_show: list = None) -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anomaly_summarydf_pred-pddataframe-product_filternone-region_filternone-pddataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        anomaly_summary(df_pred: pd.DataFrame, product_filter=None, region_filter=None) -&gt; pd.DataFrame
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualization-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualization Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Visualization Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plot_anomalies_over_timedf_pred-pddataframe-date_col-str-order_date-value_col-str-total_price_sum-title-str-anomalies-over-time-figsize-tuple-14-6-product_filternone-region_filternone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        plot_anomalies_over_time(df_pred: pd.DataFrame, date_col: str = "Order_Date", value_col: str = "total_price_sum", title: str = "Anomalies Over Time", figsize: tuple = (14, 6), product_filter=None, region_filter=None)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plot_anomalies_subplotsdf_pred-pddataframe-group_by-str-product-date_col-str-order_date-value_col-str-total_price_sum-product_filternone-region_filternone-max_groups-int-6-figsize_per_plot-tuple-14-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        plot_anomalies_subplots(df_pred: pd.DataFrame, group_by: str = "Product", date_col: str = "Order_Date", value_col: str = "total_price_sum", product_filter=None, region_filter=None, max_groups: int = 6, figsize_per_plot: tuple = (14, 4))
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#export-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Export Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Export Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#export_anomaly_reportdf_pred-pddataframe-folder_path-str-reports-file_name-str-none-top_n-int-20-product_filternone-region_filternone-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        export_anomaly_report(df_pred: pd.DataFrame, folder_path: str = "reports", file_name: str = None, top_n: int = 20, product_filter=None, region_filter=None) -&gt; str
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-and-load-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Save and Load Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Save and Load Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#save_modelfolder_pathnone-file_namenone-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        save_model(folder_path=None, file_name=None) -&gt; str
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save_best_params_jsonfolder_pathnone-file_nameisolation_forest_best_paramsjson-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        save_best_params_json(folder_path=None, file_name="isolation_forest_best_params.json") -&gt; str
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_modelmodel_path-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_model(model_path: str)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Usage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#typical-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Typical Workflow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#important-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Considerations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Important Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-feature-engineering-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required feature engineering first
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unsupervised-tuning-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unsupervised tuning strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filtering support
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-persistence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model persistence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="isolationforestanalyzer">IsolationForestAnalyzer<a class="headerlink" href="#isolationforestanalyzer" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p><code>IsolationForestAnalyzer</code> is a class used to detect anomalies in aggregated sales data with the Isolation Forest algorithm.</p>
+<p>The class prepares anomaly signals from business and temporal features, trains an unsupervised model, predicts anomalies, creates summaries, shows plots, and exports reports.</p>
+<p>It is useful in machine learning projects that need to identify unusual sales behavior, price changes, discount patterns, or abnormal ticket values.</p>
+<hr />
+<h2 id="main-purpose">Main Purpose<a class="headerlink" href="#main-purpose" title="Permanent link">&para;</a></h2>
+<p>This class helps build an anomaly detection workflow with the following steps:</p>
+<ul>
+<li>create model-ready anomaly signals</li>
+<li>train an Isolation Forest model with hyperparameter search</li>
+<li>predict anomaly flags and anomaly scores</li>
+<li>inspect the most severe anomalies</li>
+<li>visualize anomalies over time</li>
+<li>summarize anomalies by business group</li>
+<li>export reports</li>
+<li>save and load trained models</li>
+</ul>
+<hr />
+<h2 id="class-isolationforestanalyzer">Class: <code>IsolationForestAnalyzer</code><a class="headerlink" href="#class-isolationforestanalyzer" title="Permanent link">&para;</a></h2>
+<h3 id="constructor">Constructor<a class="headerlink" href="#constructor" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">IsolationForestAnalyzer</span><span class="p">(</span>
+    <span class="n">base_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>base_path</code> (<code>str</code>, optional): Base folder used to save model files and parameter files.</li>
+<li><code>random_state</code> (<code>int</code>, optional): Random seed used by the model. Default is <code>42</code>.</li>
+<li><code>cv</code> (<code>int</code>, optional): Number of cross-validation folds used in grid search. Default is <code>3</code>.</li>
+<li><code>n_jobs</code> (<code>int</code>, optional): Number of parallel jobs used in grid search. Default is <code>-1</code>.</li>
+<li><code>verbose</code> (<code>int</code>, optional): Verbosity level used in grid search. Default is <code>0</code>.</li>
+</ul>
+<h3 id="main-attributes">Main Attributes<a class="headerlink" href="#main-attributes" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>feature_cols_</code>: Model input feature names used by the analyzer.</li>
+<li><code>pipeline_</code>: Scikit-learn pipeline created during training.</li>
+<li><code>grid_search_</code>: Grid search object used during hyperparameter tuning.</li>
+<li><code>best_estimator_</code>: Best fitted model pipeline.</li>
+<li><code>best_params_</code>: Best hyperparameters found during training.</li>
+<li><code>fitted_</code>: Boolean flag that indicates whether the model has already been trained.</li>
+</ul>
+<hr />
+<h2 id="model-input-signals">Model Input Signals<a class="headerlink" href="#model-input-signals" title="Permanent link">&para;</a></h2>
+<p>The class creates and uses the following anomaly signals:</p>
+<ul>
+<li><code>if_qty_signal</code></li>
+<li><code>if_sales_signal</code></li>
+<li><code>if_discount_signal</code></li>
+<li><code>if_ticket_signal</code></li>
+</ul>
+<p>These signals are derived from historical sales behavior and business metrics.</p>
+<h3 id="source-columns-used-to-create-signals">Source columns used to create signals<a class="headerlink" href="#source-columns-used-to-create-signals" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>quantity_pct_vs_mean_7d</code></li>
+<li><code>total_price_vs_mean_30d</code></li>
+<li><code>discount_mean_mean_14d</code></li>
+<li><code>avg_ticket</code></li>
+</ul>
+<hr />
+<h2 id="public-methods">Public Methods<a class="headerlink" href="#public-methods" title="Permanent link">&para;</a></h2>
+<h2 id="configuration-and-utility-methods">Configuration and Utility Methods<a class="headerlink" href="#configuration-and-utility-methods" title="Permanent link">&para;</a></h2>
+<h3 id="set_base_pathbase_path-str-data"><code>set_base_path(base_path: str = "data")</code><a class="headerlink" href="#set_base_pathbase_path-str-data" title="Permanent link">&para;</a></h3>
+<p>Redefine the base folder used to store saved model files.</p>
+<h3 id="parameters_1">Parameters<a class="headerlink" href="#parameters_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>base_path</code> (<code>str</code>, optional): New base directory.</li>
+</ul>
+<p><strong>Returns:</strong>
+- <code>None</code></p>
+<hr />
+<h3 id="filter_dataframedf-pddataframe-product_filternone-region_filternone-pddataframe"><code>filter_dataframe(df: pd.DataFrame, product_filter=None, region_filter=None) -&gt; pd.DataFrame</code><a class="headerlink" href="#filter_dataframedf-pddataframe-product_filternone-region_filternone-pddataframe" title="Permanent link">&para;</a></h3>
+<p>Filter a DataFrame by <code>Product</code> and/or <code>Region</code>.</p>
+<p>This method accepts:</p>
+<ul>
+<li><code>None</code></li>
+<li>a single value</li>
+<li>a list of values</li>
+</ul>
+<h3 id="parameters_2">Parameters<a class="headerlink" href="#parameters_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>df</code> (<code>pd.DataFrame</code>): Input DataFrame.</li>
+<li><code>product_filter</code> (optional): One product or a list of products.</li>
+<li><code>region_filter</code> (optional): One region or a list of regions.</li>
+</ul>
+<p><strong>Returns:</strong>
+- <code>pd.DataFrame</code>: Filtered DataFrame.</p>
+<hr />
+<h2 id="feature-creation-method">Feature Creation Method<a class="headerlink" href="#feature-creation-method" title="Permanent link">&para;</a></h2>
+<h3 id="create_if_featuresdf-pddataframe-pddataframe"><code>create_if_features(df: pd.DataFrame) -&gt; pd.DataFrame</code><a class="headerlink" href="#create_if_featuresdf-pddataframe-pddataframe" title="Permanent link">&para;</a></h3>
+<p>Create the anomaly input signals used by the Isolation Forest model.</p>
+<p>This method converts source columns to numeric values, handles infinite values, and clips extreme values to reduce instability.</p>
+<h3 id="required-input-columns">Required input columns<a class="headerlink" href="#required-input-columns" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>quantity_pct_vs_mean_7d</code></li>
+<li><code>total_price_vs_mean_30d</code></li>
+<li><code>discount_mean_mean_14d</code></li>
+<li><code>avg_ticket</code></li>
+</ul>
+<h3 id="output-columns-created">Output columns created<a class="headerlink" href="#output-columns-created" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>if_qty_signal</code></li>
+<li><code>if_sales_signal</code></li>
+<li><code>if_discount_signal</code></li>
+<li><code>if_ticket_signal</code></li>
+</ul>
+<p><strong>Returns:</strong>
+- <code>pd.DataFrame</code>: DataFrame with the new anomaly signal columns.</p>
+<hr />
+<h2 id="training-and-prediction-methods">Training and Prediction Methods<a class="headerlink" href="#training-and-prediction-methods" title="Permanent link">&para;</a></h2>
+<h3 id="fitdf-pddataframe"><code>fit(df: pd.DataFrame)</code><a class="headerlink" href="#fitdf-pddataframe" title="Permanent link">&para;</a></h3>
+<p>Train the analyzer with grid search and unsupervised scoring.</p>
+<p>This method performs the following steps:</p>
+<ol>
+<li>create Isolation Forest input signals</li>
+<li>build a preprocessing and modeling pipeline</li>
+<li>run <code>GridSearchCV</code></li>
+<li>store the best fitted estimator</li>
+<li>store the best hyperparameters</li>
+</ol>
+<p>The internal pipeline includes:</p>
+<ul>
+<li><code>SimpleImputer(strategy="median")</code></li>
+<li><code>RobustScaler()</code></li>
+<li><code>IsolationForest(...)</code></li>
+</ul>
+<p><strong>Returns:</strong>
+- <code>IsolationForestAnalyzer</code>: The fitted object itself.</p>
+<hr />
+<h3 id="predictdf-pddataframe-pddataframe"><code>predict(df: pd.DataFrame) -&gt; pd.DataFrame</code><a class="headerlink" href="#predictdf-pddataframe-pddataframe" title="Permanent link">&para;</a></h3>
+<p>Predict anomalies for a DataFrame using the trained model.</p>
+<p>The method adds the following columns to the output:</p>
+<ul>
+<li><code>anomaly_flag</code></li>
+<li><code>anomaly_label</code></li>
+<li><code>anomaly_score</code></li>
+</ul>
+<h3 id="output-columns">Output columns<a class="headerlink" href="#output-columns" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>anomaly_flag</code>: <code>1</code> for anomaly and <code>0</code> for normal observation.</li>
+<li><code>anomaly_label</code>: <code>"Anomaly"</code> or <code>"Normal"</code>.</li>
+<li><code>anomaly_score</code>: Decision function score from the fitted model.</li>
+</ul>
+<p><strong>Returns:</strong>
+- <code>pd.DataFrame</code>: Input data plus anomaly prediction columns.</p>
+<hr />
+<h3 id="get_best_params-dict"><code>get_best_params() -&gt; dict</code><a class="headerlink" href="#get_best_params-dict" title="Permanent link">&para;</a></h3>
+<p>Return the best hyperparameters found during training.</p>
+<p><strong>Returns:</strong>
+- <code>dict</code>: Best parameter dictionary.</p>
+<hr />
+<h2 id="analysis-and-inspection-methods">Analysis and Inspection Methods<a class="headerlink" href="#analysis-and-inspection-methods" title="Permanent link">&para;</a></h2>
+<h3 id="top_n_anomaliesdf_pred-pddataframe-n-int-10-product_filternone-region_filternone-columns_to_show-list-none-pddataframe"><code>top_n_anomalies(df_pred: pd.DataFrame, n: int = 10, product_filter=None, region_filter=None, columns_to_show: list = None) -&gt; pd.DataFrame</code><a class="headerlink" href="#top_n_anomaliesdf_pred-pddataframe-n-int-10-product_filternone-region_filternone-columns_to_show-list-none-pddataframe" title="Permanent link">&para;</a></h3>
+<p>Return the <code>n</code> most severe anomalies.</p>
+<p>The method filters the predicted dataset, keeps only anomaly rows, and sorts them by anomaly score in ascending order.</p>
+<p>Lower anomaly scores indicate stronger anomaly behavior.</p>
+<h3 id="parameters_3">Parameters<a class="headerlink" href="#parameters_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>df_pred</code> (<code>pd.DataFrame</code>): DataFrame already processed by <code>predict</code>.</li>
+<li><code>n</code> (<code>int</code>, optional): Number of anomaly rows to return. Default is <code>10</code>.</li>
+<li><code>product_filter</code> (optional): Optional filter by product.</li>
+<li><code>region_filter</code> (optional): Optional filter by region.</li>
+<li><code>columns_to_show</code> (<code>list</code>, optional): Custom list of columns to return.</li>
+</ul>
+<p><strong>Returns:</strong>
+- <code>pd.DataFrame</code>: Top anomaly rows.</p>
+<hr />
+<h3 id="anomaly_summarydf_pred-pddataframe-product_filternone-region_filternone-pddataframe"><code>anomaly_summary(df_pred: pd.DataFrame, product_filter=None, region_filter=None) -&gt; pd.DataFrame</code><a class="headerlink" href="#anomaly_summarydf_pred-pddataframe-product_filternone-region_filternone-pddataframe" title="Permanent link">&para;</a></h3>
+<p>Create a grouped summary of anomalies by <code>Product</code> and <code>Region</code>.</p>
+<p>The summary includes:</p>
+<ul>
+<li><code>total_rows</code></li>
+<li><code>anomaly_count</code></li>
+<li><code>anomaly_rate</code></li>
+</ul>
+<h3 id="parameters_4">Parameters<a class="headerlink" href="#parameters_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>df_pred</code> (<code>pd.DataFrame</code>): DataFrame already processed by <code>predict</code>.</li>
+<li><code>product_filter</code> (optional): Optional filter by product.</li>
+<li><code>region_filter</code> (optional): Optional filter by region.</li>
+</ul>
+<p><strong>Returns:</strong>
+- <code>pd.DataFrame</code>: Summary table sorted by anomaly count and anomaly rate.</p>
+<hr />
+<h2 id="visualization-methods">Visualization Methods<a class="headerlink" href="#visualization-methods" title="Permanent link">&para;</a></h2>
+<h3 id="plot_anomalies_over_timedf_pred-pddataframe-date_col-str-order_date-value_col-str-total_price_sum-title-str-anomalies-over-time-figsize-tuple-14-6-product_filternone-region_filternone"><code>plot_anomalies_over_time(df_pred: pd.DataFrame, date_col: str = "Order_Date", value_col: str = "total_price_sum", title: str = "Anomalies Over Time", figsize: tuple = (14, 6), product_filter=None, region_filter=None)</code><a class="headerlink" href="#plot_anomalies_over_timedf_pred-pddataframe-date_col-str-order_date-value_col-str-total_price_sum-title-str-anomalies-over-time-figsize-tuple-14-6-product_filternone-region_filternone" title="Permanent link">&para;</a></h3>
+<p>Plot a time series and highlight anomaly points.</p>
+<p>Normal observations are shown as a line.<br />
+Anomalies are shown as highlighted scatter points.</p>
+<h3 id="parameters_5">Parameters<a class="headerlink" href="#parameters_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>df_pred</code> (<code>pd.DataFrame</code>): DataFrame already processed by <code>predict</code>.</li>
+<li><code>date_col</code> (<code>str</code>, optional): Date column used on the x-axis. Default is <code>"Order_Date"</code>.</li>
+<li><code>value_col</code> (<code>str</code>, optional): Metric plotted on the y-axis. Default is <code>"total_price_sum"</code>.</li>
+<li><code>title</code> (<code>str</code>, optional): Plot title.</li>
+<li><code>figsize</code> (<code>tuple</code>, optional): Figure size.</li>
+<li><code>product_filter</code> (optional): Optional filter by product.</li>
+<li><code>region_filter</code> (optional): Optional filter by region.</li>
+</ul>
+<p><strong>Returns:</strong>
+- <code>None</code></p>
+<hr />
+<h3 id="plot_anomalies_subplotsdf_pred-pddataframe-group_by-str-product-date_col-str-order_date-value_col-str-total_price_sum-product_filternone-region_filternone-max_groups-int-6-figsize_per_plot-tuple-14-4"><code>plot_anomalies_subplots(df_pred: pd.DataFrame, group_by: str = "Product", date_col: str = "Order_Date", value_col: str = "total_price_sum", product_filter=None, region_filter=None, max_groups: int = 6, figsize_per_plot: tuple = (14, 4))</code><a class="headerlink" href="#plot_anomalies_subplotsdf_pred-pddataframe-group_by-str-product-date_col-str-order_date-value_col-str-total_price_sum-product_filternone-region_filternone-max_groups-int-6-figsize_per_plot-tuple-14-4" title="Permanent link">&para;</a></h3>
+<p>Plot anomaly time series in separate subplots by <code>Product</code> or <code>Region</code>.</p>
+<p>This method is useful when the user wants to compare anomaly behavior across different groups.</p>
+<h3 id="parameters_6">Parameters<a class="headerlink" href="#parameters_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>df_pred</code> (<code>pd.DataFrame</code>): DataFrame already processed by <code>predict</code>.</li>
+<li><code>group_by</code> (<code>str</code>, optional): Subplot grouping column. Accepted values are <code>"Product"</code> or <code>"Region"</code>.</li>
+<li><code>date_col</code> (<code>str</code>, optional): Date column used on the x-axis.</li>
+<li><code>value_col</code> (<code>str</code>, optional): Metric plotted on the y-axis.</li>
+<li><code>product_filter</code> (optional): Optional filter by product.</li>
+<li><code>region_filter</code> (optional): Optional filter by region.</li>
+<li><code>max_groups</code> (<code>int</code>, optional): Maximum number of groups shown in the figure. Default is <code>6</code>.</li>
+<li><code>figsize_per_plot</code> (<code>tuple</code>, optional): Base size used for each subplot.</li>
+</ul>
+<p><strong>Returns:</strong>
+- <code>None</code></p>
+<hr />
+<h2 id="export-methods">Export Methods<a class="headerlink" href="#export-methods" title="Permanent link">&para;</a></h2>
+<h3 id="export_anomaly_reportdf_pred-pddataframe-folder_path-str-reports-file_name-str-none-top_n-int-20-product_filternone-region_filternone-str"><code>export_anomaly_report(df_pred: pd.DataFrame, folder_path: str = "reports", file_name: str = None, top_n: int = 20, product_filter=None, region_filter=None) -&gt; str</code><a class="headerlink" href="#export_anomaly_reportdf_pred-pddataframe-folder_path-str-reports-file_name-str-none-top_n-int-20-product_filternone-region_filternone-str" title="Permanent link">&para;</a></h3>
+<p>Export a CSV report containing the top anomalies.</p>
+<p>If <code>file_name</code> is not provided, the method creates a timestamped file name automatically.</p>
+<h3 id="parameters_7">Parameters<a class="headerlink" href="#parameters_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>df_pred</code> (<code>pd.DataFrame</code>): DataFrame already processed by <code>predict</code>.</li>
+<li><code>folder_path</code> (<code>str</code>, optional): Output folder. Default is <code>"reports"</code>.</li>
+<li><code>file_name</code> (<code>str</code>, optional): Custom CSV file name.</li>
+<li><code>top_n</code> (<code>int</code>, optional): Number of top anomalies exported. Default is <code>20</code>.</li>
+<li><code>product_filter</code> (optional): Optional filter by product.</li>
+<li><code>region_filter</code> (optional): Optional filter by region.</li>
+</ul>
+<p><strong>Returns:</strong>
+- <code>str</code>: Full path of the exported CSV file.</p>
+<hr />
+<h2 id="save-and-load-methods">Save and Load Methods<a class="headerlink" href="#save-and-load-methods" title="Permanent link">&para;</a></h2>
+<h3 id="save_modelfolder_pathnone-file_namenone-str"><code>save_model(folder_path=None, file_name=None) -&gt; str</code><a class="headerlink" href="#save_modelfolder_pathnone-file_namenone-str" title="Permanent link">&para;</a></h3>
+<p>Save the full trained analyzer object as a <code>.joblib</code> file.</p>
+<p>If no file name is provided, the method creates a timestamped file name automatically.</p>
+<h3 id="parameters_8">Parameters<a class="headerlink" href="#parameters_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>folder_path</code> (optional): Output folder.</li>
+<li><code>file_name</code> (optional): Custom file name.</li>
+</ul>
+<p><strong>Returns:</strong>
+- <code>str</code>: Full saved file path.</p>
+<hr />
+<h3 id="save_best_params_jsonfolder_pathnone-file_nameisolation_forest_best_paramsjson-str"><code>save_best_params_json(folder_path=None, file_name="isolation_forest_best_params.json") -&gt; str</code><a class="headerlink" href="#save_best_params_jsonfolder_pathnone-file_nameisolation_forest_best_paramsjson-str" title="Permanent link">&para;</a></h3>
+<p>Save the best hyperparameters found during training to a JSON file.</p>
+<h3 id="parameters_9">Parameters<a class="headerlink" href="#parameters_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>folder_path</code> (optional): Output folder.</li>
+<li><code>file_name</code> (<code>str</code>, optional): JSON file name.</li>
+</ul>
+<p><strong>Returns:</strong>
+- <code>str</code>: Full saved file path.</p>
+<hr />
+<h3 id="load_modelmodel_path-str"><code>load_model(model_path: str)</code><a class="headerlink" href="#load_modelmodel_path-str" title="Permanent link">&para;</a></h3>
+<p>Load a previously saved analyzer object from disk.</p>
+<p>This method is static and can be called without creating a new class instance first.</p>
+<h3 id="parameters_10">Parameters<a class="headerlink" href="#parameters_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>model_path</code> (<code>str</code>): Path to the saved <code>.joblib</code> file.</li>
+</ul>
+<p><strong>Returns:</strong>
+- Loaded analyzer object.</p>
+<hr />
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">IsolationForest</span><span class="w"> </span><span class="kn">import</span> <span class="n">IsolationForestAnalyzer</span>
+
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">IsolationForestAnalyzer</span><span class="p">()</span>
+
+<span class="n">analyzer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_features</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">analyzer</span><span class="o">.</span><span class="n">get_best_params</span><span class="p">())</span>
+
+<span class="n">df_pred</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df_features</span><span class="p">)</span>
+
+<span class="n">top_anomalies</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">top_n_anomalies</span><span class="p">(</span><span class="n">df_pred</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">top_anomalies</span><span class="p">)</span>
+
+<span class="n">summary</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">anomaly_summary</span><span class="p">(</span><span class="n">df_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+
+<span class="n">analyzer</span><span class="o">.</span><span class="n">plot_anomalies_over_time</span><span class="p">(</span><span class="n">df_pred</span><span class="p">)</span>
+
+<span class="n">model_path</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">save_model</span><span class="p">()</span>
+<span class="n">params_path</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">save_best_params_json</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h2 id="typical-workflow">Typical Workflow<a class="headerlink" href="#typical-workflow" title="Permanent link">&para;</a></h2>
+<p>A common workflow with this class is:</p>
+<ol>
+<li>load and clean transactional data</li>
+<li>build temporal features</li>
+<li>train <code>IsolationForestAnalyzer</code></li>
+<li>predict anomalies</li>
+<li>inspect top anomalies</li>
+<li>visualize results</li>
+<li>export reports</li>
+<li>save the trained model</li>
+</ol>
+<hr />
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>This class is designed for aggregated sales data.</li>
+<li>It depends on previously created temporal and business features.</li>
+<li>It uses an unsupervised model, so no target label is required.</li>
+<li>It is useful for exploratory anomaly detection and business monitoring.</li>
+<li>The anomaly score comes from the Isolation Forest decision function.</li>
+</ul>
+<hr />
+<h2 id="important-considerations">Important Considerations<a class="headerlink" href="#important-considerations" title="Permanent link">&para;</a></h2>
+<h3 id="required-feature-engineering-first">Required feature engineering first<a class="headerlink" href="#required-feature-engineering-first" title="Permanent link">&para;</a></h3>
+<p>Before using this class, the input DataFrame should already contain the required temporal features used to build the anomaly signals.</p>
+<h3 id="unsupervised-tuning-strategy">Unsupervised tuning strategy<a class="headerlink" href="#unsupervised-tuning-strategy" title="Permanent link">&para;</a></h3>
+<p>The model uses a custom unsupervised scorer inside <code>GridSearchCV</code>.<br />
+This helps choose parameters based on separation between more extreme points and more normal points.</p>
+<h3 id="filtering-support">Filtering support<a class="headerlink" href="#filtering-support" title="Permanent link">&para;</a></h3>
+<p>Several public methods allow optional filtering by product and region.<br />
+This is useful for focused business analysis.</p>
+<h3 id="model-persistence">Model persistence<a class="headerlink" href="#model-persistence" title="Permanent link">&para;</a></h3>
+<p>The class supports model saving and loading, which is useful when training is expensive and the same fitted model needs to be reused later.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

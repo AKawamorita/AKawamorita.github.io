@@ -1,0 +1,2570 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the Beverage Sales project">
+      
+      
+        <meta name="author" content="Alexandre Kawamorita">
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../notebooks/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Documentation - Beverage Sales</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#beverage-sales-project-notebook-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Beverage Sales" class="md-header__button md-logo" aria-label="Beverage Sales" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Beverage Sales
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Documentation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Beverage Sales" class="md-nav__button md-logo" aria-label="Beverage Sales" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Beverage Sales
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-execution-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Execution Order
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-data_loadingipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) data_loading.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1) data_loading.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-notebook-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Notebook Does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-step-is-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Step Is Important
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-data_qualityipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) data_quality.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2) data_quality.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-components_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-notebook-does_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Notebook Does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-checks-in-this-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Checks in This Step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-step-is-important_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Step Is Important
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-feature_engineeringipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) feature_engineering.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) feature_engineering.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-components_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input File
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-notebook-does_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Notebook Does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples-of-features-found-in-this-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples of Features Found in This Notebook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-step-is-important_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Step Is Important
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#points-of-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Points of Attention
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-anomaly_detectionipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) anomaly_detection.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4) anomaly_detection.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-components_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-notebook-does_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Notebook Does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-step-is-important_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Step Is Important
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-leakage-prevention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Leakage Prevention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-baselineipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) BaseLine.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5) BaseLine.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-components_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-notebook-does_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Notebook Does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-step-is-important_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Step Is Important
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#end-to-end-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End-to-End Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-generated-artifacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Generated Artifacts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#note" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Note
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notebooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loaders
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Loaders
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CSVLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSV Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataQuality Class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataFeatures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataQualityFeatures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Quality Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Models
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IsolationForestAnalyzer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Isolation Forest Analyzer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LightGBMRegressorModels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LightGBM Regressor Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Repository
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ParquetRepository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parquet Repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    XAI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    XAI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LightGBMShapInterpreter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LightGBMShapInterpreter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Results
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beverage Sales - Test Set Analysis by Anomaly Segment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shap_results_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shap results analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-execution-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Execution Order
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-data_loadingipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) data_loading.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1) data_loading.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-notebook-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Notebook Does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-step-is-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Step Is Important
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-data_qualityipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) data_quality.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2) data_quality.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-components_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-notebook-does_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Notebook Does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-checks-in-this-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Checks in This Step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-step-is-important_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Step Is Important
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-feature_engineeringipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) feature_engineering.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) feature_engineering.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-components_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input File
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-notebook-does_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Notebook Does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples-of-features-found-in-this-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples of Features Found in This Notebook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-step-is-important_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Step Is Important
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#points-of-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Points of Attention
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-anomaly_detectionipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) anomaly_detection.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4) anomaly_detection.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-components_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-notebook-does_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Notebook Does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-step-is-important_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Step Is Important
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-leakage-prevention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Leakage Prevention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-baselineipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) BaseLine.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5) BaseLine.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-components_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-notebook-does_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Notebook Does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-step-is-important_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Step Is Important
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#end-to-end-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End-to-End Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-generated-artifacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Generated Artifacts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#note" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Note
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="beverage-sales-project-notebook-documentation">Beverage Sales Project — Notebook Documentation<a class="headerlink" href="#beverage-sales-project-notebook-documentation" title="Permanent link">&para;</a></h1>
+<p><img alt="main cities and products consumed" src="../img/InfoGraphic50.png" /></p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>This document describes the main notebooks used in the <strong>Beverage Sales</strong> project. The pipeline follows a practical machine learning flow for tabular and time-based sales data:</p>
+<ol>
+<li>Load raw CSV data</li>
+<li>Save the dataset in Parquet format</li>
+<li>Validate data quality</li>
+<li>Create time-based features</li>
+<li>Detect anomalies with Isolation Forest</li>
+<li>Train a baseline model with LightGBM</li>
+</ol>
+<p>The notebooks were designed to run in sequence, sharing intermediate artifacts through Parquet files and serialized models.</p>
+<ul>
+<li>sequential organization of the data pipeline</li>
+<li>explicit data quality step</li>
+<li>time-based feature engineering</li>
+<li>careful time split to avoid leakage</li>
+<li>combination of supervised and unsupervised modeling ideas</li>
+</ul>
+<hr />
+<h2 id="recommended-execution-order">Recommended Execution Order<a class="headerlink" href="#recommended-execution-order" title="Permanent link">&para;</a></h2>
+<ol>
+<li><code>data_loading.ipynb</code></li>
+<li><code>data_quality.ipynb</code></li>
+<li><code>feature_engineering.ipynb</code></li>
+<li><code>anomaly_detection.ipynb</code></li>
+<li><code>BaseLine.ipynb</code></li>
+</ol>
+<hr />
+<h2 id="1-data_loadingipynb">1) <code>data_loading.ipynb</code><a class="headerlink" href="#1-data_loadingipynb" title="Permanent link">&para;</a></h2>
+<h3 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h3>
+<p>This notebook loads the raw CSV dataset and saves it in Parquet format, allowing faster and more consistent processing in the next steps.</p>
+<h3 id="main-components">Main Components<a class="headerlink" href="#main-components" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>CSVLoader</code></li>
+<li><code>ParquetRepository</code></li>
+<li><code>DATA_RAW</code></li>
+<li><code>DATA_PROCESSED</code></li>
+</ul>
+<h3 id="what-the-notebook-does">What the Notebook Does<a class="headerlink" href="#what-the-notebook-does" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Imports project paths and helper classes</li>
+<li>Loads the file <code>synthetic_beverage_sales_data.csv</code></li>
+<li>Creates a pandas DataFrame from the raw source</li>
+<li>Saves the result as <code>beverage_sales_processed.parquet</code></li>
+<li>Reloads the saved Parquet file</li>
+<li>Checks whether the loaded file is equal to the original DataFrame</li>
+</ul>
+<h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Raw CSV file from the project's raw data folder</li>
+</ul>
+<h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>beverage_sales_processed.parquet</code></li>
+</ul>
+<h3 id="why-this-step-is-important">Why This Step Is Important<a class="headerlink" href="#why-this-step-is-important" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Reduces loading time in the next steps</li>
+<li>Standardizes the storage format</li>
+<li>Improves pipeline reproducibility</li>
+</ul>
+<h3 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>This notebook is the entry point of the data pipeline.</li>
+<li>The equality check is useful to validate the save and reload process.</li>
+</ul>
+<hr />
+<h2 id="2-data_qualityipynb">2) <code>data_quality.ipynb</code><a class="headerlink" href="#2-data_qualityipynb" title="Permanent link">&para;</a></h2>
+<h3 id="purpose_1">Purpose<a class="headerlink" href="#purpose_1" title="Permanent link">&para;</a></h3>
+<p>This notebook validates the processed dataset before the feature engineering and modeling stage.</p>
+<h3 id="main-components_1">Main Components<a class="headerlink" href="#main-components_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>ParquetRepository</code></li>
+<li><code>DataQuality</code></li>
+<li><code>DATA_PROCESSED</code></li>
+</ul>
+<h3 id="what-the-notebook-does_1">What the Notebook Does<a class="headerlink" href="#what-the-notebook-does_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Loads <code>beverage_sales_processed.parquet</code></li>
+<li>Creates an instance of the <code>DataQuality</code> class</li>
+<li>Runs a full analysis with <code>run_full_analysis(tolerance=0.1)</code></li>
+<li>Displays the validation report</li>
+<li>Shows a sample of total price inconsistencies</li>
+<li>Generates an executive summary</li>
+<li>Displays the DataFrame column types</li>
+</ul>
+<h3 id="input_1">Input<a class="headerlink" href="#input_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>beverage_sales_processed.parquet</code></li>
+</ul>
+<h3 id="output_1">Output<a class="headerlink" href="#output_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Quality report shown in the notebook</li>
+<li>Executive summary shown in the notebook</li>
+<li>Sample of inconsistent records shown in the notebook</li>
+</ul>
+<h3 id="expected-checks-in-this-step">Expected Checks in This Step<a class="headerlink" href="#expected-checks-in-this-step" title="Permanent link">&para;</a></h3>
+<p>Depending on the implementation of the <code>DataQuality</code> class, this step may validate:
+- Missing values
+- Negative values
+- Discount rules
+- Duplicate records
+- Invalid dates
+- Inconsistencies between total price and expected total price</p>
+<h3 id="why-this-step-is-important_1">Why This Step Is Important<a class="headerlink" href="#why-this-step-is-important_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Prevents low-quality records from affecting feature engineering</li>
+<li>Gives more confidence to the modeling pipeline</li>
+<li>Makes business rules more explicit</li>
+</ul>
+<h3 id="notes_1">Notes<a class="headerlink" href="#notes_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The tolerance parameter is important for numeric comparisons.</li>
+<li>This notebook is a validation step and should be run before creating derived features.</li>
+</ul>
+<hr />
+<h2 id="3-feature_engineeringipynb">3) <code>feature_engineering.ipynb</code><a class="headerlink" href="#3-feature_engineeringipynb" title="Permanent link">&para;</a></h2>
+<h3 id="purpose_2">Purpose<a class="headerlink" href="#purpose_2" title="Permanent link">&para;</a></h3>
+<p>This notebook creates time-based and aggregated features for the sales dataset. It also includes exploratory visual analysis of distributions and outliers.</p>
+<h3 id="main-components_2">Main Components<a class="headerlink" href="#main-components_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>ParquetRepository</code></li>
+<li><code>DataQualityFeatures</code></li>
+<li><code>SalesTimeBoxplot</code></li>
+<li><code>SalesTimeViolin</code></li>
+<li><code>SalesTimeOutlier</code></li>
+<li><code>ProductQuantityHistogram</code></li>
+<li><code>DATA_PROCESSED</code></li>
+<li><code>DATA_FEATURES</code></li>
+</ul>
+<h3 id="input-file">Input File<a class="headerlink" href="#input-file" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>beverage_sales_processed_qa_ok.parquet</code></li>
+</ul>
+<h3 id="what-the-notebook-does_2">What the Notebook Does<a class="headerlink" href="#what-the-notebook-does_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Loads the processed dataset approved in the quality validation step</li>
+<li>Creates a <code>DataQualityFeatures</code> object using:</li>
+<li><code>date_col="Order_Date"</code></li>
+<li><code>group_cols=["Category", "Product", "Region"]</code></li>
+<li><code>fill_missing_days=True</code></li>
+<li>Generates all features with <code>build_all_features()</code></li>
+<li>Checks missing values in important derived columns</li>
+<li>Displays data types and first rows</li>
+<li>Runs feature quality analysis and executive summary</li>
+<li>Compares the size of the original DataFrame with the enriched DataFrame</li>
+<li>Merges original data with feature-enriched data</li>
+<li>Checks key duplication after the merge</li>
+<li>Creates visual analysis with:</li>
+<li>boxplot by period</li>
+<li>violin plot by period</li>
+<li>outlier chart using IQR</li>
+<li>outlier chart using z-score</li>
+<li>histogram by year/category/product</li>
+<li>Saves the final dataset with features as <code>beverage_sales_feature.parquet</code></li>
+</ul>
+<h3 id="examples-of-features-found-in-this-notebook">Examples of Features Found in This Notebook<a class="headerlink" href="#examples-of-features-found-in-this-notebook" title="Permanent link">&para;</a></h3>
+<p>The generated dataset includes features such as:
+- <code>quantity_sum_mean_7d</code>
+- <code>quantity_sum_std_7d</code>
+- <code>quantity_sum_sum_7d</code>
+- <code>total_price_sum_mean_7d</code>
+- <code>total_price_sum_std_7d</code>
+- <code>total_price_sum_mean_30d</code>
+- <code>unit_price_mean_mean_7d</code>
+- <code>discount_mean_mean_14d</code>
+- <code>quantity_vs_mean_7d</code>
+- <code>total_price_vs_mean_30d</code>
+- <code>quantity_pct_vs_mean_7d</code>
+- <code>history_less_than_7d</code>
+- <code>history_less_than_30d</code></p>
+<h3 id="output_2">Output<a class="headerlink" href="#output_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>beverage_sales_feature.parquet</code></li>
+<li>Feature quality report in the notebook</li>
+<li>Visual analysis charts for distribution and outliers</li>
+</ul>
+<h3 id="why-this-step-is-important_2">Why This Step Is Important<a class="headerlink" href="#why-this-step-is-important_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Adds time context to each sales record</li>
+<li>Helps models understand recent behavior and local trends</li>
+<li>Creates stronger signals for anomaly detection and forecasting</li>
+</ul>
+<h3 id="notes_2">Notes<a class="headerlink" href="#notes_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The grouping keys are important because rolling statistics are calculated inside each group.</li>
+<li>The notebook uses <code>fill_missing_days=True</code>, which is useful in time series because it makes the historical window more consistent.</li>
+<li>There are exploratory analysis cells, but the main production artifact of this step is the Parquet file with the features.</li>
+</ul>
+<h3 id="points-of-attention">Points of Attention<a class="headerlink" href="#points-of-attention" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Some visualization cells use <code>value_col="Quantity"</code>, while the feature dataset mainly uses aggregated names such as <code>quantity_sum</code>. This is acceptable only if the plotting class expects the original column. Otherwise, it is worth reviewing.</li>
+<li>One violin plot uses an end date in 2024. If the dataset is limited to the 2021 to 2023 period, this filter should be checked.</li>
+</ul>
+<hr />
+<h2 id="4-anomaly_detectionipynb">4) <code>anomaly_detection.ipynb</code><a class="headerlink" href="#4-anomaly_detectionipynb" title="Permanent link">&para;</a></h2>
+<h3 id="purpose_3">Purpose<a class="headerlink" href="#purpose_3" title="Permanent link">&para;</a></h3>
+<p>This notebook trains an <strong>Isolation Forest</strong> model to detect anomalous sales behavior and generate anomaly signals for later use.</p>
+<h3 id="main-components_3">Main Components<a class="headerlink" href="#main-components_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>ParquetRepository</code></li>
+<li><code>IsolationForestAnalyzer</code></li>
+<li><code>DATA_FEATURES</code></li>
+<li><code>MODELS_ANOMALYD</code></li>
+</ul>
+<h3 id="input_2">Input<a class="headerlink" href="#input_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>beverage_sales_feature.parquet</code></li>
+</ul>
+<h3 id="what-the-notebook-does_3">What the Notebook Does<a class="headerlink" href="#what-the-notebook-does_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Loads the dataset with features</li>
+<li>Converts <code>Order_Date</code> to datetime</li>
+<li>Splits the data by year:</li>
+<li>Training: 2021 and 2022</li>
+<li>Test / future period: 2023</li>
+<li>Creates an <code>IsolationForestAnalyzer</code> with:</li>
+<li><code>random_state=42</code></li>
+<li><code>cv=3</code></li>
+<li><code>n_jobs=-1</code></li>
+<li><code>verbose=1</code></li>
+<li>Trains the model only on the training period</li>
+<li>Displays the best parameters</li>
+<li>Saves the trained model to a <code>.joblib</code> file</li>
+<li>Saves the best parameters to JSON</li>
+<li>Runs prediction on the feature dataset</li>
+<li>Selects anomaly-related columns, including:</li>
+<li><code>anomaly_flag</code></li>
+<li><code>anomaly_label</code></li>
+<li><code>anomaly_score</code></li>
+<li><code>if_qty_signal</code></li>
+<li><code>if_sales_signal</code></li>
+<li><code>if_discount_signal</code></li>
+<li><code>if_ticket_signal</code></li>
+<li>Displays an anomaly summary</li>
+</ul>
+<h3 id="output_3">Output<a class="headerlink" href="#output_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Serialized model: <code>isolation_forest_analyzer.joblib</code></li>
+<li>Parameter file: <code>isolation_forest_best_params.json</code></li>
+<li>Anomaly predictions available in memory / notebook output</li>
+</ul>
+<h3 id="why-this-step-is-important_3">Why This Step Is Important<a class="headerlink" href="#why-this-step-is-important_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Detects unusual patterns without needing labels</li>
+<li>Creates useful anomaly signals that can be used later by supervised models</li>
+<li>Supports a hybrid modeling strategy</li>
+</ul>
+<h3 id="data-leakage-prevention">Data Leakage Prevention<a class="headerlink" href="#data-leakage-prevention" title="Permanent link">&para;</a></h3>
+<p>This notebook clearly defines an important rule:</p>
+<blockquote>
+<p>To avoid data leakage, the Isolation Forest model is trained only on data from 2021 to 2022, leaving 2023 for testing.</p>
+</blockquote>
+<p>This is a strong and correct decision for time-based modeling.</p>
+<h3 id="notes_3">Notes<a class="headerlink" href="#notes_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Although <code>df_test_if</code> is created, prediction is made on <code>df_load</code>. This may be intentional if the goal is to score the full dataset after training only on historical data.</li>
+<li>The anomaly output columns are useful for future comparison between the baseline model and the anomaly-enriched model.</li>
+</ul>
+<hr />
+<h2 id="5-baselineipynb">5) <code>BaseLine.ipynb</code><a class="headerlink" href="#5-baselineipynb" title="Permanent link">&para;</a></h2>
+<h3 id="purpose_4">Purpose<a class="headerlink" href="#purpose_4" title="Permanent link">&para;</a></h3>
+<p>This notebook trains a <strong>baseline model with LightGBM Regressor</strong> to predict <code>quantity_sum</code>, without using anomaly-derived signals yet.</p>
+<h3 id="main-components_4">Main Components<a class="headerlink" href="#main-components_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>ParquetRepository</code></li>
+<li><code>LightGBMRegressorBaseLine</code></li>
+<li><code>LightGBMRegressorAnomaly</code> (imported, but not used in the visible cells)</li>
+<li><code>DATA_FEATURES</code></li>
+<li><code>MODELS_BASELINE</code></li>
+<li><code>MODELS_METRICS</code></li>
+</ul>
+<h3 id="input_3">Input<a class="headerlink" href="#input_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>beverage_sales_feature.parquet</code></li>
+</ul>
+<h3 id="what-the-notebook-does_4">What the Notebook Does<a class="headerlink" href="#what-the-notebook-does_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Loads the dataset with features</li>
+<li>Displays the column types</li>
+<li>Converts <code>Order_Date</code> to datetime</li>
+<li>Splits the data by year:</li>
+<li>Training: 2021 and 2022</li>
+<li>Test: 2023</li>
+<li>Defines the target:</li>
+<li><code>quantity_sum</code></li>
+<li>Defines numeric features, such as:</li>
+<li>price, discount, order and customer aggregations</li>
+<li>calendar features</li>
+<li>rolling window features</li>
+<li>ratio and history features</li>
+<li>Defines categorical features:</li>
+<li><code>Product</code></li>
+<li><code>Region</code></li>
+<li>Creates an instance of <code>LightGBMRegressorBaseLine</code></li>
+<li>Trains the model with cross-validation and hyperparameter search</li>
+<li>Evaluates the model</li>
+<li>Saves the trained model and best parameters</li>
+</ul>
+<h3 id="output_4">Output<a class="headerlink" href="#output_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Serialized baseline model</li>
+<li>File with best parameters</li>
+<li>Evaluation metrics shown in the notebook</li>
+</ul>
+<h3 id="why-this-step-is-important_4">Why This Step Is Important<a class="headerlink" href="#why-this-step-is-important_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Establishes a supervised benchmark</li>
+<li>Creates a reference point before using anomaly-derived signals</li>
+<li>Helps compare a simple forecasting approach with a hybrid approach</li>
+</ul>
+<h3 id="notes_4">Notes<a class="headerlink" href="#notes_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>In the visible section, the evaluation is done with <code>baseline_model.evaluate(df_train_baseline)</code>. For the final performance report, the most appropriate choice is to evaluate on <code>df_test_baseline</code>.</li>
+<li>This notebook is important because it provides the baseline needed to justify whether the anomaly-based approach really adds value.</li>
+</ul>
+<hr />
+<h2 id="pipeline-summary">Pipeline Summary<a class="headerlink" href="#pipeline-summary" title="Permanent link">&para;</a></h2>
+<h3 id="end-to-end-logic">End-to-End Logic<a class="headerlink" href="#end-to-end-logic" title="Permanent link">&para;</a></h3>
+<p>The notebooks implement the following practical flow:</p>
+<ul>
+<li><strong>Load and standardize the data</strong></li>
+<li><strong>Validate business consistency in the data</strong></li>
+<li><strong>Create time-based and rolling features</strong></li>
+<li><strong>Detect unusual patterns with an unsupervised model</strong></li>
+<li><strong>Train a supervised baseline forecasting model</strong></li>
+</ul>
+<h3 id="main-generated-artifacts">Main Generated Artifacts<a class="headerlink" href="#main-generated-artifacts" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>beverage_sales_processed.parquet</code></li>
+<li><code>beverage_sales_feature.parquet</code></li>
+<li>Data quality report</li>
+<li>Feature quality report</li>
+<li>Serialized Isolation Forest model</li>
+<li>JSON with best Isolation Forest parameters</li>
+<li>Serialized LightGBM baseline model</li>
+<li>File with best LightGBM baseline parameters</li>
+</ul>
+<hr />
+<h2 id="note">Note<a class="headerlink" href="#note" title="Permanent link">&para;</a></h2>
+<p>These notebooks already show a coherent ML pipeline structure for a portfolio project. The strongest points are:
+- sequential organization of the data pipeline
+- explicit data quality step
+- time-based feature engineering
+- careful time split to avoid leakage
+- combination of supervised and unsupervised modeling ideas</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

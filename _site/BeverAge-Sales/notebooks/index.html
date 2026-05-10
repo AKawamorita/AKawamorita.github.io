@@ -1,0 +1,2784 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the Beverage Sales project">
+      
+      
+        <meta name="author" content="Alexandre Kawamorita">
+      
+      
+      
+        <link rel="prev" href="../documentation/">
+      
+      
+        <link rel="next" href="../TextLoader/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Notebooks - Beverage Sales</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#beverage-sales-analytics-and-hybrid-ml-pipeline" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Beverage Sales" class="md-header__button md-logo" aria-label="Beverage Sales" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Beverage Sales
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Notebooks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Beverage Sales" class="md-nav__button md-logo" aria-label="Beverage Sales" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Beverage Sales
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notebooks
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notebooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#project-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#business-motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Business Motivation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notebook-execution-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notebook Execution Order
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notebook-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notebook Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Notebook Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-data_loadingipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. data_loading.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. data_loading.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-data_qualityipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. data_quality.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. data_quality.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-tasks_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-feature_engineeringipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. feature_engineering.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. feature_engineering.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-tasks_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-anomaly_detectionipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. anomaly_detection.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. anomaly_detection.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-tasks_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-baselineipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. BaseLine.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. BaseLine.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-tasks_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-hybridmodelipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. HybridModel.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. HybridModel.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-tasks_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-performance_benchmarkingipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. performance_benchmarking.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. performance_benchmarking.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-tasks_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow Logic
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visual-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visual Analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Visual Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#boxplot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boxplot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#violin-plot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Violin Plot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-quantity-was-used-instead-of-quantity_sum-in-distribution-plots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Quantity was used instead of quantity_sum in distribution plots
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outlier-plot-by-period" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outlier Plot by Period
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-design-choices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Design Choices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Design Choices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameterized-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameterized filters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hybrid-modeling-idea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hybrid modeling idea
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-strengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Strengths
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skills-demonstrated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skills Demonstrated
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Skills Demonstrated">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-technical-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core technical skills
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ml-and-analytics-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ML and analytics skills
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#engineering-and-project-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Engineering and project skills
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-linkedin-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Suggested LinkedIn Skills
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Suggested LinkedIn Skills">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-impact-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High-impact skills
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strong-supporting-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strong supporting skills
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#good-options-for-an-ml-engineer-positioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Good options for an ML Engineer positioning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-linkedin-skill-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Suggested LinkedIn Skill Order
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future Improvements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loaders
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Loaders
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CSVLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSV Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataQuality Class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataFeatures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataQualityFeatures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Quality Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Models
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IsolationForestAnalyzer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Isolation Forest Analyzer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LightGBMRegressorModels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LightGBM Regressor Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Repository
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ParquetRepository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parquet Repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    XAI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    XAI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LightGBMShapInterpreter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LightGBMShapInterpreter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Results
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beverage Sales - Test Set Analysis by Anomaly Segment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shap_results_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shap results analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#project-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#business-motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Business Motivation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notebook-execution-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notebook Execution Order
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notebook-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notebook Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Notebook Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-data_loadingipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. data_loading.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. data_loading.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-data_qualityipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. data_quality.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. data_quality.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-tasks_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-feature_engineeringipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. feature_engineering.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. feature_engineering.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-tasks_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-anomaly_detectionipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. anomaly_detection.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. anomaly_detection.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-tasks_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-baselineipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. BaseLine.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. BaseLine.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-tasks_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-hybridmodelipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. HybridModel.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. HybridModel.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-tasks_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-performance_benchmarkingipynb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. performance_benchmarking.ipynb
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. performance_benchmarking.ipynb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-tasks_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow Logic
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visual-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visual Analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Visual Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#boxplot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boxplot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#violin-plot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Violin Plot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-quantity-was-used-instead-of-quantity_sum-in-distribution-plots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Quantity was used instead of quantity_sum in distribution plots
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outlier-plot-by-period" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outlier Plot by Period
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-design-choices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Design Choices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Design Choices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameterized-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameterized filters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hybrid-modeling-idea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hybrid modeling idea
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-strengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Strengths
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skills-demonstrated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skills Demonstrated
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Skills Demonstrated">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-technical-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core technical skills
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ml-and-analytics-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ML and analytics skills
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#engineering-and-project-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Engineering and project skills
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-linkedin-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Suggested LinkedIn Skills
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Suggested LinkedIn Skills">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-impact-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High-impact skills
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strong-supporting-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strong supporting skills
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#good-options-for-an-ml-engineer-positioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Good options for an ML Engineer positioning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-linkedin-skill-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Suggested LinkedIn Skill Order
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future Improvements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="beverage-sales-analytics-and-hybrid-ml-pipeline">Beverage Sales Analytics and Hybrid ML Pipeline<a class="headerlink" href="#beverage-sales-analytics-and-hybrid-ml-pipeline" title="Permanent link">&para;</a></h1>
+<h2 id="project-overview">Project Overview<a class="headerlink" href="#project-overview" title="Permanent link">&para;</a></h2>
+<p>This project explores a <strong>Beverage Sales</strong> dataset and builds a structured analytics and machine learning workflow focused on:</p>
+<ul>
+<li>sales intelligence</li>
+<li>data quality validation</li>
+<li>time-based feature engineering</li>
+<li>anomaly detection</li>
+<li>baseline modeling</li>
+<li>hybrid modeling</li>
+<li>performance benchmarking</li>
+</ul>
+<p>The project was designed as a <strong>structured end-to-end analytical and machine learning workflow</strong>, not only as isolated notebook experiments.</p>
+<hr />
+<h2 id="business-motivation">Business Motivation<a class="headerlink" href="#business-motivation" title="Permanent link">&para;</a></h2>
+<p>Sales data often contains:</p>
+<ul>
+<li>seasonality</li>
+<li>regional demand differences</li>
+<li>product-level variation</li>
+<li>unusual peaks and drops</li>
+<li>behavior changes over time</li>
+</ul>
+<p>Because of that, this project investigates both:</p>
+<ol>
+<li><strong>normal sales patterns</strong></li>
+<li><strong>unusual sales behavior through anomaly detection</strong></li>
+</ol>
+<p>The main idea is to test whether anomaly-related signals can improve supervised model performance when compared to a simpler baseline approach.</p>
+<hr />
+<h2 id="main-objectives">Main Objectives<a class="headerlink" href="#main-objectives" title="Permanent link">&para;</a></h2>
+<p>This project was created to answer questions such as:</p>
+<ul>
+<li>How do beverage sales behave over time?</li>
+<li>Can we detect unusual demand spikes and drops?</li>
+<li>Which time-based features help describe sales dynamics?</li>
+<li>Does anomaly information add value to a supervised model?</li>
+<li>How does a hybrid model compare against a baseline model?</li>
+</ul>
+<hr />
+<h2 id="notebook-execution-order">Notebook Execution Order<a class="headerlink" href="#notebook-execution-order" title="Permanent link">&para;</a></h2>
+<p>The project was organized as a notebook pipeline. The recommended execution order is:</p>
+<ol>
+<li><code>01_data_loading.ipynb</code></li>
+<li><code>02_data_quality.ipynb</code></li>
+<li><code>03_feature_engineering.ipynb</code></li>
+<li><code>04_anomaly_detection.ipynb</code></li>
+<li><code>05_BaseLine.ipynb</code></li>
+<li><code>06_HybridModel.ipynb</code></li>
+<li><code>07_performance_benchmarking.ipynb</code></li>
+</ol>
+<hr />
+<h2 id="notebook-summary">Notebook Summary<a class="headerlink" href="#notebook-summary" title="Permanent link">&para;</a></h2>
+<h3 id="1-data_loadingipynb">1. <code>data_loading.ipynb</code><a class="headerlink" href="#1-data_loadingipynb" title="Permanent link">&para;</a></h3>
+<h4 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h4>
+<p>Loads the raw dataset, standardizes columns, converts data types, and prepares the base data for the next stages.</p>
+<h4 id="main-tasks">Main tasks<a class="headerlink" href="#main-tasks" title="Permanent link">&para;</a></h4>
+<ul>
+<li>load raw CSV data</li>
+<li>inspect schema and columns</li>
+<li>standardize structure</li>
+<li>convert date fields</li>
+<li>save processed data</li>
+</ul>
+<h4 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h4>
+<ul>
+<li>cleaned dataset</li>
+<li>processed file ready for downstream analysis</li>
+</ul>
+<hr />
+<h3 id="2-data_qualityipynb">2. <code>data_quality.ipynb</code><a class="headerlink" href="#2-data_qualityipynb" title="Permanent link">&para;</a></h3>
+<h4 id="purpose_1">Purpose<a class="headerlink" href="#purpose_1" title="Permanent link">&para;</a></h4>
+<p>Validates whether the processed dataset is reliable enough for analysis and modeling.</p>
+<h4 id="main-tasks_1">Main tasks<a class="headerlink" href="#main-tasks_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>missing value checks</li>
+<li>invalid or inconsistent record detection</li>
+<li>business-rule validation</li>
+<li>quality summary generation</li>
+</ul>
+<h4 id="output_1">Output<a class="headerlink" href="#output_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>quality report</li>
+<li>validated dataset for feature engineering</li>
+</ul>
+<hr />
+<h3 id="3-feature_engineeringipynb">3. <code>feature_engineering.ipynb</code><a class="headerlink" href="#3-feature_engineeringipynb" title="Permanent link">&para;</a></h3>
+<h4 id="purpose_2">Purpose<a class="headerlink" href="#purpose_2" title="Permanent link">&para;</a></h4>
+<p>Transforms raw sales data into time-based and business-oriented features for analysis and machine learning.</p>
+<h4 id="main-tasks_2">Main tasks<a class="headerlink" href="#main-tasks_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>aggregate sales information</li>
+<li>create rolling window statistics</li>
+<li>generate lag-based features</li>
+<li>build ratio-based features</li>
+<li>prepare model-ready inputs</li>
+</ul>
+<h4 id="example-features">Example features<a class="headerlink" href="#example-features" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>quantity_sum</code></li>
+<li><code>total_price_sum</code></li>
+<li><code>unit_price_mean</code></li>
+<li><code>discount_mean</code></li>
+<li><code>order_count</code></li>
+<li><code>customer_count</code></li>
+<li><code>avg_ticket</code></li>
+<li>rolling means</li>
+<li>rolling standard deviations</li>
+<li>historical comparison metrics</li>
+</ul>
+<h4 id="output_2">Output<a class="headerlink" href="#output_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>feature-enriched dataset</li>
+</ul>
+<hr />
+<h3 id="4-anomaly_detectionipynb">4. <code>anomaly_detection.ipynb</code><a class="headerlink" href="#4-anomaly_detectionipynb" title="Permanent link">&para;</a></h3>
+<h4 id="purpose_3">Purpose<a class="headerlink" href="#purpose_3" title="Permanent link">&para;</a></h4>
+<p>Detects unusual sales behavior using anomaly detection logic.</p>
+<h4 id="main-tasks_3">Main tasks<a class="headerlink" href="#main-tasks_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>load engineered features</li>
+<li>train or load anomaly detection model</li>
+<li>generate anomaly scores</li>
+<li>generate anomaly flags</li>
+<li>save anomaly-enriched outputs</li>
+</ul>
+<h4 id="output_3">Output<a class="headerlink" href="#output_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>anomaly scores</li>
+<li>anomaly flags</li>
+<li>enriched dataset for downstream modeling</li>
+</ul>
+<hr />
+<h3 id="5-baselineipynb">5. <code>BaseLine.ipynb</code><a class="headerlink" href="#5-baselineipynb" title="Permanent link">&para;</a></h3>
+<h4 id="purpose_4">Purpose<a class="headerlink" href="#purpose_4" title="Permanent link">&para;</a></h4>
+<p>Builds the baseline supervised model used as the main reference point in the project.</p>
+<h4 id="main-tasks_4">Main tasks<a class="headerlink" href="#main-tasks_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>load modeling features</li>
+<li>prepare train / validation / test logic</li>
+<li>train the baseline model</li>
+<li>evaluate predictive performance</li>
+<li>generate benchmark metrics</li>
+</ul>
+<h4 id="output_4">Output<a class="headerlink" href="#output_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>trained baseline model</li>
+<li>baseline metrics</li>
+<li>reference results for comparison</li>
+</ul>
+<hr />
+<h3 id="6-hybridmodelipynb">6. <code>HybridModel.ipynb</code><a class="headerlink" href="#6-hybridmodelipynb" title="Permanent link">&para;</a></h3>
+<h4 id="purpose_5">Purpose<a class="headerlink" href="#purpose_5" title="Permanent link">&para;</a></h4>
+<p>Builds the hybrid solution by combining anomaly-related information with supervised learning.</p>
+<h4 id="main-tasks_5">Main tasks<a class="headerlink" href="#main-tasks_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>load engineered features</li>
+<li>include anomaly outputs as additional signals</li>
+<li>train the hybrid model</li>
+<li>evaluate predictive performance</li>
+<li>compare hybrid results against the baseline</li>
+</ul>
+<h4 id="output_5">Output<a class="headerlink" href="#output_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>trained hybrid model</li>
+<li>hybrid model metrics</li>
+<li>comparison-ready outputs</li>
+</ul>
+<hr />
+<h3 id="7-performance_benchmarkingipynb">7. <code>performance_benchmarking.ipynb</code><a class="headerlink" href="#7-performance_benchmarkingipynb" title="Permanent link">&para;</a></h3>
+<h4 id="purpose_6">Purpose<a class="headerlink" href="#purpose_6" title="Permanent link">&para;</a></h4>
+<p>Consolidates results and compares the final performance of the modeling approaches.</p>
+<h4 id="main-tasks_6">Main tasks<a class="headerlink" href="#main-tasks_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li>gather baseline results</li>
+<li>gather hybrid model results</li>
+<li>compare metrics</li>
+<li>visualize model differences</li>
+<li>summarize performance trade-offs</li>
+</ul>
+<h4 id="output_6">Output<a class="headerlink" href="#output_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li>benchmark tables</li>
+<li>comparison plots</li>
+<li>final performance summary</li>
+</ul>
+<hr />
+<h2 id="workflow-logic">Workflow Logic<a class="headerlink" href="#workflow-logic" title="Permanent link">&para;</a></h2>
+<p>The project follows this logic:</p>
+<p><strong>raw data -&gt; data quality -&gt; feature engineering -&gt; anomaly detection -&gt; baseline model -&gt; hybrid model -&gt; performance benchmarking</strong></p>
+<p>This structure helps keep the workflow clear, reproducible, and easier to explain in a portfolio context.</p>
+<hr />
+<h2 id="visual-analysis">Visual Analysis<a class="headerlink" href="#visual-analysis" title="Permanent link">&para;</a></h2>
+<p>This project also includes visual analysis to improve interpretability and business understanding.</p>
+<h3 id="boxplot">Boxplot<a class="headerlink" href="#boxplot" title="Permanent link">&para;</a></h3>
+<p>Used to summarize the distribution of <code>Quantity</code> with focus on:</p>
+<ul>
+<li>median</li>
+<li>quartiles</li>
+<li>spread</li>
+<li>possible outliers</li>
+</ul>
+<h3 id="violin-plot">Violin Plot<a class="headerlink" href="#violin-plot" title="Permanent link">&para;</a></h3>
+<p>Used when a richer view of the distribution is needed.</p>
+<p>Why it is useful:</p>
+<ul>
+<li>shows density shape</li>
+<li>highlights concentration zones</li>
+<li>makes long-tail behavior easier to interpret</li>
+</ul>
+<h3 id="why-quantity-was-used-instead-of-quantity_sum-in-distribution-plots">Why <code>Quantity</code> was used instead of <code>quantity_sum</code> in distribution plots<a class="headerlink" href="#why-quantity-was-used-instead-of-quantity_sum-in-distribution-plots" title="Permanent link">&para;</a></h3>
+<p>For distribution analysis, the raw <code>Quantity</code> field is more appropriate because it preserves the natural variability of the observations.</p>
+<p>Using <code>quantity_sum</code> in boxplots or violin plots could distort interpretation because it is already an aggregated metric.</p>
+<h3 id="outlier-plot-by-period">Outlier Plot by Period<a class="headerlink" href="#outlier-plot-by-period" title="Permanent link">&para;</a></h3>
+<p>This chart was used to detect unusual <strong>daily total demand</strong> over time.</p>
+<p>For this use case, aggregation makes sense because the goal is to identify abnormal daily behavior rather than the distribution of individual records.</p>
+<hr />
+<h2 id="technical-design-choices">Technical Design Choices<a class="headerlink" href="#technical-design-choices" title="Permanent link">&para;</a></h2>
+<h3 id="parameterized-filters">Parameterized filters<a class="headerlink" href="#parameterized-filters" title="Permanent link">&para;</a></h3>
+<p>Visualization functions were designed with reusable filters such as:</p>
+<ul>
+<li><code>Category</code></li>
+<li><code>Region</code></li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="n">filters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Category&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Soft Drinks&quot;</span><span class="p">,</span> <span class="s2">&quot;Water&quot;</span><span class="p">,</span> <span class="s2">&quot;Juices&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Region&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Baden-Württemberg&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This improves:</p>
+<ul>
+<li>code reuse</li>
+<li>flexibility across business slices</li>
+<li>maintainability</li>
+<li>future reuse in dashboards or APIs</li>
+</ul>
+<h3 id="hybrid-modeling-idea">Hybrid modeling idea<a class="headerlink" href="#hybrid-modeling-idea" title="Permanent link">&para;</a></h3>
+<p>A central idea of the project is that anomaly-related information can complement supervised learning.</p>
+<p>This reflects a practical machine learning engineering mindset:</p>
+<ul>
+<li>use unsupervised signals to enrich structured data</li>
+<li>compare against a simpler baseline</li>
+<li>validate whether extra complexity adds real value</li>
+</ul>
+<hr />
+<h2 id="project-strengths">Project Strengths<a class="headerlink" href="#project-strengths" title="Permanent link">&para;</a></h2>
+<p>This project demonstrates:</p>
+<ul>
+<li>structured notebook pipeline</li>
+<li>data preparation discipline</li>
+<li>data quality validation</li>
+<li>time-based feature engineering</li>
+<li>anomaly detection for business data</li>
+<li>baseline vs hybrid model comparison</li>
+<li>reusable Python components</li>
+<li>visual analysis for business interpretation</li>
+<li>portfolio-ready technical documentation</li>
+</ul>
+<hr />
+<h2 id="skills-demonstrated">Skills Demonstrated<a class="headerlink" href="#skills-demonstrated" title="Permanent link">&para;</a></h2>
+<p>This project covers relevant skills for <strong>Machine Learning Engineer</strong>, <strong>Data Scientist</strong>, and <strong>Applied Analytics</strong> roles.</p>
+<h3 id="core-technical-skills">Core technical skills<a class="headerlink" href="#core-technical-skills" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Python</li>
+<li>Pandas</li>
+<li>NumPy</li>
+<li>Matplotlib</li>
+<li>Scikit-learn</li>
+<li>Feature Engineering</li>
+<li>Exploratory Data Analysis (EDA)</li>
+<li>Data Visualization</li>
+<li>Anomaly Detection</li>
+<li>Supervised Machine Learning</li>
+<li>Model Benchmarking</li>
+<li>Time-Series Feature Engineering</li>
+<li>Business Data Analysis</li>
+</ul>
+<h3 id="ml-and-analytics-skills">ML and analytics skills<a class="headerlink" href="#ml-and-analytics-skills" title="Permanent link">&para;</a></h3>
+<ul>
+<li>baseline model design</li>
+<li>hybrid modeling strategy</li>
+<li>outlier analysis</li>
+<li>distribution analysis</li>
+<li>rolling window features</li>
+<li>lag-based reasoning</li>
+<li>anomaly-aware modeling</li>
+<li>evaluation and comparison of models</li>
+</ul>
+<h3 id="engineering-and-project-skills">Engineering and project skills<a class="headerlink" href="#engineering-and-project-skills" title="Permanent link">&para;</a></h3>
+<ul>
+<li>notebook pipeline structuring</li>
+<li>reusable code design</li>
+<li>parameterized visual components</li>
+<li>technical documentation</li>
+<li>GitHub-ready project organization</li>
+<li>analytical storytelling</li>
+</ul>
+<hr />
+<h2 id="suggested-linkedin-skills">Suggested LinkedIn Skills<a class="headerlink" href="#suggested-linkedin-skills" title="Permanent link">&para;</a></h2>
+<p>Based on what was actually built, these are the strongest and most honest skills to highlight on LinkedIn.</p>
+<h3 id="high-impact-skills">High-impact skills<a class="headerlink" href="#high-impact-skills" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Machine Learning</li>
+<li>Python</li>
+<li>Feature Engineering</li>
+<li>Anomaly Detection</li>
+<li>Time Series Analysis</li>
+<li>Predictive Modeling</li>
+<li>Scikit-learn</li>
+<li>Pandas</li>
+<li>Data Analysis</li>
+<li>Data Visualization</li>
+</ul>
+<h3 id="strong-supporting-skills">Strong supporting skills<a class="headerlink" href="#strong-supporting-skills" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Exploratory Data Analysis</li>
+<li>Statistical Data Analysis</li>
+<li>Model Evaluation</li>
+<li>Business Analytics</li>
+<li>Sales Analytics</li>
+<li>Outlier Detection</li>
+<li>Data Quality</li>
+<li>Technical Documentation</li>
+</ul>
+<h3 id="good-options-for-an-ml-engineer-positioning">Good options for an ML Engineer positioning<a class="headerlink" href="#good-options-for-an-ml-engineer-positioning" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Machine Learning Engineering</li>
+<li>ML Pipelines</li>
+<li>Model Benchmarking</li>
+<li>Applied Machine Learning</li>
+<li>Reusable Data Components</li>
+</ul>
+<hr />
+<h2 id="suggested-linkedin-skill-order">Suggested LinkedIn Skill Order<a class="headerlink" href="#suggested-linkedin-skill-order" title="Permanent link">&para;</a></h2>
+<p>A strong order could be:</p>
+<ol>
+<li>Machine Learning</li>
+<li>Python</li>
+<li>Feature Engineering</li>
+<li>Anomaly Detection</li>
+<li>Time Series Analysis</li>
+<li>Predictive Modeling</li>
+<li>Scikit-learn</li>
+<li>Pandas</li>
+<li>Data Analysis</li>
+<li>Data Visualization</li>
+<li>Exploratory Data Analysis</li>
+<li>Statistical Data Analysis</li>
+<li>Business Analytics</li>
+<li>Model Evaluation</li>
+<li>Technical Documentation</li>
+</ol>
+<hr />
+<h2 id="future-improvements">Future Improvements<a class="headerlink" href="#future-improvements" title="Permanent link">&para;</a></h2>
+<p>Possible next steps include:</p>
+<ul>
+<li>API deployment for inference</li>
+<li>Docker packaging</li>
+<li>automated tests</li>
+<li>model versioning</li>
+<li>experiment tracking</li>
+<li>interactive dashboards</li>
+<li>cloud deployment</li>
+<li>stronger time-series validation strategy</li>
+</ul>
+<hr />
+<h2 id="final-notes">Final Notes<a class="headerlink" href="#final-notes" title="Permanent link">&para;</a></h2>
+<p>This project is valuable for a portfolio because it shows more than model training.</p>
+<p>It demonstrates:</p>
+<ul>
+<li>data preparation</li>
+<li>practical feature engineering</li>
+<li>anomaly reasoning</li>
+<li>structured experimentation</li>
+<li>model comparison</li>
+<li>business interpretation</li>
+<li>technical communication</li>
+</ul>
+<p>In other words, it helps position the work as an <strong>applied machine learning project with engineering thinking</strong>, not only as an exploratory notebook.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

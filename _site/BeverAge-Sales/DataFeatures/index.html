@@ -1,0 +1,2176 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the Beverage Sales project">
+      
+      
+        <meta name="author" content="Alexandre Kawamorita">
+      
+      
+      
+        <link rel="prev" href="../data_quality/">
+      
+      
+        <link rel="next" href="../DataQualityFeatures/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Data Features - Beverage Sales</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#datafeatures" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Beverage Sales" class="md-header__button md-logo" aria-label="Beverage Sales" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Beverage Sales
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data Features
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Beverage Sales" class="md-nav__button md-logo" aria-label="Beverage Sales" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Beverage Sales
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notebooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loaders
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Loaders
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CSVLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSV Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataQuality Class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Features
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-datafeatures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Function: DataFeatures
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#df" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        df
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#date_col" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        date_col
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group_cols" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        group_cols
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        windows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#min_periods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        min_periods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fill_missing_days" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fill_missing_days
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-input-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Input Columns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Processing Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-date-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Date conversion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-daily-normalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Daily normalization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-daily-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Daily aggregation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-missing-day-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Missing day completion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Sorting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-calendar-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Calendar features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-rolling-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Rolling features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-comparison-with-recent-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Comparison with recent history
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-percentage-variation-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Percentage variation features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-standard-deviation-fill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Standard deviation fill
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-output-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Output Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#daily-business-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Daily business metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calendar-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calendar features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rolling-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rolling features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#percentage-variation-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Percentage variation features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Usage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-in-a-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example in a Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#important-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Considerations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Important Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-leakage-prevention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data leakage prevention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zero-filled-days" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zero-filled days
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-rolling-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial rolling values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataQualityFeatures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Quality Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Models
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IsolationForestAnalyzer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Isolation Forest Analyzer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LightGBMRegressorModels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LightGBM Regressor Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Repository
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ParquetRepository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parquet Repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    XAI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    XAI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LightGBMShapInterpreter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LightGBMShapInterpreter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Results
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beverage Sales - Test Set Analysis by Anomaly Segment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shap_results_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shap results analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-datafeatures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Function: DataFeatures
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#df" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        df
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#date_col" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        date_col
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group_cols" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        group_cols
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        windows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#min_periods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        min_periods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fill_missing_days" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fill_missing_days
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-input-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Input Columns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Processing Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-date-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Date conversion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-daily-normalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Daily normalization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-daily-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Daily aggregation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-missing-day-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Missing day completion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Sorting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-calendar-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Calendar features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-rolling-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Rolling features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-comparison-with-recent-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Comparison with recent history
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-percentage-variation-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Percentage variation features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-standard-deviation-fill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Standard deviation fill
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-output-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Main Output Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#daily-business-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Daily business metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calendar-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calendar features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rolling-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rolling features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#percentage-variation-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Percentage variation features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Usage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-in-a-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example in a Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#important-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Considerations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Important Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-leakage-prevention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data leakage prevention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zero-filled-days" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zero-filled days
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-rolling-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial rolling values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="datafeatures">DataFeatures<a class="headerlink" href="#datafeatures" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p><code>DataFeatures</code> is a public function used to create daily sales features for time series analysis, anomaly detection, and machine learning models.</p>
+<p>It receives a transactional sales DataFrame and returns a new DataFrame with:</p>
+<ul>
+<li>daily aggregated business metrics</li>
+<li>calendar features</li>
+<li>rolling window statistics</li>
+<li>comparison features versus recent history</li>
+<li>percentage variation features</li>
+</ul>
+<p>This function is useful in projects that need temporal features built from raw sales transactions.</p>
+<hr />
+<h2 id="main-purpose">Main Purpose<a class="headerlink" href="#main-purpose" title="Permanent link">&para;</a></h2>
+<p>The function helps transform raw sales records into a structured daily feature table.</p>
+<p>Typical use cases include:</p>
+<ul>
+<li>anomaly detection</li>
+<li>demand analysis</li>
+<li>forecasting support</li>
+<li>supervised machine learning</li>
+<li>time-based business analysis</li>
+</ul>
+<p>It is especially useful when the dataset contains many transactions and the model needs historical context.</p>
+<hr />
+<h2 id="function-datafeatures">Function: <code>DataFeatures</code><a class="headerlink" href="#function-datafeatures" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">DataFeatures</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">date_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Order_Date&quot;</span><span class="p">,</span>
+    <span class="n">group_cols</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">windows</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+    <span class="n">min_periods</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">fill_missing_days</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
+</code></pre></div>
+<hr />
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<h3 id="df"><code>df</code><a class="headerlink" href="#df" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Type: <code>pd.DataFrame</code></li>
+<li>Description: Raw transactional sales DataFrame.</li>
+</ul>
+<h3 id="date_col"><code>date_col</code><a class="headerlink" href="#date_col" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Type: <code>str</code></li>
+<li>Default: <code>"Order_Date"</code></li>
+<li>Description: Name of the column used as the transaction date.</li>
+</ul>
+<h3 id="group_cols"><code>group_cols</code><a class="headerlink" href="#group_cols" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Type: <code>list</code></li>
+<li>Default: <code>["Product", "Region"]</code></li>
+<li>Description: Columns used to define the business grouping for daily aggregation and rolling windows.</li>
+</ul>
+<h3 id="windows"><code>windows</code><a class="headerlink" href="#windows" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Type: <code>tuple</code></li>
+<li>Default: <code>(7, 14, 30)</code></li>
+<li>Description: Rolling window sizes, in days, used to create historical statistics.</li>
+</ul>
+<h3 id="min_periods"><code>min_periods</code><a class="headerlink" href="#min_periods" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Type: <code>int</code></li>
+<li>Default: <code>1</code></li>
+<li>Description: Minimum number of past observations required to compute rolling features.</li>
+</ul>
+<h3 id="fill_missing_days"><code>fill_missing_days</code><a class="headerlink" href="#fill_missing_days" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Type: <code>bool</code></li>
+<li>Default: <code>True</code></li>
+<li>Description: If <code>True</code>, the function creates missing calendar days inside each group so the daily time series becomes continuous.</li>
+</ul>
+<hr />
+<h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>pd.DataFrame</code>: A daily feature DataFrame with aggregated, calendar, rolling, and comparison features.</li>
+</ul>
+<hr />
+<h2 id="expected-input-columns">Expected Input Columns<a class="headerlink" href="#expected-input-columns" title="Permanent link">&para;</a></h2>
+<p>The function requires the following columns:</p>
+<ul>
+<li><code>Order_ID</code></li>
+<li><code>Customer_ID</code></li>
+<li><code>Customer_Type</code></li>
+<li><code>Product</code></li>
+<li><code>Category</code></li>
+<li><code>Unit_Price</code></li>
+<li><code>Quantity</code></li>
+<li><code>Discount</code></li>
+<li><code>Total_Price</code></li>
+<li><code>Region</code></li>
+<li><code>Order_Date</code><br />
+  or the column defined by <code>date_col</code></li>
+</ul>
+<p>If one or more required columns are missing, the function raises a <code>ValueError</code>.</p>
+<hr />
+<h2 id="processing-steps">Processing Steps<a class="headerlink" href="#processing-steps" title="Permanent link">&para;</a></h2>
+<h2 id="1-date-conversion">1. Date conversion<a class="headerlink" href="#1-date-conversion" title="Permanent link">&para;</a></h2>
+<p>The function converts the date column to datetime using safe parsing.</p>
+<p>Invalid dates are converted to missing values and then removed.</p>
+<hr />
+<h2 id="2-daily-normalization">2. Daily normalization<a class="headerlink" href="#2-daily-normalization" title="Permanent link">&para;</a></h2>
+<p>The datetime column is normalized to daily level, so all transactions from the same day share the same date value.</p>
+<hr />
+<h2 id="3-daily-aggregation">3. Daily aggregation<a class="headerlink" href="#3-daily-aggregation" title="Permanent link">&para;</a></h2>
+<p>The function groups the raw data by:</p>
+<ul>
+<li>business grouping columns</li>
+<li>daily date</li>
+</ul>
+<p>Then it creates daily metrics such as:</p>
+<ul>
+<li><code>quantity_sum</code></li>
+<li><code>quantity_mean</code></li>
+<li><code>quantity_std</code></li>
+<li><code>total_price_sum</code></li>
+<li><code>total_price_mean</code></li>
+<li><code>unit_price_mean</code></li>
+<li><code>discount_mean</code></li>
+<li><code>order_count</code></li>
+<li><code>customer_count</code></li>
+</ul>
+<p>It also creates:</p>
+<ul>
+<li><code>avg_ticket</code></li>
+</ul>
+<p>This feature is calculated as:</p>
+<div class="highlight"><pre><span></span><code><span class="n">total_price_sum</span> <span class="o">/</span> <span class="n">order_count</span>
+</code></pre></div>
+<p>when <code>order_count</code> is greater than zero.</p>
+<hr />
+<h2 id="4-missing-day-completion">4. Missing day completion<a class="headerlink" href="#4-missing-day-completion" title="Permanent link">&para;</a></h2>
+<p>When <code>fill_missing_days=True</code>, the function fills missing calendar days inside each business group.</p>
+<p>For days without sales, it fills the main numeric metrics with zero.</p>
+<p>This helps create continuous daily series, which is important for rolling windows.</p>
+<hr />
+<h2 id="5-sorting">5. Sorting<a class="headerlink" href="#5-sorting" title="Permanent link">&para;</a></h2>
+<p>The resulting daily dataset is sorted by:</p>
+<ul>
+<li>grouping columns</li>
+<li>date column</li>
+</ul>
+<p>This is necessary to ensure correct rolling calculations.</p>
+<hr />
+<h2 id="6-calendar-features">6. Calendar features<a class="headerlink" href="#6-calendar-features" title="Permanent link">&para;</a></h2>
+<p>The function creates the following calendar features:</p>
+<ul>
+<li><code>day_of_week</code></li>
+<li><code>day</code></li>
+<li><code>month</code></li>
+<li><code>year</code></li>
+<li><code>is_weekend</code></li>
+</ul>
+<p>These features help the model capture temporal and seasonal behavior.</p>
+<hr />
+<h2 id="7-rolling-features">7. Rolling features<a class="headerlink" href="#7-rolling-features" title="Permanent link">&para;</a></h2>
+<p>Rolling features are built using only past data.</p>
+<p>The function uses:</p>
+<div class="highlight"><pre><span></span><code><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<p>before the rolling window calculation.</p>
+<p>This is important because it avoids using the current day's value inside its own history window, which helps prevent data leakage.</p>
+<p>Rolling statistics are created for these metrics:</p>
+<ul>
+<li><code>quantity_sum</code></li>
+<li><code>total_price_sum</code></li>
+<li><code>unit_price_mean</code></li>
+<li><code>discount_mean</code></li>
+<li><code>order_count</code></li>
+<li><code>avg_ticket</code></li>
+</ul>
+<p>For each window size, the function creates:</p>
+<ul>
+<li>rolling mean</li>
+<li>rolling standard deviation</li>
+<li>rolling sum</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li><code>quantity_sum_mean_7d</code></li>
+<li><code>quantity_sum_std_7d</code></li>
+<li><code>quantity_sum_sum_7d</code></li>
+<li><code>total_price_sum_mean_14d</code></li>
+<li><code>avg_ticket_sum_30d</code></li>
+</ul>
+<hr />
+<h2 id="8-comparison-with-recent-history">8. Comparison with recent history<a class="headerlink" href="#8-comparison-with-recent-history" title="Permanent link">&para;</a></h2>
+<p>For each window size, the function creates deviation features that compare the current day with recent rolling averages.</p>
+<p>Examples:</p>
+<ul>
+<li><code>quantity_vs_mean_7d</code></li>
+<li><code>total_price_vs_mean_14d</code></li>
+<li><code>unit_price_vs_mean_30d</code></li>
+<li><code>discount_vs_mean_7d</code></li>
+</ul>
+<p>These features help show whether the current day is above or below recent historical behavior.</p>
+<hr />
+<h2 id="9-percentage-variation-features">9. Percentage variation features<a class="headerlink" href="#9-percentage-variation-features" title="Permanent link">&para;</a></h2>
+<p>The function also creates percentage-based comparison features for quantity.</p>
+<p>Example:</p>
+<ul>
+<li><code>quantity_pct_vs_mean_7d</code></li>
+</ul>
+<p>This value shows how much the current quantity is above or below the recent rolling mean, in percentage form.</p>
+<p>When the rolling mean is zero, the result is set to <code>NaN</code>.</p>
+<hr />
+<h2 id="10-standard-deviation-fill">10. Standard deviation fill<a class="headerlink" href="#10-standard-deviation-fill" title="Permanent link">&para;</a></h2>
+<p>Some rolling standard deviation columns may be missing at the beginning of the series.</p>
+<p>The function fills these missing rolling standard deviation values with zero.</p>
+<hr />
+<h2 id="main-output-features">Main Output Features<a class="headerlink" href="#main-output-features" title="Permanent link">&para;</a></h2>
+<p>Below is a summary of the main feature groups created by the function.</p>
+<h2 id="daily-business-metrics">Daily business metrics<a class="headerlink" href="#daily-business-metrics" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>quantity_sum</code></li>
+<li><code>quantity_mean</code></li>
+<li><code>quantity_std</code></li>
+<li><code>total_price_sum</code></li>
+<li><code>total_price_mean</code></li>
+<li><code>unit_price_mean</code></li>
+<li><code>discount_mean</code></li>
+<li><code>order_count</code></li>
+<li><code>customer_count</code></li>
+<li><code>avg_ticket</code></li>
+</ul>
+<h2 id="calendar-features">Calendar features<a class="headerlink" href="#calendar-features" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>day_of_week</code></li>
+<li><code>day</code></li>
+<li><code>month</code></li>
+<li><code>year</code></li>
+<li><code>is_weekend</code></li>
+</ul>
+<h2 id="rolling-features">Rolling features<a class="headerlink" href="#rolling-features" title="Permanent link">&para;</a></h2>
+<p>For each window in <code>windows</code>, the function creates rolling features such as:</p>
+<ul>
+<li><code>{metric}_mean_{w}d</code></li>
+<li><code>{metric}_std_{w}d</code></li>
+<li><code>{metric}_sum_{w}d</code></li>
+</ul>
+<p>where <code>metric</code> may be:</p>
+<ul>
+<li><code>quantity_sum</code></li>
+<li><code>total_price_sum</code></li>
+<li><code>unit_price_mean</code></li>
+<li><code>discount_mean</code></li>
+<li><code>order_count</code></li>
+<li><code>avg_ticket</code></li>
+</ul>
+<h2 id="comparison-features">Comparison features<a class="headerlink" href="#comparison-features" title="Permanent link">&para;</a></h2>
+<p>For each window in <code>windows</code>, the function creates:</p>
+<ul>
+<li><code>quantity_vs_mean_{w}d</code></li>
+<li><code>total_price_vs_mean_{w}d</code></li>
+<li><code>unit_price_vs_mean_{w}d</code></li>
+<li><code>discount_vs_mean_{w}d</code></li>
+</ul>
+<h2 id="percentage-variation-features">Percentage variation features<a class="headerlink" href="#percentage-variation-features" title="Permanent link">&para;</a></h2>
+<p>For each window in <code>windows</code>, the function creates:</p>
+<ul>
+<li><code>quantity_pct_vs_mean_{w}d</code></li>
+</ul>
+<hr />
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">data_features</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataFeatures</span>
+
+<span class="n">df_features</span> <span class="o">=</span> <span class="n">DataFeatures</span><span class="p">(</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">df_sales</span><span class="p">,</span>
+    <span class="n">date_col</span><span class="o">=</span><span class="s2">&quot;Order_Date&quot;</span><span class="p">,</span>
+    <span class="n">group_cols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Product&quot;</span><span class="p">,</span> <span class="s2">&quot;Region&quot;</span><span class="p">],</span>
+    <span class="n">windows</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+    <span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">fill_missing_days</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df_features</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</code></pre></div>
+<hr />
+<h2 id="example-in-a-pipeline">Example in a Pipeline<a class="headerlink" href="#example-in-a-pipeline" title="Permanent link">&para;</a></h2>
+<p>A common pipeline can be:</p>
+<ol>
+<li>load raw transactional data</li>
+<li>apply data quality checks</li>
+<li>call <code>DataFeatures(...)</code></li>
+<li>send the output to anomaly detection or a supervised model</li>
+<li>save the final feature table</li>
+</ol>
+<hr />
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The function is designed for transactional sales datasets.</li>
+<li>It creates daily features at group level.</li>
+<li>It uses only past information for rolling windows.</li>
+<li>It helps reduce leakage risk in machine learning pipelines.</li>
+<li>Missing days can be filled automatically to improve temporal continuity.</li>
+</ul>
+<hr />
+<h2 id="important-considerations">Important Considerations<a class="headerlink" href="#important-considerations" title="Permanent link">&para;</a></h2>
+<h3 id="data-leakage-prevention">Data leakage prevention<a class="headerlink" href="#data-leakage-prevention" title="Permanent link">&para;</a></h3>
+<p>The function uses <code>shift(1)</code> before rolling calculations.<br />
+This means the rolling window only uses previous days, not the current day.</p>
+<p>This is a good practice for machine learning and time series feature engineering.</p>
+<h3 id="zero-filled-days">Zero-filled days<a class="headerlink" href="#zero-filled-days" title="Permanent link">&para;</a></h3>
+<p>When <code>fill_missing_days=True</code>, days without transactions are added and numeric sales metrics are filled with zero.</p>
+<p>This is useful in many business scenarios, but it should still be reviewed according to the project's business meaning.</p>
+<h3 id="initial-rolling-values">Initial rolling values<a class="headerlink" href="#initial-rolling-values" title="Permanent link">&para;</a></h3>
+<p>At the start of each series, rolling features may be based on very short history because <code>min_periods=1</code> by default.</p>
+<p>This is practical, but users should still evaluate if this behavior fits the modeling strategy.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
