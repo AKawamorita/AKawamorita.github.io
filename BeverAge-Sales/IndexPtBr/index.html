@@ -1,0 +1,3331 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the Beverage Sales project">
+      
+      
+        <meta name="author" content="Alexandre Kawamorita">
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../documentation_ptbr/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Pagina principal (PtBr) - Beverage Sales</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#analise-de-vendas-de-bebidas-e-pipeline-hibrido-de-ml" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Beverage Sales" class="md-header__button md-logo" aria-label="Beverage Sales" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Beverage Sales
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Pagina principal (PtBr)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Beverage Sales" class="md-nav__button md-logo" aria-label="Beverage Sales" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Beverage Sales
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagina principal (PtBr)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagina principal (PtBr)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dataset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visão Geral
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivacao-de-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Motivação de Negócio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo Principal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storytelling-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storytelling do Projeto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fluxo-end-to-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo End-to-End
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fluxo End-to-End">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcao-de-cada-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Função de cada Notebook
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#carga-de-dados-e-persistencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Carga de Dados e Persistência
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-de-qualidade-dos-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação de Qualidade dos Dados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validação de Qualidade dos Dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regras-de-qualidade-verificadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regras de qualidade verificadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#engenharia-de-atributos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Engenharia de Atributos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Engenharia de Atributos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principais-atributos-gerados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Principais atributos gerados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-isso-importa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que isso importa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logica-de-sliding-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lógica de Sliding Window
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lógica de Sliding Window">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação prática
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-sliding-window-e-importante-aqui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que sliding window é importante aqui
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forca-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Força técnica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analise-exploratoria-e-inspecao-de-outliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análise Exploratória e Inspeção de Outliers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Análise Exploratória e Inspeção de Outliers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-nota" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Nota
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-analise-comparativa-prophet-vs-modelo-hibrido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Análise Comparativa: Prophet vs. Modelo Híbrido
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deteccao-de-anomalias-com-isolation-forest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detecção de Anomalias com Isolation Forest
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detecção de Anomalias com Isolation Forest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#decisao-metodologica-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisão metodológica importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#melhores-parametros-encontrados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Melhores parâmetros encontrados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sinais-de-anomalia-gerados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sinais de anomalia gerados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-isso-e-util" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que isso é útil
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelo-base-de-previsao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo Base de Previsão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelo Base de Previsão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atributos-usados-no-modelo-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos usados no modelo base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metricas-reportadas-do-modelo-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métricas reportadas do modelo base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelo-hibrido-de-previsao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo Híbrido de Previsão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelo Híbrido de Previsão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metricas-reportadas-no-notebook-hibrido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métricas reportadas no notebook híbrido
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observacao-importante-sobre-a-interpretacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observação importante sobre a interpretação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benchmark-de-desempenho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benchmark de Desempenho
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacao-do-lado-de-treino-por-grupo-de-anomalia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação do Lado de Treino por Grupo de Anomalia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparação do Lado de Treino por Grupo de Anomalia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacao-do-lado-de-teste-por-grupo-de-anomalia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação do Lado de Teste por Grupo de Anomalia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparação do Lado de Teste por Grupo de Anomalia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interpretação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-periodos-normais-anomaly_flag-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Períodos normais (anomaly_flag = 0)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-periodos-anomalos-anomaly_flag-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Períodos anômalos (anomaly_flag = 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-comparacao-entre-periodos-normais-e-anomalos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Comparação entre períodos normais e anômalos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-interpretacao-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Interpretação final
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-o-modelo-hibrido-importa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que o Modelo Híbrido Importa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analise-de-interpretabilidade-com-shap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análise de Interpretabilidade com SHAP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Análise de Interpretabilidade com SHAP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atributos-mais-relevantes-reportados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos mais relevantes reportados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#papel-dos-sinais-de-anomalia-no-shap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Papel dos sinais de anomalia no SHAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpretacao-das-principais-metricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação das Principais Métricas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interpretação das Principais Métricas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mae-erro-absoluto-medio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MAE — Erro Absoluto Médio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rmse-raiz-do-erro-quadratico-medio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RMSE — Raiz do Erro Quadrático Médio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#r2-coeficiente-de-determinacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        R² — Coeficiente de Determinação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forcas-metodologicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forças Metodológicas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Forças Metodológicas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-estrutura-clara-de-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Estrutura clara de pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-qualidade-dos-dados-antes-da-modelagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Qualidade dos dados antes da modelagem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-design-sensivel-ao-tempo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Design sensível ao tempo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-consciencia-sobre-leakage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Consciência sobre leakage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-forte-engenharia-de-atributos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Forte engenharia de atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-arquitetura-hibrida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Arquitetura híbrida
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-explicabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Explicabilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-benchmark-orientado-por-segmento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Benchmark orientado por segmento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusão Final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-executivo-sugerido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo Executivo Sugerido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation_ptbr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentacao (PTBR)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation_eng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../venv_requirements_vscode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Venv & requeriments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notebooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loaders
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Loaders
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CSVLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSV Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataQuality Class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataFeatures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataQualityFeatures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Quality Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Models
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IsolationForestAnalyzer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Isolation Forest Analyzer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LightGBMRegressorModels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LightGBM Regressor Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Repository
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ParquetRepository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parquet Repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    XAI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    XAI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LightGBMShapInterpreter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LightGBMShapInterpreter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Results
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis by Anomaly Segment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shap_results_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shap results analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dataset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visão Geral
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivacao-de-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Motivação de Negócio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo Principal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storytelling-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storytelling do Projeto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fluxo-end-to-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo End-to-End
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fluxo End-to-End">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcao-de-cada-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Função de cada Notebook
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#carga-de-dados-e-persistencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Carga de Dados e Persistência
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-de-qualidade-dos-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação de Qualidade dos Dados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validação de Qualidade dos Dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regras-de-qualidade-verificadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regras de qualidade verificadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#engenharia-de-atributos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Engenharia de Atributos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Engenharia de Atributos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principais-atributos-gerados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Principais atributos gerados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-isso-importa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que isso importa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logica-de-sliding-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lógica de Sliding Window
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lógica de Sliding Window">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação prática
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-sliding-window-e-importante-aqui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que sliding window é importante aqui
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forca-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Força técnica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analise-exploratoria-e-inspecao-de-outliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análise Exploratória e Inspeção de Outliers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Análise Exploratória e Inspeção de Outliers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-nota" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Nota
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-analise-comparativa-prophet-vs-modelo-hibrido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Análise Comparativa: Prophet vs. Modelo Híbrido
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deteccao-de-anomalias-com-isolation-forest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detecção de Anomalias com Isolation Forest
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detecção de Anomalias com Isolation Forest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#decisao-metodologica-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisão metodológica importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#melhores-parametros-encontrados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Melhores parâmetros encontrados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sinais-de-anomalia-gerados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sinais de anomalia gerados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-isso-e-util" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que isso é útil
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelo-base-de-previsao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo Base de Previsão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelo Base de Previsão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atributos-usados-no-modelo-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos usados no modelo base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metricas-reportadas-do-modelo-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métricas reportadas do modelo base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelo-hibrido-de-previsao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo Híbrido de Previsão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelo Híbrido de Previsão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metricas-reportadas-no-notebook-hibrido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métricas reportadas no notebook híbrido
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observacao-importante-sobre-a-interpretacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observação importante sobre a interpretação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benchmark-de-desempenho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benchmark de Desempenho
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacao-do-lado-de-treino-por-grupo-de-anomalia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação do Lado de Treino por Grupo de Anomalia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparação do Lado de Treino por Grupo de Anomalia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacao-do-lado-de-teste-por-grupo-de-anomalia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação do Lado de Teste por Grupo de Anomalia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparação do Lado de Teste por Grupo de Anomalia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interpretação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-periodos-normais-anomaly_flag-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Períodos normais (anomaly_flag = 0)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-periodos-anomalos-anomaly_flag-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Períodos anômalos (anomaly_flag = 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-comparacao-entre-periodos-normais-e-anomalos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Comparação entre períodos normais e anômalos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-interpretacao-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Interpretação final
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-o-modelo-hibrido-importa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que o Modelo Híbrido Importa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analise-de-interpretabilidade-com-shap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análise de Interpretabilidade com SHAP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Análise de Interpretabilidade com SHAP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atributos-mais-relevantes-reportados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos mais relevantes reportados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#papel-dos-sinais-de-anomalia-no-shap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Papel dos sinais de anomalia no SHAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpretacao-das-principais-metricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação das Principais Métricas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interpretação das Principais Métricas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mae-erro-absoluto-medio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MAE — Erro Absoluto Médio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rmse-raiz-do-erro-quadratico-medio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RMSE — Raiz do Erro Quadrático Médio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#r2-coeficiente-de-determinacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        R² — Coeficiente de Determinação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forcas-metodologicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forças Metodológicas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Forças Metodológicas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-estrutura-clara-de-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Estrutura clara de pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-qualidade-dos-dados-antes-da-modelagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Qualidade dos dados antes da modelagem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-design-sensivel-ao-tempo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Design sensível ao tempo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-consciencia-sobre-leakage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Consciência sobre leakage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-forte-engenharia-de-atributos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Forte engenharia de atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-arquitetura-hibrida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Arquitetura híbrida
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-explicabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Explicabilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-benchmark-orientado-por-segmento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Benchmark orientado por segmento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusão Final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-executivo-sugerido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo Executivo Sugerido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="analise-de-vendas-de-bebidas-e-pipeline-hibrido-de-ml">Análise de Vendas de Bebidas e Pipeline Híbrido de ML</h1>
+<p><br>
+📝Idioma: <small>A documentação é mantida quase inteiramente em inglês para garantir consistência técnica e evitar retrabalho.</small>
+             <small>The documentation is maintained in English to guarantee technical consistency and avoid redundant documentation work.</small></p>
+<p><img alt="techinical infographic" src="../img/InfoGraphic50.png" /></p>
+<h2 id="dataset">Dataset</h2>
+<p><br><small>https://www.kaggle.com/datasets/sebastianwillmann/beverage-sales</small></p>
+<h2 id="visao-geral">Visão Geral</h2>
+<p>Este projeto propõe um <strong>pipeline híbrido de previsão para vendas de bebidas</strong> que combina:</p>
+<ul>
+<li><strong>previsão supervisionada de demanda</strong> com <strong>LightGBM</strong></li>
+<li><strong>detecção não supervisionada de anomalias</strong> com <strong>Isolation Forest</strong></li>
+<li><strong>análise de explicabilidade</strong> com <strong>SHAP</strong></li>
+<li><strong>engenharia de atributos temporais</strong> usando <strong>sliding windows</strong>, estatísticas móveis e razões orientadas ao negócio</li>
+</ul>
+<p>A ideia central é simples: um modelo de previsão pode se beneficiar de sinais que indiquem quando o contexto de vendas parece incomum.<br />
+Em vez de usar apenas atributos tradicionais de defasagem e janelas móveis, o projeto adiciona uma camada de anomalia para que o modelo de previsão consiga reagir melhor a comportamentos de demanda raros, instáveis ou inesperados.</p>
+<hr />
+<h2 id="motivacao-de-negocio">Motivação de Negócio</h2>
+<p>Os dados de vendas raramente se comportam de forma perfeitamente estável. Em cenários reais, a demanda pode aumentar ou cair devido a:</p>
+<ul>
+<li>mudanças locais de demanda</li>
+<li>promoções ou descontos</li>
+<li>comportamento específico por produto/região</li>
+<li>mudanças na concentração de clientes</li>
+<li>eventos incomuns de negócio</li>
+</ul>
+<p>Um modelo treinado apenas em médias históricas pode funcionar bem em períodos normais, mas ter dificuldades quando o padrão se torna menos estável.<br />
+Por isso, este projeto investiga se uma <strong>previsão sensível a anomalias</strong> pode melhorar o desempenho em comparação com um <strong>modelo base de previsão</strong>.</p>
+<hr />
+<h2 id="objetivo-principal">Objetivo Principal</h2>
+<p>Construir e avaliar um fluxo de previsão capaz de prever vendas agregadas de bebidas, respondendo à seguinte pergunta:</p>
+<blockquote>
+<p>Um modelo híbrido que recebe sinais de anomalia do Isolation Forest tem desempenho melhor do que um modelo base padrão?</p>
+</blockquote>
+<hr />
+<h2 id="storytelling-do-projeto">Storytelling do Projeto</h2>
+<p><img alt="main cities and products consumed" src="../img/MAP_P40.png" /></p>
+<p>O projeto foi desenhado como um pipeline estruturado, e não como um experimento isolado em notebook.</p>
+<p>O fluxo começa com dados brutos transacionais de vendas em formato CSV.<br />
+A partir daí, os dados são validados, transformados, enriquecidos com atributos temporais e agregados, e finalmente usados em duas estratégias de modelagem:</p>
+<ol>
+<li>
+<p><strong>Modelo base</strong><br />
+   Um regressor LightGBM treinado apenas com atributos de negócio e de séries temporais.</p>
+</li>
+<li>
+<p><strong>Modelo híbrido</strong><br />
+   Um regressor LightGBM treinado com os mesmos atributos <strong>mais</strong> sinais de anomalia gerados pelo Isolation Forest.</p>
+</li>
+</ol>
+<p>Após o treinamento de ambos os modelos, o projeto compara seu comportamento globalmente e, mais importante, em períodos marcados como anômalos.<br />
+Essa é uma distinção relevante porque espera-se que a modelagem sensível a anomalias ajude mais <strong>quando os dados se desviam do comportamento normal</strong>, e não necessariamente em todos os cenários estáveis.</p>
+<p>Por fim, o projeto usa <strong>SHAP</strong> para tornar o modelo híbrido mais interpretável e verificar se os atributos de anomalia realmente contribuem para as decisões do modelo.</p>
+<hr />
+<h2 id="fluxo-end-to-end">Fluxo End-to-End</h2>
+<p>O projeto segue esta ordem de execução:</p>
+<ol>
+<li><code>01_data_loading.ipynb</code></li>
+<li><code>02_data_quality.ipynb</code></li>
+<li><code>03_feature_engineering.ipynb</code></li>
+<li><code>04_anomaly_detection.ipynb</code></li>
+<li><code>05_BaseLine.ipynb</code></li>
+<li><code>06_HybridModel.ipynb</code></li>
+<li><code>07_Interpretability_SHAP_Analysis.ipynb</code></li>
+<li><code>08_performance_benchmarking.ipynb</code></li>
+</ol>
+<h3 id="funcao-de-cada-notebook">Função de cada Notebook</h3>
+<table>
+<thead>
+<tr>
+<th>Notebook</th>
+<th>Papel no pipeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>01_data_loading.ipynb</code></td>
+<td>Carrega os dados brutos em CSV e os salva em formato Parquet</td>
+</tr>
+<tr>
+<td><code>02_data_quality.ipynb</code></td>
+<td>Aplica regras de validação e verifica se os dados processados são confiáveis</td>
+</tr>
+<tr>
+<td><code>03_feature_engineering.ipynb</code></td>
+<td>Constrói atributos temporais, móveis, de razão e agregados</td>
+</tr>
+<tr>
+<td><code>04_anomaly_detection.ipynb</code></td>
+<td>Treina o Isolation Forest e gera <code>anomaly_score</code> e <code>anomaly_flag</code></td>
+</tr>
+<tr>
+<td><code>05_BaseLine.ipynb</code></td>
+<td>Treina o modelo base com LightGBM</td>
+</tr>
+<tr>
+<td><code>06_HybridModel.ipynb</code></td>
+<td>Treina o modelo híbrido com LightGBM e sinais de anomalia</td>
+</tr>
+<tr>
+<td><code>07_Interpretability_SHAP_Analysis.ipynb</code></td>
+<td>Explica o modelo híbrido usando SHAP</td>
+</tr>
+<tr>
+<td><code>08_performance_benchmarking.ipynb</code></td>
+<td>Compara o desempenho do modelo base versus o híbrido</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="carga-de-dados-e-persistencia">Carga de Dados e Persistência</h2>
+<p>O primeiro notebook converte o dataset bruto em CSV para <strong>Parquet</strong>, o que é uma decisão prática de engenharia porque melhora:</p>
+<ul>
+<li>desempenho de leitura</li>
+<li>consistência do pipeline</li>
+<li>reprodutibilidade entre etapas</li>
+<li>reutilização mais fácil em notebooks e APIs posteriores</li>
+</ul>
+<p>Esse passo pode parecer simples, mas é importante porque transforma o projeto em um fluxo mais orientado à produção, em vez de uma exploração pontual em notebook.</p>
+<hr />
+<h2 id="validacao-de-qualidade-dos-dados">Validação de Qualidade dos Dados</h2>
+<p>Antes de construir atributos ou modelos, o projeto valida o dataset processado.</p>
+<h3 id="regras-de-qualidade-verificadas">Regras de qualidade verificadas</h3>
+<p>O notebook de qualidade avaliou 10 regras de validação, incluindo:</p>
+<ul>
+<li>quantidade ausente</li>
+<li>quantidade negativa</li>
+<li>desconto ausente</li>
+<li>desconto negativo</li>
+<li>desconto acima de um</li>
+<li>tipo de cliente inválido</li>
+<li>violação da regra de desconto B2C</li>
+<li>data do pedido inválida</li>
+<li>linhas duplicadas exatas</li>
+<li>consistência do preço total</li>
+</ul>
+<h3 id="resultado">Resultado</h3>
+<p>O relatório de qualidade indicou:</p>
+<ul>
+<li><strong>Regras avaliadas:</strong> 10  </li>
+<li><strong>Regras com problemas encontrados:</strong> 0  </li>
+<li><strong>Total de problemas:</strong> 0  </li>
+<li><strong>Problemas de alta severidade:</strong> nenhum detectado</li>
+</ul>
+<h3 id="interpretacao">Interpretação</h3>
+<p>Essa é uma base importante para o restante do projeto.<br />
+Um modelo de previsão só pode ser confiável se os dados de entrada também forem confiáveis.<br />
+Ao validar explicitamente as regras de negócio antes da geração de atributos, o projeto reduz o risco de aprender com registros inválidos ou inconsistências silenciosas na origem dos dados.</p>
+<hr />
+<h2 id="engenharia-de-atributos">Engenharia de Atributos</h2>
+<p>Esta etapa é uma das partes mais fortes do projeto.</p>
+<p>Em vez de tratar o problema como uma tarefa genérica de regressão tabular, o notebook introduz atributos sensíveis ao tempo e ao negócio que ajudam o modelo a entender o comportamento da demanda de forma mais realista.</p>
+<h3 id="principais-atributos-gerados">Principais atributos gerados</h3>
+<p>O projeto inclui atributos como:</p>
+<ul>
+<li><code>quantity_sum</code></li>
+<li><code>total_price_sum</code></li>
+<li><code>unit_price_mean</code></li>
+<li><code>discount_mean</code></li>
+<li><code>order_count</code></li>
+<li><code>customer_count</code></li>
+<li><code>avg_ticket</code></li>
+<li><code>day_of_week</code></li>
+<li><code>month</code></li>
+<li><code>year</code></li>
+<li><code>is_weekend</code></li>
+</ul>
+<p>Também cria atributos móveis e contextuais como:</p>
+<ul>
+<li><code>quantity_sum_mean_7d</code></li>
+<li><code>quantity_sum_std_7d</code></li>
+<li><code>quantity_sum_sum_7d</code></li>
+<li><code>total_price_sum_mean_7d</code></li>
+<li><code>total_price_sum_std_7d</code></li>
+<li><code>total_price_sum_mean_30d</code></li>
+<li><code>unit_price_mean_mean_7d</code></li>
+<li><code>discount_mean_mean_14d</code></li>
+<li><code>quantity_vs_mean_7d</code></li>
+<li><code>total_price_vs_mean_30d</code></li>
+<li><code>quantity_pct_vs_mean_7d</code></li>
+<li><code>history_less_than_7d</code></li>
+<li><code>history_less_than_30d</code></li>
+</ul>
+<h3 id="por-que-isso-importa">Por que isso importa</h3>
+<p>Esses atributos fazem mais do que resumir o histórico.<br />
+Eles dão ao modelo uma noção de:</p>
+<ul>
+<li>comportamento de curto prazo</li>
+<li>dispersão e estabilidade</li>
+<li>aceleração ou desaceleração recente da demanda</li>
+<li>relação entre a demanda atual e a média local recente</li>
+<li>maturidade da janela histórica</li>
+</ul>
+<p>Esse é exatamente o tipo de engenharia de atributos que permite que modelos baseados em árvores, como o LightGBM, funcionem bem em contextos de séries temporais.</p>
+<hr />
+<h2 id="logica-de-sliding-window">Lógica de Sliding Window</h2>
+<p>Uma ideia técnica central neste projeto é o uso de <strong>sliding windows</strong>.</p>
+<p>Em vez de alimentar o modelo apenas com o registro atual, o projeto resume o histórico recente em janelas como 7, 14 e 30 dias.<br />
+Isso torna possível converter um problema temporal em um problema supervisionado baseado em atributos, sem ignorar a ordem dos eventos.</p>
+<h3 id="interpretacao-pratica">Interpretação prática</h3>
+<p>A sliding window permite que o modelo responda a perguntas como:</p>
+<ul>
+<li>Qual foi a demanda média nos últimos 7 dias?</li>
+<li>Quão instável a demanda esteve recentemente?</li>
+<li>O valor atual está acima ou abaixo do nível normal recente?</li>
+<li>Há histórico suficiente para confiar nessas estatísticas?</li>
+</ul>
+<h3 id="por-que-sliding-window-e-importante-aqui">Por que sliding window é importante aqui</h3>
+<p>Sem essa etapa, o LightGBM receberia majoritariamente colunas estáticas e não entenderia bem o contexto temporal.<br />
+Com as sliding windows, o modelo ganha uma visão compacta da dinâmica de curto prazo e consegue capturar melhor o comportamento local da demanda.</p>
+<h3 id="forca-tecnica">Força técnica</h3>
+<p>Essa é uma das razões pelas quais o projeto é mais forte do que um simples exercício de “aplicar LightGBM em um dataset”.<br />
+O modelo não está dependendo apenas do algoritmo.<br />
+Ele está dependendo de uma representação do tempo bem planejada.</p>
+<hr />
+<h2 id="analise-exploratoria-e-inspecao-de-outliers">Análise Exploratória e Inspeção de Outliers</h2>
+<p>O notebook de engenharia de atributos também inclui análise visual exploratória, como:</p>
+<ul>
+<li>análise de distribuição</li>
+<li>boxplots</li>
+<li>violin plots</li>
+<li>inspeção de outliers baseada em IQR</li>
+</ul>
+<p>Essas análises são úteis por dois motivos:</p>
+<ol>
+<li>Elas mostram que o autor investigou os dados antes da modelagem.</li>
+<li>Elas ajudam a justificar por que a detecção de anomalias faz sentido neste dataset.</li>
+</ol>
+<p>A exploração visual sugere que a quantidade vendida não é perfeitamente estável e que os dados contêm comportamento assimétrico e observações incomumente altas.<br />
+Isso fornece uma motivação natural para testar uma arquitetura sensível a anomalias.</p>
+<h6 id="1-nota"><small>1. Nota</small></h6>
+<p>A distribuição mostrada nos seus dados de vendas de bebidas — caracterizada por uma base densa e um “pescoço” fino de outliers — é um desafio significativo para modelos aditivos como o Prophet.</p>
+<ul>
+<li><strong>Distorção da sazonalidade</strong>: o Prophet identifica padrões repetitivos com base no tempo. Se um pico de vendas de <strong>100 unidades</strong> acontecer em dezembro, o modelo pode rotular isso incorretamente como um “efeito dezembro” permanente. Isso leva a superprevisão em anos futuros, mesmo que o pico tenha sido uma anomalia pontual.</li>
+<li><strong>Instabilidade de tendência</strong>: como o Prophet é um modelo baseado em regressão, ele é altamente sensível a valores extremos. Um único outlier nesse “pescoço” pode puxar toda a tendência de base para cima, fazendo o modelo perder precisão nos dias normais de venda.</li>
+<li><strong>Inflação da incerteza</strong>: o modelo calcula intervalos de incerteza com base na variância histórica. Quando ele vê valores variando de <strong>0 a 100</strong> enquanto a mediana é apenas <strong>10–15</strong>, os intervalos de previsão ficam tão amplos que perdem valor prático para planejamento de estoque.</li>
+</ul>
+<hr />
+<h6 id="2-analise-comparativa-prophet-vs-modelo-hibrido"><small>2. Análise Comparativa: Prophet vs. Modelo Híbrido</small></h6>
+<p>A abordagem híbrida usando <strong>Isolation Forest</strong> e <strong>LightGBM</strong> supera essas limitações ao focar em transparência técnica e <strong>Explainable AI (XAI)</strong>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Característica</th>
+<th style="text-align: left;">Prophet (Padrão)</th>
+<th style="text-align: left;">Seu Modelo Híbrido (Orientado por XAI)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Tratamento de outliers</strong></td>
+<td style="text-align: left;">Tenta ajustar a curva aos outliers, distorcendo a tendência de longo prazo.</td>
+<td style="text-align: left;">Usa um <code>anomaly_flag</code> para isolar e identificar eventos incomuns.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Lógica de previsão</strong></td>
+<td style="text-align: left;">Depende estritamente de padrões baseados em tempo, como dias ou meses.</td>
+<td style="text-align: left;">Usa direcionadores operacionais, como <code>order_count</code> e <code>quantity_vs_mean_7d</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Interpretabilidade</strong></td>
+<td style="text-align: left;">Difícil explicar por que um pico ou queda específica ocorreu.</td>
+<td style="text-align: left;">Usa <strong>gráficos waterfall do SHAP</strong> para mostrar exatamente quais atributos conduziram a previsão.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Acurácia</strong></td>
+<td style="text-align: left;">Frequentemente superestima a demanda após observar um pico histórico.</td>
+<td style="text-align: left;">Reduz o erro (MAE/RMSE) ao reconhecer e ajustar atividade incomum.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="deteccao-de-anomalias-com-isolation-forest">Detecção de Anomalias com Isolation Forest</h2>
+<p>A etapa de detecção de anomalias treina um modelo <strong>Isolation Forest</strong> para detectar comportamento incomum nas vendas.</p>
+<h3 id="decisao-metodologica-importante">Decisão metodológica importante</h3>
+<p>O notebook afirma explicitamente que, para evitar leakage, o modelo de anomalia é treinado apenas em:</p>
+<ul>
+<li><strong>2021</strong></li>
+<li><strong>2022</strong></li>
+</ul>
+<p>O ano de <strong>2023</strong> é deixado para teste.</p>
+<p>Essa é uma escolha de design muito boa porque preserva o realismo temporal.</p>
+<h3 id="melhores-parametros-encontrados">Melhores parâmetros encontrados</h3>
+<p>O notebook reporta os seguintes melhores parâmetros para o Isolation Forest:</p>
+<ul>
+<li><code>contamination = 0.01</code></li>
+<li><code>max_features = 1.0</code></li>
+<li><code>max_samples = 512</code></li>
+<li><code>n_estimators = 100</code></li>
+</ul>
+<h3 id="sinais-de-anomalia-gerados">Sinais de anomalia gerados</h3>
+<p>A etapa de detecção de anomalias produz pelo menos dois atributos importantes:</p>
+<ul>
+<li><code>anomaly_score</code></li>
+<li><code>anomaly_flag</code></li>
+</ul>
+<p>Esses sinais são depois injetados no modelo híbrido com LightGBM.</p>
+<h3 id="por-que-isso-e-util">Por que isso é útil</h3>
+<p>O Isolation Forest não está sendo usado aqui como modelo preditivo final.<br />
+Ele está sendo usado como um <strong>detector de contexto</strong>.</p>
+<p>Essa é a principal ideia arquitetural:</p>
+<ul>
+<li>o modelo não supervisionado identifica contextos incomuns</li>
+<li>o modelo supervisionado usa essa informação para melhorar a previsão de demanda</li>
+</ul>
+<p>Essa é uma forte decisão de design porque combina duas perspectivas de modelagem diferentes de forma complementar.</p>
+<hr />
+<h2 id="modelo-base-de-previsao">Modelo Base de Previsão</h2>
+<p>O notebook base treina um <strong>regressor LightGBM</strong> usando apenas os atributos temporais e de negócio gerados.</p>
+<h3 id="atributos-usados-no-modelo-base">Atributos usados no modelo base</h3>
+<p>O modelo base usa:</p>
+<ul>
+<li>agregações de negócio</li>
+<li>atributos de calendário</li>
+<li>estatísticas de janelas móveis</li>
+<li>atributos de razão/contexto</li>
+<li>identificadores categóricos como <code>Product</code> e <code>Region</code></li>
+</ul>
+<h3 id="metricas-reportadas-do-modelo-base">Métricas reportadas do modelo base</h3>
+<p>O notebook reporta as seguintes métricas de avaliação:</p>
+<ul>
+<li><strong>MAE:</strong> <code>2.7275</code></li>
+<li><strong>RMSE:</strong> <code>4.1588</code></li>
+<li><strong>R²:</strong> <code>0.999305</code></li>
+</ul>
+<h3 id="interpretacao_1">Interpretação</h3>
+<p>Esses valores indicam que o modelo base já é muito forte.</p>
+<ul>
+<li>Um <strong>MAE baixo</strong> sugere que o erro médio de previsão é pequeno.</li>
+<li>Um <strong>RMSE baixo</strong> indica que erros grandes estão relativamente controlados.</li>
+<li>Um <strong>R² muito alto</strong> sugere que o modelo explica quase toda a variância observada no alvo.</li>
+</ul>
+<p>Ainda assim, em problemas de previsão, ter um baseline forte não é motivo para parar.<br />
+Ele é o ponto correto de comparação para estratégias mais avançadas.</p>
+<hr />
+<h2 id="modelo-hibrido-de-previsao">Modelo Híbrido de Previsão</h2>
+<p>O notebook híbrido treina outro <strong>regressor LightGBM</strong>, mas agora com duas entradas adicionais:</p>
+<ul>
+<li><code>anomaly_score</code></li>
+<li><code>anomaly_flag</code></li>
+</ul>
+<p>Isso significa que o modelo recebe tanto:</p>
+<ul>
+<li>o contexto normal estruturado de vendas</li>
+<li>quanto um sinal indicando se o contexto atual parece incomum</li>
+</ul>
+<h3 id="metricas-reportadas-no-notebook-hibrido">Métricas reportadas no notebook híbrido</h3>
+<p>O notebook reporta:</p>
+<ul>
+<li><strong>MAE:</strong> <code>2.7463</code></li>
+<li><strong>RMSE:</strong> <code>4.1904</code></li>
+<li><strong>R²:</strong> <code>0.999295</code></li>
+</ul>
+<h3 id="observacao-importante-sobre-a-interpretacao">Observação importante sobre a interpretação</h3>
+<p>Essas métricas do notebook híbrido devem ser lidas com cautela quando comparadas diretamente com a seção final de benchmark, porque o projeto depois realiza uma comparação mais detalhada, separada por condição de anomalia e contexto de treino/teste.</p>
+<p>A conclusão mais importante do projeto <strong>não</strong> vem da leitura isolada das métricas do notebook híbrido.<br />
+Ela vem da etapa dedicada de benchmark, onde os dois modelos são comparados de forma mais estruturada.</p>
+<hr />
+<h2 id="benchmark-de-desempenho">Benchmark de Desempenho</h2>
+<p>Este é o notebook que entrega a resposta final mais significativa.</p>
+<p>Em vez de comparar apenas uma métrica global, o projeto avalia ambos os modelos por <strong>grupo de anomalia</strong>.</p>
+<p>Isso é importante porque espera-se que a abordagem híbrida ajude especialmente quando o comportamento de vendas é incomum.</p>
+<hr />
+<h2 id="comparacao-do-lado-de-treino-por-grupo-de-anomalia">Comparação do Lado de Treino por Grupo de Anomalia</h2>
+<p>A saída do benchmarking para a comparação no conjunto de treino mostra:</p>
+<table>
+<thead>
+<tr>
+<th>anomaly_flag</th>
+<th style="text-align: right;">count</th>
+<th style="text-align: right;">baseline_mae</th>
+<th style="text-align: right;">hybrid_mae</th>
+<th style="text-align: right;">baseline_rmse</th>
+<th style="text-align: right;">hybrid_rmse</th>
+<th style="text-align: right;">mae_improvement_pct</th>
+<th style="text-align: right;">rmse_improvement_pct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td style="text-align: right;">543470</td>
+<td style="text-align: right;">2.6905</td>
+<td style="text-align: right;">2.6947</td>
+<td style="text-align: right;">3.9699</td>
+<td style="text-align: right;">3.9670</td>
+<td style="text-align: right;">-0.1557%</td>
+<td style="text-align: right;">0.0736%</td>
+</tr>
+<tr>
+<td>1</td>
+<td style="text-align: right;">5490</td>
+<td style="text-align: right;">6.3946</td>
+<td style="text-align: right;">6.2201</td>
+<td style="text-align: right;">13.0114</td>
+<td style="text-align: right;">12.3144</td>
+<td style="text-align: right;">2.7286%</td>
+<td style="text-align: right;">5.3573%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="interpretacao_2">Interpretação</h3>
+<p>Esse resultado é muito revelador:</p>
+<ul>
+<li>Em <strong>casos normais</strong> (<code>anomaly_flag = 0</code>), o modelo híbrido se comporta quase da mesma forma que o baseline.</li>
+<li>Em <strong>casos anômalos</strong> (<code>anomaly_flag = 1</code>), o modelo híbrido mostra uma melhoria clara.</li>
+</ul>
+<p>Isso é exatamente o que se esperaria observar.</p>
+<p>Os atributos de anomalia não distorcem radicalmente o modelo em períodos normais.<br />
+Em vez disso, parecem se tornar mais úteis quando o contexto é instável.</p>
+<hr />
+<h2 id="comparacao-do-lado-de-teste-por-grupo-de-anomalia">Comparação do Lado de Teste por Grupo de Anomalia</h2>
+<p>A comparação no conjunto de teste mostra:</p>
+<p><img alt="principais cidades e produtos consumidos" src="../img/Baseline_x_Hybrid.png" /></p>
+<h3 id="interpretacao_3">Interpretação</h3>
+<p>Análise dos resultados por anomaly_flag</p>
+<p>Esta tabela compara o modelo base e o modelo híbrido em dois grupos diferentes:</p>
+<p>anomaly_flag = 0: períodos normais
+anomaly_flag = 1: períodos anômalos</p>
+<p>A ideia principal é verificar se o modelo híbrido apresenta melhor desempenho, especialmente quando os dados mostram comportamento incomum.</p>
+<h4 id="1-periodos-normais-anomaly_flag-0">1. Períodos normais (anomaly_flag = 0)</h4>
+<p>Este grupo contém 271.161 observações, então representa quase todo o dataset.
+Nesse cenário, o modelo híbrido mostra uma pequena melhoria em relação ao baseline.</p>
+<p>MAE cai de 2.774 para 2.773
+Median AE cai de 1.937 para 1.930
+RMSE cai de 4.285 para 4.258
+Max AE cai de 186.173 para 161.018</p>
+<p>A melhoria percentual é pequena:</p>
+<p>Melhoria de MAE: cerca de 0,05%
+Melhoria de RMSE: cerca de 0,64%</p>
+<p>Isso significa que, em períodos normais, ambos os modelos se comportam de forma muito semelhante.
+O modelo híbrido é ligeiramente melhor, mas o ganho é modesto. Isso é esperado, porque em períodos estáveis o modelo base já apresenta bom desempenho.</p>
+<h4 id="2-periodos-anomalos-anomaly_flag-1">2. Períodos anômalos (anomaly_flag = 1)</h4>
+<p>Este grupo contém apenas 2.566 observações, então é muito menor, mas também mais importante do ponto de vista de negócio, porque são os casos difíceis.</p>
+<p>Aqui, o modelo híbrido apresenta desempenho de forma mais claramente melhor do que o baseline:</p>
+<p>MAE cai de 3.516 para 3.409
+Median AE cai de 2.224 para 2.128
+RMSE cai de 7.931 para 7.522
+Max AE cai de 263.094 para 245.972</p>
+<p>As melhorias são muito mais relevantes:</p>
+<p>Melhoria de MAE: cerca de 3,05%
+Melhoria de RMSE: cerca de 5,15%</p>
+<p>Este é um resultado importante. Ele sugere que a abordagem híbrida ajuda mais quando o padrão é incomum ou mais difícil de prever. Em outras palavras, a informação relacionada à anomalia parece adicionar sinal útil exatamente onde o problema de previsão é mais complexo.</p>
+<h4 id="3-comparacao-entre-periodos-normais-e-anomalos">3. Comparação entre períodos normais e anômalos</h4>
+<p>A tabela também mostra que períodos anômalos são naturalmente mais difíceis para ambos os modelos.</p>
+<p>Por exemplo:</p>
+<p>Em períodos normais, o RMSE do baseline é 4.285
+Em períodos anômalos, o RMSE do baseline sobe para 7.931</p>
+<p>O mesmo acontece com MAE e Max AE.
+Isso indica que períodos anômalos contêm mais incerteza, mais volatilidade ou padrões mais difíceis de aprender.</p>
+<p>Por isso, o fato de o modelo híbrido melhorar de forma mais forte no grupo anômalo é significativo. Não é apenas uma melhoria estatística, mas também um sinal de que o componente de detecção de anomalias pode estar ajudando o modelo de previsão a focar em situações difíceis.</p>
+<h4 id="4-interpretacao-final">4. Interpretação final</h4>
+<p>No geral, os resultados sugerem o seguinte:</p>
+<p>O modelo híbrido não prejudica o desempenho em períodos normais
+Ele traz ganhos pequenos, mas positivos, em situações estáveis
+Ele traz ganhos mais relevantes em períodos anômalos
+Ele também reduz o erro máximo, o que é útil porque erros muito grandes podem ser custosos em cenários reais</p>
+<h4 id="interpretacao_4">Interpretação</h4>
+<p>Globalmente, os ganhos são modestos, o que é esperado porque a maioria dos registros não é anômala.</p>
+<p>No entanto, o projeto se torna muito mais convincente quando observamos <strong>onde</strong> os ganhos acontecem:</p>
+<ul>
+<li>o modelo híbrido não está melhorando principalmente os casos fáceis</li>
+<li>ele está melhorando os segmentos mais difíceis e menos estáveis</li>
+</ul>
+<p>Esse é um argumento forte a favor do design híbrido.</p>
+<hr />
+<h2 id="por-que-o-modelo-hibrido-importa">Por que o Modelo Híbrido Importa</h2>
+<p>Uma pergunta justa é:</p>
+<blockquote>
+<p>Se o ganho geral não é tão grande, por que o modelo híbrido é importante?</p>
+</blockquote>
+<p>Porque em muitos problemas reais de negócio, o principal valor não vem de tornar casos já estáveis um pouco melhores.<br />
+Ele vem de reduzir o erro quando o comportamento se torna anormal.</p>
+<p>Este projeto mostra exatamente esse padrão:</p>
+<ul>
+<li>períodos estáveis: desempenho quase equivalente</li>
+<li>períodos instáveis: melhor controle de erro com modelagem sensível a anomalias</li>
+</ul>
+<p>Isso torna o modelo híbrido estrategicamente valioso.</p>
+<hr />
+<h2 id="analise-de-interpretabilidade-com-shap">Análise de Interpretabilidade com SHAP</h2>
+<p>O projeto usa <strong>SHAP</strong> para entender o modelo híbrido.</p>
+<p>Esse é um passo importante porque, uma vez que atributos de anomalia são introduzidos, torna-se necessário explicar se eles realmente influenciam o modelo e como interagem com os outros preditores.</p>
+<p><img alt="Gráfico de dependência SHAP" src="../img/Dependence_plot01.png" /></p>
+<h3 id="atributos-mais-relevantes-reportados">Atributos mais relevantes reportados</h3>
+<p>A análise SHAP destaca atributos como:</p>
+<ul>
+<li><code>numeric__quantity_vs_mean_7d</code></li>
+<li><code>numeric__quantity_sum_mean_7d</code></li>
+<li><code>numeric__quantity_pct_vs_mean_7d</code></li>
+<li><code>numeric__order_count</code></li>
+<li><code>numeric__total_price_vs_mean_30d</code></li>
+<li><code>numeric__customer_count</code></li>
+</ul>
+<h3 id="interpretacao_5">Interpretação</h3>
+<p>Esse ranking de atributos é coerente com a lógica de negócio do projeto.</p>
+<p>O modelo é conduzido principalmente por:</p>
+<ul>
+<li>desvio em relação ao comportamento recente</li>
+<li>nível local recente de demanda</li>
+<li>intensidade de pedidos</li>
+<li>concentração de clientes</li>
+<li>contexto relativo a janelas históricas curtas e médias</li>
+</ul>
+<p>Isso é um sinal muito bom, porque mostra que o modelo está aprendendo uma estrutura significativa de demanda, em vez de depender de ruído arbitrário.</p>
+<h3 id="papel-dos-sinais-de-anomalia-no-shap">Papel dos sinais de anomalia no SHAP</h3>
+<p><img alt="waterfall shap" src="../img/Waterfall_plot.png" /></p>
+<p>Por que o Modelo Previu Alta Demanda<br />
+O gráfico waterfall explica como o nosso modelo híbrido ajustou sua previsão para um evento específico de alto impacto. Partindo de uma linha de base de 253.12, o modelo levou em conta vários sinais importantes para chegar a uma previsão final de 828.91.  </p>
+<p>Embora o valor real tenha sido 867.00, o modelo híbrido foi muito mais preciso do que o baseline (que previu 781.09), reduzindo o erro de previsão em 47.82 unidades.</p>
+<p>Em última análise, este caso prova que a abordagem híbrida se destaca ao capturar comportamentos “incomuns” que modelos padrão podem deixar passar, aproximando muito mais a previsão da realidade durante eventos críticos de vendas.</p>
+<hr />
+<h2 id="interpretacao-das-principais-metricas">Interpretação das Principais Métricas</h2>
+<p><img alt=" " src="../img/Baseline_x_Hybrid.png" /></p>
+<h3 id="mae-erro-absoluto-medio">MAE — Erro Absoluto Médio</h3>
+<p>O MAE mede a diferença absoluta média entre a previsão e o valor real.</p>
+<p>Em termos práticos:</p>
+<ul>
+<li>ele informa quão distante a previsão está da realidade em média</li>
+<li>é fácil de interpretar</li>
+<li>é menos sensível a erros extremos do que o RMSE</li>
+</ul>
+<p>Para este projeto, o MAE é útil para entender o erro típico da previsão.</p>
+<h3 id="rmse-raiz-do-erro-quadratico-medio">RMSE — Raiz do Erro Quadrático Médio</h3>
+<p>O RMSE também mede erro de previsão, mas penaliza erros grandes com mais força.</p>
+<p>Em termos práticos:</p>
+<ul>
+<li>ele dá mais peso a erros severos</li>
+<li>é muito útil quando grandes erros são especialmente indesejáveis</li>
+<li>ajuda a detectar se o modelo está tendo dificuldade em casos complexos</li>
+</ul>
+<p>Neste projeto, o RMSE é especialmente importante porque o modelo híbrido melhora de forma mais forte em períodos anômalos, onde grandes erros têm maior probabilidade de ocorrer.</p>
+<h3 id="r2-coeficiente-de-determinacao">R² — Coeficiente de Determinação</h3>
+<p>O R² indica quanto da variância do alvo é explicada pelo modelo.</p>
+<p>Um R² muito alto é esperado aqui porque o projeto usa um conjunto rico de atributos gerados e um modelo forte baseado em árvores.<br />
+Ainda assim, o R² sozinho não é suficiente para comparar modelos neste contexto.<br />
+MAE e RMSE são mais informativos para entender a qualidade da previsão.</p>
+<hr />
+<h2 id="forcas-metodologicas">Forças Metodológicas</h2>
+<p>Este projeto tem vários pontos fortes:</p>
+<h3 id="1-estrutura-clara-de-pipeline">1. Estrutura clara de pipeline</h3>
+<p>O trabalho não é uma exploração solta em notebook.<br />
+Ele segue uma sequência reproduzível do dado bruto até a avaliação.</p>
+<h3 id="2-qualidade-dos-dados-antes-da-modelagem">2. Qualidade dos dados antes da modelagem</h3>
+<p>O projeto valida regras antes da engenharia de atributos e do treinamento.</p>
+<h3 id="3-design-sensivel-ao-tempo">3. Design sensível ao tempo</h3>
+<p>A divisão treino/teste respeita o tempo:</p>
+<ul>
+<li>treino: 2021–2022</li>
+<li>teste: 2023</li>
+</ul>
+<h3 id="4-consciencia-sobre-leakage">4. Consciência sobre leakage</h3>
+<p>O modelo de anomalia também é treinado apenas no período histórico.</p>
+<h3 id="5-forte-engenharia-de-atributos">5. Forte engenharia de atributos</h3>
+<p>Sliding windows, razões, estatísticas móveis e sinais sensíveis ao contexto estão bem alinhados com a lógica de previsão.</p>
+<h3 id="6-arquitetura-hibrida">6. Arquitetura híbrida</h3>
+<p>O projeto combina aprendizado não supervisionado e supervisionado de forma significativa.</p>
+<h3 id="7-explicabilidade">7. Explicabilidade</h3>
+<p>O uso de SHAP torna o projeto mais robusto e mais fácil de defender tecnicamente.</p>
+<h3 id="8-benchmark-orientado-por-segmento">8. Benchmark orientado por segmento</h3>
+<p>Comparar os modelos por grupo de anomalia é muito mais informativo do que comparar apenas uma métrica global.</p>
+<hr />
+<h2 id="conclusao-final">Conclusão Final</h2>
+<p>Este projeto mostra que:</p>
+<ul>
+<li>um modelo base forte de previsão já pode apresentar ótimo desempenho</li>
+<li>adicionar consciência de anomalia não precisa melhorar todos os casos igualmente</li>
+<li>o valor real do modelo híbrido aparece nos períodos mais difíceis, instáveis e incomuns</li>
+</ul>
+<p>O benchmark final indica que a combinação <strong>Isolation Forest + LightGBM</strong> é uma abordagem válida e tecnicamente defensável.</p>
+<p>A conclusão mais importante não é apenas:</p>
+<blockquote>
+<p>“O modelo híbrido melhorou?”</p>
+</blockquote>
+<p>Mas sim:</p>
+<blockquote>
+<p>“Onde ele melhorou, e por que isso importa?”</p>
+</blockquote>
+<p>Neste projeto, a resposta é clara:</p>
+<ul>
+<li>o modelo híbrido é especialmente útil em contextos anômalos</li>
+<li>ele reduz o erro de forma mais significativa onde o problema é mais difícil</li>
+<li>o SHAP confirma que o modelo se apoia em atributos temporais e contextuais coerentes</li>
+<li>a arquitetura geral é consistente com um fluxo real de engenharia de ML</li>
+</ul>
+<hr />
+<h2 id="resumo-executivo-sugerido">Resumo Executivo Sugerido</h2>
+<p>Este projeto desenvolveu um pipeline híbrido de previsão de demanda para vendas de bebidas usando LightGBM, Isolation Forest e SHAP.<br />
+Após validar a qualidade dos dados e construir atributos temporais com sliding windows, duas estratégias de previsão foram comparadas: um modelo base e um modelo híbrido sensível a anomalias.</p>
+<p>Os resultados mostram que o baseline já é muito forte, mas o modelo híbrido entrega os ganhos mais relevantes em períodos anômalos, onde a previsão é naturalmente mais difícil.<br />
+Isso torna a abordagem híbrida especialmente valiosa do ponto de vista de negócio, já que os maiores e mais instáveis erros costumam ser os mais custosos.</p>
+<h2 id="notas">Notas</h2>
+<p>Este não é apenas um notebook de previsão.<br />
+É um projeto estruturado de machine learning que conecta:</p>
+<ul>
+<li>disciplina de engenharia de dados</li>
+<li>design de atributos temporais</li>
+<li>modelagem sensível a anomalias</li>
+<li>explicabilidade</li>
+<li>e avaliação orientada por benchmark</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
