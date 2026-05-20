@@ -324,6 +324,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#export-parquet-to-api-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Export parquet to API project
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1887,6 +1898,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#export-parquet-to-api-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Export parquet to API project
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2659,7 +2681,7 @@
              <small>A documentação é mantida em inglês para garantir consistência técnica e evitar retrabalho na documentação.</small></p>
 <p><img alt="techinical infographic" src="img/InfoGraphic50.png" /></p>
 <h2 id="dataset">Dataset</h2>
-<p><br><small>https://www.kaggle.com/datasets/sebastianwillmann/beverage-sales</small></p>
+<p><br><a https://www.kaggle.com/datasets/sebastianwillmann/beverage-sales" target="_blank">🌐 Pesquisar o artigo/dataset do Kaggle DataSet</a></p>
 <h2 id="overview">Overview</h2>
 <p>This project proposes a <strong>hybrid forecasting pipeline for beverage sales</strong> that combines:</p>
 <ul>
@@ -2706,6 +2728,14 @@ Because of that, this project investigates whether <strong>anomaly-aware forecas
 <li><code>07_Interpretability_SHAP_Analysis.ipynb</code></li>
 <li><code>08_performance_benchmarking.ipynb</code></li>
 </ol>
+<hr />
+<h3 id="export-parquet-to-api-project">Export parquet to API project</h3>
+<ul>
+<li>To finalize the model, a compressed Parquet file is generated to be used in the API project. It is only required in the Beverage-Sales API project because the API relies on historical data to return responses, due to the use of a Sliding Window.
+Location (data/exports)</li>
+<li>📦<code>anomaly_predictions_api.parquet</code></li>
+</ul>
+<p><img alt="parquet schema" src="img/esquema_parquets.png" /></p>
 <hr />
 <h2 id="project-storytelling">Project Storytelling</h2>
 <p><img alt="main cities and products consumed" src="img/MAP_P40.png" /></p>
