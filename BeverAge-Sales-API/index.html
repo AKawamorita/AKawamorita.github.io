@@ -280,6 +280,34 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parquet-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parquet file
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#endpoints-identificados" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -520,6 +548,33 @@
   
   
     <li class="md-nav__item">
+      <a href="docker_ptbr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker e chamadas (PTBR)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="documentation_eng/" class="md-nav__link">
         
   
@@ -612,6 +667,34 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parquet-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parquet file
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -853,6 +936,21 @@
 <li>executa o modelo final de predição</li>
 <li>devolve o resultado em JSON</li>
 </ol>
+<h2 id="data">Data<a class="headerlink" href="#data" title="Permanent link">&para;</a></h2>
+<h3 id="parquet-file">Parquet file<a class="headerlink" href="#parquet-file" title="Permanent link">&para;</a></h3>
+<p>In the Beverage-Sales project, the notebook 04_anomaly_detection.ipynb generates the compressed Parquet file:
+📦 anomaly_predictions_api.parquet</p>
+<p>Inside the API repository, this file must be placed in the following directory: app/data</p>
+<p>To ensure the API can access this data, references need to be updated in two configuration files (which has already been set up in this version):
+🛠️ app/src/config/src_config.py
+🛠️ app/core/config.py
+<br> --- --- ---<br>
+No projeto Beverage-Sales, o notebook 04_anomaly_detection.ipynb gera o arquivo Parquet compactado:
+📦 anomaly_predictions_api.parquet</p>
+<p>No projeto da API, este arquivo deve ser armazenado no diretório: app/data</p>
+<p>Para que a API consuma esses dados, é necessário atualizar o caminho em dois arquivos de configuração (o que já foi implementado nesta versão):
+🛠️ app/src/config/src_config.py
+🛠️ app/core/config.py</p>
 <h2 id="endpoints-identificados">Endpoints Identificados<a class="headerlink" href="#endpoints-identificados" title="Permanent link">&para;</a></h2>
 <h3 id="get-health"><code>GET /health</code><a class="headerlink" href="#get-health" title="Permanent link">&para;</a></h3>
 <p>Endpoint simples para verificação de disponibilidade da API.</p>

@@ -1,0 +1,268 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Beverage-Sales
+meta:
+  id: wrk_52b4395cd8fd40588d749355a5691d0d
+  created: 1778331963796
+  modified: 1778331963796
+  description: ""
+collection:
+  - url: http://localhost:8060/api/v1/health
+    name: Health
+    meta:
+      id: req_4b978b5c4fca47c9afa535c615e5498d
+      created: 1778332005482
+      modified: 1779301639004
+      isPrivate: false
+      description: ""
+      sortKey: -1778332005482
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8060/api/v1/debug/full-check
+    name: FullCheck
+    meta:
+      id: req_a8483a1e886f46a4962f2a229aae98b7
+      created: 1778332454013
+      modified: 1779301644360
+      isPrivate: false
+      description: ""
+      sortKey: -1778332454013
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8060/api/v1/predict
+    name: Predict
+    meta:
+      id: req_f04dd09bf2804d778d9bbc01b090f95e
+      created: 1778332500976
+      modified: 1779301698840
+      isPrivate: false
+      description: ""
+      sortKey: -1778332500976
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "Order_ID": "ORD1",
+          "Customer_ID": "CUS1496",
+          "Customer_Type": "B2B",
+          "Product": "Vio Wasser",
+          "Category": "Water",
+          "Unit_Price": 1.66,
+          "Quantity": 53,
+          "Discount": 0.10,
+          "Total_Price": 79.18,
+          "Region": "Baden-Württemberg",
+          "Order_Date": "2023-08-23"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc3OTMwNTI2OX0.OX-Jr-XGU6bKOsNVScJh8o8tiLV0qnvx3hAQVndQtC0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8060/api/v1/login
+    name: Login
+    meta:
+      id: req_3c98afb15d02427e8fc9c993837e256a
+      created: 1778332566203
+      modified: 1779301668804
+      isPrivate: false
+      description: ""
+      sortKey: -1778332566203
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "username": "admin",
+          "password": "123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+    authentication:
+      type: none
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8062/api/v1/login
+    name: docker_Login
+    meta:
+      id: req_d8db50e8f1e54b5589f161a0d1084a7d
+      created: 1778408864401
+      modified: 1778409082457
+      isPrivate: false
+      description: ""
+      sortKey: -1778408864401
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "username": "admin",
+          "password": "123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8062/api/v1/health
+    name: docker_Health
+    meta:
+      id: req_83ebf2dc67bb46a39562d777d050119a
+      created: 1778408896749
+      modified: 1778408932495
+      isPrivate: false
+      description: ""
+      sortKey: -1778408896749
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8062/api/v1/debug/full-check
+    name: docker_FullCheck
+    meta:
+      id: req_0c1a3f2f0c67423292c39c6483d41a80
+      created: 1778408952081
+      modified: 1778408983304
+      isPrivate: false
+      description: ""
+      sortKey: -1778408952081
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8062/api/v1/predict
+    name: docker_predict
+    meta:
+      id: req_3da42486dbb34e17882088d6237e1ee7
+      created: 1778409094290
+      modified: 1778409196030
+      isPrivate: false
+      description: ""
+      sortKey: -1778409094290
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "Order_ID": "ORD1",
+          "Customer_ID": "CUS1496",
+          "Customer_Type": "B2B",
+          "Product": "Vio Wasser",
+          "Category": "Water",
+          "Unit_Price": 1.66,
+          "Quantity": 53,
+          "Discount": 0.10,
+          "Total_Price": 79.18,
+          "Region": "Baden-Württemberg",
+          "Order_Date": "2023-08-23"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTc3ODQxMjY4M30.xhc41Onhr2fEQM0avJrIV1_RXVjpHBi2PD09RXo_wIo
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_5f7176cd386f6e4be30a05c9591ac3f1af8e745d
+    created: 1778331963816
+    modified: 1778331963816
+environments:
+  name: Base Environment
+  meta:
+    id: env_5f7176cd386f6e4be30a05c9591ac3f1af8e745d
+    created: 1778331963810
+    modified: 1778331963810
+    isPrivate: false
