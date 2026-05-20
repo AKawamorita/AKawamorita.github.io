@@ -615,15 +615,19 @@
   <h1>Docker e chamadas (PTBR)</h1>
 
 <h2 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h2>
-<p>Foi utilizado um container docker, demonstrando o deploy, é importante avisar que devido a caracteristicas da solução (série temporal, 
-dependencia de histórico, geração de sliding window) se faz necessário o uso de uma base de dados, o correto seria usar um banco de 
-dados em um container e gravar os dados porém para simplificar o projeto em portfolio doi utilizado um arquivo parket, gerado no 
-projeto Beverage-Sales, o notebook 04_anomaly_detection.ipynb gera o arquivo Parquet compactado:
-📦 anomaly_predictions_api.parquet</p>
-<p>No projeto da API, este arquivo deve ser armazenado no diretório: app/data</p>
-<p>Para que a API consuma esses dados, é necessário atualizar o caminho em dois arquivos de configuração (o que já foi implementado nesta versão):
+<p>Deploy e Infraestrutura
+A solução foi containerizada utilizando Docker. Devido à natureza do modelo (série temporal com dependência de histórico e geração de sliding window), a aplicação exige persistência de dados. Em um cenário de produção, o ideal seria utilizar um banco de dados dedicado em um container à parte; contudo, para simplificar a arquitetura deste portfólio, optou-se pelo uso de um arquivo Parquet.</p>
+<p>Fluxo de Dados e Configuração
+O arquivo compactado 📦 anomaly_predictions_api.parquet é gerado previamente no projeto Beverage-Sales através do notebook 04_anomaly_detection.ipynb.</p>
+<p>Para o funcionamento correto da API, siga as instruções abaixo:</p>
+<p>Armazenamento: Certifique-se de que o arquivo gerado está mapeado no diretório:
+app/data/anomaly_predictions_api.parquet</p>
+<p>Configuração de Caminhos: Para que a API consuma esses dados, os caminhos de leitura já mapeiam esse diretório nos arquivos de configuração do projeto (implementado por padrão nesta versão):
+<br>
 🛠️ app/src/config/src_config.py
-🛠️ app/core/config.py</p>
+<br>
+🛠️ app/core/config.py
+<br></p>
 <h4 id="dockercommpose">dockerCommpose<a class="headerlink" href="#dockercommpose" title="Permanent link">&para;</a></h4>
 <p>Utilize o arquivo, anexo ao projeto: docker-compose.yml</p>
 <p>A imagem abaixo demonstra o uso.
