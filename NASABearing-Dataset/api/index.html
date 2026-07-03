@@ -7357,7 +7357,8 @@ treino do regressor e a persistência do modelo em disco.</p>
 <span class="normal">80</span>
 <span class="normal">81</span>
 <span class="normal">82</span>
-<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TrainXGBModel</span> <span class="p">:</span>
+<span class="normal">83</span>
+<span class="normal">84</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TrainXGBModel</span> <span class="p">:</span>
 
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Orquestra o treino do modelo final XGBoost utilizando hiperparâmetros otimizados.</span>
@@ -7420,7 +7421,8 @@ treino do regressor e a persistência do modelo em disco.</p>
 <span class="sd">            model: Objeto do modelo treinado.</span>
 <span class="sd">            path (str): Caminho de destino para gravação.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="n">path_params</span> <span class="o">=</span> <span class="n">MODELS</span> <span class="o">/</span> <span class="n">path</span>
+        <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">path_params</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">load_best_model</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
@@ -7523,8 +7525,7 @@ treino do regressor e a persistência do modelo em disco.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src\models\train_xgb.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">72</span>
-<span class="normal">73</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">73</span>
 <span class="normal">74</span>
 <span class="normal">75</span>
 <span class="normal">76</span>
@@ -7534,7 +7535,8 @@ treino do regressor e a persistência do modelo em disco.</p>
 <span class="normal">80</span>
 <span class="normal">81</span>
 <span class="normal">82</span>
-<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@staticmethod</span>
+<span class="normal">83</span>
+<span class="normal">84</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@staticmethod</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_best_model</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Carrega um modelo previamente salvo.</span>
@@ -7733,7 +7735,8 @@ treino do regressor e a persistência do modelo em disco.</p>
 <span class="normal">67</span>
 <span class="normal">68</span>
 <span class="normal">69</span>
-<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@staticmethod</span>
+<span class="normal">70</span>
+<span class="normal">71</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@staticmethod</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">save_best_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Salva o modelo treinado em formato binário (.pkl ou .joblib).</span>
@@ -7742,7 +7745,8 @@ treino do regressor e a persistência do modelo em disco.</p>
 <span class="sd">        model: Objeto do modelo treinado.</span>
 <span class="sd">        path (str): Caminho de destino para gravação.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="n">path_params</span> <span class="o">=</span> <span class="n">MODELS</span> <span class="o">/</span> <span class="n">path</span>
+    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">path_params</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
