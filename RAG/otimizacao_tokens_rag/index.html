@@ -636,14 +636,11 @@
 <li>exemplos de consultas.</li>
 </ul>
 <p>Com isso, o sistema evita enviar páginas inteiras de documentação ao LLM e passa a enviar apenas os trechos mais relevantes para a pergunta.</p>
-<h2 id="5-estrategia-recomendada-para-o-projeto">5. Estratégia Recomendada para o Projeto</h2>
-<p>Para este projeto, a otimização de tokens pode ser considerada da seguinte forma:</p>
+<p>Possiveis melhorias:</p>
 <ol>
-<li>Manter prompts estruturados, com instruções fixas no início e pergunta do usuário no final, favorecendo Prompt Caching.</li>
-<li>Usar Reranking para reduzir a quantidade de chunks enviados ao LLM.</li>
-<li>Considerar Semantic Caching caso o sistema passe a receber perguntas repetitivas ou muito semelhantes.</li>
+<li>Neste projeto específico acredito que considerar Semantic Caching caso o sistema passe a receber perguntas repetitivas ou muito semelhantes.</li>
 <li>Organizar a documentação em Markdown com Hierarchical Chunking, separando tabelas, campos, regras e exemplos.</li>
-<li>Priorizar poucos chunks de alta relevância em vez de muitos chunks genéricos.</li>
+<li>Na próxima evolução, seria interessante priorizar poucos chunks de alta relevância em vez de muitos chunks genéricos.</li>
 </ol>
 
 
