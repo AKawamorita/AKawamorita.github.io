@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="PharmaDemand: forecasting farmacêutico D+15 com LightGBM, XGBoost, AutoETS e Stacking Ridge Meta; validação temporal, benchmarks estatísticos e roadmap de BI.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#102c43">
+<title>PharmaDemand | Documentação técnica — Stacking D+15</title>
+<style>
+:root{color-scheme:light;--navy:#102c43;--deep:#0c2336;--accent:#138a86;--blue:#3376ae;--bg:#f3f7fa;--paper:#fff;--ink:#193247;--muted:#5b7284;--border:#dbe6ec;--shadow:0 12px 36px rgba(15,43,63,.07);--radius:16px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:35px}body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.75 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}button,a{font:inherit}a{color:#166a9c;text-underline-offset:3px}a:hover{color:#0c4f77}img{max-width:100%;height:auto}.layout{display:grid;grid-template-columns:285px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;background:var(--deep);color:#d9e7f0;padding:29px 20px;overflow-y:auto;scrollbar-color:#557186 #102c43}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:white;font-weight:750;letter-spacing:-.4px;font-size:18px}.brand:hover{color:#fff}.brand-icon{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#10a6a1,#276f9c);color:#fff;font-weight:850}.sidebar .subtitle{font-size:11px;text-transform:uppercase;letter-spacing:1.35px;color:#91afc2;margin:32px 0 12px 10px}.nav{display:flex;flex-direction:column;gap:2px}.nav-item{display:block;color:#cadbe5;text-decoration:none;font-size:12.8px;line-height:1.4;padding:9px 12px;border-radius:8px}.nav-item:hover,.nav-item.active{background:#214359;color:white}.nav-sub{font-size:12px;padding-left:25px;color:#aac4d5}.sidebar-foot{margin-top:25px;border-top:1px solid #36546a;padding:18px 8px 0;color:#a4c0d0;font-size:12px}.main{min-width:0}.topbar{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:19px 54px;border-bottom:1px solid var(--border);background:#fff}.action{border:1px solid #c9dce5;border-radius:8px;padding:7px 13px;background:white;color:#26495e;cursor:pointer;text-decoration:none;font-size:12px;font-weight:650}.action:hover{background:#eef6f8}.menu-btn{display:none}.wrap{max-width:1170px;margin:auto;padding:45px 54px 90px}.eyebrow{display:inline-block;color:#087e80;font-weight:760;font-size:11.5px;text-transform:uppercase;letter-spacing:1.7px}.hero{background:linear-gradient(125deg,#102f49 0%,#164962 55%,#127b82 125%);color:white;border-radius:22px;padding:42px 47px 35px;box-shadow:var(--shadow)}.hero h1{font-size:clamp(28px,3vw,43px);font-weight:780;line-height:1.17;margin:10px 0 13px;letter-spacing:-1px;max-width:900px}.hero p{max-width:820px;color:#d9eaf0;margin:0;font-size:15px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 0}.chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.20);padding:5px 10px;border-radius:50px;font-size:11.5px;color:#e8f5f7}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:20px 0 34px}.stat{background:white;border:1px solid var(--border);border-radius:13px;padding:18px;box-shadow:0 3px 12px rgba(20,50,75,.025)}.stat .k{font-size:23px;font-weight:760;letter-spacing:-.7px;line-height:1.2;color:#0e394b}.stat .t{font-size:11px;color:var(--muted);margin-top:5px}.status-note{padding:13px 18px;border-radius:10px;background:#e8f3f5;border:1px solid #c7e5e3;color:#315c62;font-size:12.5px;margin-bottom:20px}.doc{background:white;border-radius:18px;box-shadow:var(--shadow);padding:32px 48px 65px;overflow:hidden}.doc h2{font-size:25px;font-weight:770;letter-spacing:-.5px;color:#10364b;border-top:1px solid #e8eef2;padding-top:32px;margin:42px 0 17px}.doc h2:first-child{margin-top:0;border:0;padding-top:0}.doc h3{font-size:18.5px;letter-spacing:-.3px;color:#12506a;margin:30px 0 13px}.anchor{margin-left:9px;text-decoration:none;opacity:0;font-size:.62em;color:#83a5b2}.doc h2:hover .anchor,.doc h3:hover .anchor{opacity:1}.doc p{margin:13px 0 17px}.doc li{padding-left:2px;margin:5px 0}.doc ul,.doc ol{padding-left:24px}.doc strong{color:#132f42}.doc code{font-size:.91em;background:#eef5f8;padding:2px 5px;border-radius:4px;color:#14516b}.doc pre{background:#0b2236;color:#e3eef5;border-radius:11px;padding:19px;overflow:auto;font:12.5px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}.doc pre code{background:none;color:inherit;padding:0;white-space:pre}.table-scroll{overflow:auto;max-width:100%;margin:23px 0;border:1px solid var(--border);border-radius:12px;scrollbar-color:#adc8d6 transparent}.doc table{border-collapse:separate;border-spacing:0;width:100%;font-size:13.5px;line-height:1.55}.doc th,.doc td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid #e5eef2;min-width:95px}.doc th{background:#eaf3f7;color:#1a4761;font-weight:760;white-space:nowrap}.doc tr:last-child td{border-bottom:0}.doc tbody tr:nth-child(even){background:#fbfdfe}.doc td:first-child{font-weight:540}.doc blockquote.note{margin:19px 0 25px;border-left:4px solid #31a6a1;padding:15px 19px;background:#ecf8f6;border-radius:0 9px 9px 0;color:#365b63}.doc blockquote.note p{margin:2px 0}.document-figure{margin:26px 0 33px;text-align:center;border:1px solid var(--border);border-radius:13px;padding:17px;background:#f9fcfe}.document-figure img{display:block;width:auto;max-height:650px;margin:auto;object-fit:contain;box-shadow:0 2px 15px rgba(0,0,0,.06);border-radius:6px}.document-figure figcaption,.flow-figure figcaption{color:#637e8c;font-size:12px;margin:11px 0 0}.flow-figure{padding:15px;margin:24px 0 28px;background:#f8fbfc;border:1px solid var(--border);border-radius:13px}.diagram{overflow:auto;padding:5px}.diagram svg{display:block;width:100%;height:auto;min-width:600px;max-height:1200px}.source-code summary{font-weight:600;font-size:12px;color:#507283;cursor:pointer;margin:15px 0 10px}.source-code pre{max-height:380px}.footer{color:#708697;font-size:12px;margin:24px auto 0;text-align:center}.nav-overlay{display:none}.footnote{font-size:12px;color:#637a8a}::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-thumb{background:#afc2cd;border-radius:8px}
+@media(max-width:1120px){.layout{grid-template-columns:230px minmax(0,1fr)}.wrap{padding:30px}.doc{padding:26px 30px 40px}.topbar{padding:17px 30px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){.layout{display:block}.sidebar{position:fixed;left:0;top:0;width:min(84vw,320px);z-index:50;transform:translateX(-102%);transition:transform .25s ease;box-shadow:20px 0 60px #06182733}.sidebar.open{transform:translateX(0)}.nav-overlay.open{display:block;position:fixed;inset:0;background:#071f3080;z-index:40}.menu-btn{display:inline-flex;margin-right:auto}.topbar{padding:13px 16px}.wrap{padding:18px 13px 52px}.hero{border-radius:15px;padding:29px 23px}.stats{gap:9px}.stat{padding:14px}.doc{padding:19px 16px 30px;border-radius:13px}.doc h2{font-size:22px}.doc h3{font-size:17px}.doc table{font-size:12px}.doc th,.doc td{padding:10px}.diagram svg{min-width:550px}}
+@media print{body{background:#fff;font-size:11px}.layout{display:block}.sidebar,.topbar,.nav-overlay{display:none!important}.wrap{padding:0;margin:0;max-width:none}.hero{background:#eef4f6!important;color:#142f42!important;box-shadow:none;padding:18px 20px;border:1px solid #a5cbd1;break-inside:avoid}.hero p,.chip{color:#355365}.chip{border-color:#c4d9dc}.stats{grid-template-columns:repeat(4,1fr);margin:12px 0}.stat{box-shadow:none;padding:10px}.doc{box-shadow:none;padding:0}.doc h2{break-after:avoid;font-size:18px}.doc h3{break-after:avoid;font-size:14px}.doc table,.document-figure,.flow-figure{break-inside:avoid}.document-figure img{max-height:380px}.anchor{display:none}.table-scroll{overflow:visible}.doc table{font-size:9px}.doc th,.doc td{padding:6px}.diagram svg{min-width:auto;max-height:650px}}
+</style>
+</head>
+<body>
+<div class="nav-overlay" aria-hidden="true"></div>
+<div class="layout">
+<aside class="sidebar" aria-label="Navegação do documento">
+<a class="brand" href="#inicio"><span class="brand-icon" aria-hidden="true">P</span><span>PharmaDemand</span></a>
+<div class="subtitle">Documentação técnica</div><nav class="nav" aria-label="Seções do README"><a class="nav-item " href="#1-problema-de-negocio"><span>1. Problema de negócio</span></a>
+<a class="nav-item " href="#2-objetivos-e-escopo-atual"><span>2. Objetivos e escopo atual</span></a>
+<a class="nav-item nav-sub" href="#2-1-por-que-manter-todas-as-categorias-em-um-unico-treinamento"><span>2.1. Por que manter todas as categorias em um único treinamento?</span></a>
+<a class="nav-item " href="#3-arquitetura-atual-e-justificativas-dos-modelos"><span>3. Arquitetura atual e justificativas dos modelos</span></a>
+<a class="nav-item nav-sub" href="#3-1-papel-e-escolha-dos-tres-modelos-base"><span>3.1. Papel e escolha dos três modelos-base</span></a>
+<a class="nav-item nav-sub" href="#3-2-por-que-ridge-regression-como-metamodelo"><span>3.2. Por que Ridge Regression como metamodelo?</span></a>
+<a class="nav-item nav-sub" href="#3-3-comparacao-tecnica-ridge-meta-arvore-de-decisao-como-metamodelo"><span>3.3. Comparação técnica: Ridge Meta × árvore de decisão como metamodelo</span></a>
+<a class="nav-item nav-sub" href="#3-4-modelos-externos-ao-stacking"><span>3.4. Modelos externos ao stacking</span></a>
+<a class="nav-item " href="#4-preparacao-dos-dados"><span>4. Preparação dos dados</span></a>
+<a class="nav-item " href="#5-validacao-metodologia-e-resultados"><span>5. Validação, metodologia e resultados</span></a>
+<a class="nav-item nav-sub" href="#5-1-procedimento-de-avaliacao-d-15"><span>5.1. Procedimento de avaliação D+15</span></a>
+<a class="nav-item nav-sub" href="#5-2-resultados-disponiveis-do-experimento-global-d-15"><span>5.2. Resultados disponíveis do experimento global D+15</span></a>
+<a class="nav-item nav-sub" href="#5-3-criterios-para-promover-um-modelo"><span>5.3. Critérios para promover um modelo</span></a>
+<a class="nav-item " href="#6-roadmap-de-execucao"><span>6. Roadmap de execução</span></a>
+<a class="nav-item nav-sub" href="#6-1-visao-executiva-planejada-looker-studio"><span>6.1. Visão Executiva planejada (Looker Studio)</span></a>
+<a class="nav-item " href="#7-organizacao-sugerida-do-repositorio"><span>7. Organização sugerida do repositório</span></a>
+<a class="nav-item " href="#8-tecnologias-e-estado-de-uso"><span>8. Tecnologias e estado de uso</span></a>
+<a class="nav-item " href="#9-limitacoes-e-proximos-cuidados"><span>9. Limitações e próximos cuidados</span></a></nav>
+<div class="sidebar-foot">Forecasting D+15 · Portfólio técnico <br>linkedin.com/in/alexandrekawamorita/ <br>Atualização do README: 06/11/2026</div>
+</aside>
+<main class="main" id="inicio">
+<div class="topbar"><button type="button" class="action menu-btn" aria-expanded="false" aria-label="Abrir índice">☰ Índice</button><a class="action" href="#1-problema-de-negocio">Explorar documentação</a><button type="button" class="action" onclick="window.print()">Imprimir / Salvar PDF</button></div>
+<div class="wrap">
+<header class="hero">
+<span class="eyebrow" style="color:#a6e5df">Projeto de portfólio · Em desenvolvimento<p></span>
+<h1>Forecasting de Vendas Farmacêuticas</h1>
+<p>Previsão diária D+15 com treinamento global em oito categorias ATC, ensemble stacking e comparação objetiva de desempenho fora da amostra.</p>
+<div class="chips"><span class="chip">LightGBM · XGBoost · AutoETS</span><span class="chip">Ridge Meta</span><span class="chip">SARIMAX independente</span><span class="chip">Prophet P80 planejado</span><span class="chip">Looker Studio planejado</span></div>
+</header>
+<div class="stats" aria-label="Resumo do experimento">
+<div class="stat"><div class="k">D+15</div><div class="t">Horizonte de previsão principal</div></div>
+<div class="stat"><div class="k">8 ATCs</div><div class="t">Categorias em treinamento global</div></div>
+<div class="stat"><div class="k">4,5812</div><div class="t">RMSE LightGBM · champion</div></div>
+<div class="stat"><div class="k">≈ 4,8063</div><div class="t">RMSE Stacking 3 modelos · challenger</div></div>
+</div>
+<p class="status-note"><strong>Escopo:</strong> resultados experimentais em holdout. CSV de reporting, Looker Studio, Prophet P80 calibrado e Databricks estão previstos no roadmap, não implantados em produção.</p>
+<article class="doc" id="documentacao">
+<blockquote class="note"><p><strong>Projeto de portfólio em desenvolvimento</strong> · Machine Learning · Séries temporais · Detecção de anomalias · Ensemble Learning · Business Intelligence (planejado)</p>
+</blockquote>
+<p>O <strong>PharmaDemand (PharmaMed)</strong> é um projeto de previsão de vendas diárias no varejo farmacêutico com dados agrupados por <strong>categorias ATC</strong>. O horizonte atualmente priorizado é <strong>D+15</strong> (previsão do valor diário exatamente 15 dias após a origem), com estudos anteriores em <strong>D+7</strong>.</p>
+<p>A solução utiliza <strong>LightGBM, XGBoost e AutoETS</strong> como modelos-base e <strong>Ridge Regression como metamodelo</strong> (<em>stacking</em>). O <strong>SARIMAX</strong> permanece independente, como benchmark estatístico, enquanto o <strong>Prophet P80</strong> é previsto para a análise de cenários conservadores de demanda. O projeto não pressupõe que o stacking seja superior ao melhor modelo individual, apesar que em todas as situações não ocorreu isto ele perdeu para o melhor modelo por muito pouco.</p>
+<p>O trabalho está dividido em duas frentes: <strong>(1) engenharia temporal, modelagem, treinamento e avaliação</strong> e <strong>(2) disponibilização das previsões, visualização executiva, monitoramento e MLOps</strong>. O primeiro bloco possui experimentos executados; a operacionalização do segundo ainda está no roadmap.</p>
+<p><strong>Estado de referência (30/10/2026):</strong> stacking global D+15 com três modelos-base já experimentado e comparado no holdout; <strong>LightGBM apresentou o menor RMSE global</strong> nos resultados disponíveis. Documentação, exportação CSV e dashboard executivo no Looker Studio são as próximas entregas; não há alegação de implantação corporativa ou integração já concluída com Databricks.</p>
+<p><figure class="document-figure"><a href="docs/roadmap.png" target="_blank" rel="noopener" title="Abrir imagem em tamanho original"><img src="docs/roadmap.png" alt="Roadmap do PharmaMed" loading="lazy"></a><figcaption>Roadmap do PharmaMed</figcaption></figure></p>
+<h2 id="1-problema-de-negocio">1. Problema de negócio<a class="anchor" href="#1-problema-de-negocio" title="Link para esta seção" aria-label="Link para esta seção">#</a></h2>
+<p>Estimar a demanda de curto prazo pode apoiar estudos de:</p>
+<ul>
+<li>planejamento de reposição e avaliação de cenários de estoque;</li>
+<li>identificação de variações e comportamentos atípicos da demanda;</li>
+<li>comparação entre métodos estatísticos, ML e stacking;</li>
+<li>comunicação dos resultados por indicadores executivos e diagnósticos técnicos;</li>
+<li>monitoramento de erros, viés e eventuais desvios de comportamento dos modelos.</li>
+</ul>
+<p>A fonte é o conjunto público <strong><a href="https://www.kaggle.com/datasets/milanzdravkovic/pharma-sales-data">Pharma Sales Data</a></strong>, especialmente a tabela <code>salesdaily</code>, com séries diárias por categoria ATC. É uma base <strong>histórica de vendas</strong>, não um sistema completo de estoque, compras ou abastecimento. Por isso, o projeto <strong>não reivindica redução comprovada de rupturas, economia financeira ou validação operacional em ambiente industrial</strong>.</p>
+<h2 id="2-objetivos-e-escopo-atual">2. Objetivos e escopo atual<a class="anchor" href="#2-objetivos-e-escopo-atual" title="Link para esta seção" aria-label="Link para esta seção">#</a></h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Tabela rolável"><table>
+<thead>
+<tr>
+  <th>Item</th>
+  <th>Definição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Granularidade de origem</td>
+  <td>Diária, com identificação da categoria ATC</td>
+</tr>
+<tr>
+  <td>Abrangência</td>
+  <td>Treinamento global com as <strong>oito categorias ATC</strong> disponíveis no experimento: <code>M01AB</code>, <code>M01AE</code>, <code>N02BA</code>, <code>N02BE</code>, <code>N05B</code>, <code>N05C</code>, <code>R03</code> e <code>R06</code></td>
+</tr>
+<tr>
+  <td>Base do MVP</td>
+  <td><code>salesdaily</code> e features derivadas</td>
+</tr>
+<tr>
+  <td>Horizonte principal atual</td>
+  <td><strong>D+15</strong>; D+7 permanece como estudo separado</td>
+</tr>
+<tr>
+  <td>Alvo</td>
+  <td><code>quantity</code>: vendas/quantidade diária por categoria na data-alvo</td>
+</tr>
+<tr>
+  <td>Modelos-base do stacking</td>
+  <td><strong>LightGBM + XGBoost + AutoETS</strong></td>
+</tr>
+<tr>
+  <td>Metamodelo</td>
+  <td><strong>Ridge Regression</strong> sobre as três previsões-base, com categoria como informação adicional de ajuste</td>
+</tr>
+<tr>
+  <td>Fora do stacking</td>
+  <td><strong>SARIMAX</strong>: benchmark estatístico independente; <strong>Prophet P80</strong>: cenário conservador, sujeito a validação de cobertura</td>
+</tr>
+<tr>
+  <td>Anomalias</td>
+  <td>Isolation Forest e seus indicadores, na engenharia de features e na análise, quando compatíveis com o protocolo temporal</td>
+</tr>
+<tr>
+  <td>Avaliação</td>
+  <td>MAE, RMSE, R², WAPE, Bias, quantidade de previsões e, para P80, cobertura empírica</td>
+</tr>
+<tr>
+  <td>Visualização planejada</td>
+  <td>Uma <strong>Visão Executiva</strong> no Looker Studio, a partir de <strong>CSV</strong></td>
+</tr>
+<tr>
+  <td>Integração futura</td>
+  <td>Databricks, FastAPI, observabilidade e alertas automatizados</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Decisão de simplificação:</strong> o <strong>Ridge Base foi retirado</strong>. O único Ridge da arquitetura principal é o <strong>metamodelo</strong>. A exclusão do quarto modelo-base praticamente não mudou o RMSE global do stacking nos testes disponíveis, reduzindo custo de manutenção e complexidade operacional.</p>
+<h3 id="2-1-por-que-manter-todas-as-categorias-em-um-unico-treinamento">2.1. Por que manter todas as categorias em um único treinamento?<a class="anchor" href="#2-1-por-que-manter-todas-as-categorias-em-um-unico-treinamento" title="Link para esta seção" aria-label="Link para esta seção">#</a></h3>
+<p>A escolha por <strong>treinamento global</strong> é deliberada, não um ajuste cosmético do dashboard:</p>
+<ol>
+<li><strong>Amostragem e variabilidade:</strong> nos experimentos por categoria, algumas séries apresentaram poucas observações úteis e/ou baixa variabilidade; modelos isolados tiveram dificuldade de generalizar e chegaram a produzir R² negativo.</li>
+<li><strong>Maior base de aprendizagem:</strong> reunir as categorias permite que LightGBM e XGBoost aprendam padrões temporais comuns em um conjunto mais amplo, em vez de ajustar vários modelos com menos dados cada.</li>
+<li><strong>Menor risco de sobreajuste local e menor manutenção:</strong> um treinamento global simplifica tuning, controle de versões, validação, inferência e atualização do pipeline.</li>
+<li><strong>Padronização da comparação:</strong> os três modelos-base e o metamodelo podem ser comparados no mesmo holdout, mantendo as oito categorias no mesmo processo.</li>
+<li><strong>Arquitetura extensível:</strong> o identificador da categoria permanece nos dados; futuramente é possível testar interações, efeitos específicos ou segmentações sem abandonar o pipeline global.</li>
+</ol>
+<p><strong>Limitação importante:</strong> treinamento global <strong>não garante melhor desempenho em todas as ATCs</strong>. Padrões heterogêneos podem ser mascarados pelas métricas agregadas. Portanto, a <strong>Visão Executiva exibirá indicadores consolidados</strong>, mas a <strong>avaliação técnica continuará calculando os erros por categoria</strong>, mesmo que não seja necessário publicar uma página adicional no Looker. O identificador ATC deverá permanecer no CSV para auditoria e investigação.</p>
+<h2 id="3-arquitetura-atual-e-justificativas-dos-modelos">3. Arquitetura atual e justificativas dos modelos<a class="anchor" href="#3-arquitetura-atual-e-justificativas-dos-modelos" title="Link para esta seção" aria-label="Link para esta seção">#</a></h2>
+<figure class="flow-figure"><div class="diagram"><!-- Generated by graphviz version 2.42.4 (0)
+ -->
+<!-- Title: architecture Pages: 1 -->
+<svg class="architecture-svg" role="img" aria-label="Arquitetura PharmaDemand: LightGBM, XGBoost e AutoETS combinados pelo Ridge Meta; SARIMAX e Prophet P80 externos ao stacking; CSV e Looker Studio planejados"
+ viewBox="0.00 0.00 812.00 648.00" xmlns="http://www.w3.org/2000/svg" >
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(18 630)">
+<title>architecture</title>
+<!-- data -->
+<g id="node1" class="node">
+<title>data</title>
+<path fill="#dcecf5" stroke="#8fb4d0" stroke-width="1.2" d="M229.5,-612C229.5,-612 78.5,-612 78.5,-612 72.5,-612 66.5,-606 66.5,-600 66.5,-600 66.5,-588 66.5,-588 66.5,-582 72.5,-576 78.5,-576 78.5,-576 229.5,-576 229.5,-576 235.5,-576 241.5,-582 241.5,-588 241.5,-588 241.5,-600 241.5,-600 241.5,-606 235.5,-612 229.5,-612"/>
+<text text-anchor="middle" x="154" y="-591.3" font-family="Arial" font-size="11.50" fill="#183247">salesdaily\n8 categorias ATC</text>
+</g>
+<!-- prep -->
+<g id="node2" class="node">
+<title>prep</title>
+<path fill="#e7f2f8" stroke="#c7d8e3" stroke-width="1.2" d="M242,-540C242,-540 66,-540 66,-540 60,-540 54,-534 54,-528 54,-528 54,-516 54,-516 54,-510 60,-504 66,-504 66,-504 242,-504 242,-504 248,-504 254,-510 254,-516 254,-516 254,-528 254,-528 254,-534 248,-540 242,-540"/>
+<text text-anchor="middle" x="154" y="-519.3" font-family="Arial" font-size="11.50" fill="#183247">Engenharia temporal\npor origem</text>
+</g>
+<!-- data&#45;&gt;prep -->
+<g id="edge1" class="edge">
+<title>data&#45;&gt;prep</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" d="M154,-575.7C154,-566.97 154,-556.24 154,-546.75"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="156.28,-546.6 154,-540.1 151.73,-546.6 156.28,-546.6"/>
+</g>
+<!-- light -->
+<g id="node3" class="node">
+<title>light</title>
+<path fill="#e2edf9" stroke="#a9c5e5" stroke-width="1.2" d="M84,-468C84,-468 32,-468 32,-468 26,-468 20,-462 20,-456 20,-456 20,-444 20,-444 20,-438 26,-432 32,-432 32,-432 84,-432 84,-432 90,-432 96,-438 96,-444 96,-444 96,-456 96,-456 96,-462 90,-468 84,-468"/>
+<text text-anchor="middle" x="58" y="-447.3" font-family="Arial" font-size="11.50" fill="#183247">LightGBM</text>
+</g>
+<!-- prep&#45;&gt;light -->
+<g id="edge2" class="edge">
+<title>prep&#45;&gt;light</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" d="M130.27,-503.7C117.13,-494.12 100.71,-482.14 86.83,-472.02"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="88.05,-470.1 81.46,-468.1 85.37,-473.77 88.05,-470.1"/>
+</g>
+<!-- xgb -->
+<g id="node4" class="node">
+<title>xgb</title>
+<path fill="#e2edf9" stroke="#a9c5e5" stroke-width="1.2" d="M177.5,-468C177.5,-468 130.5,-468 130.5,-468 124.5,-468 118.5,-462 118.5,-456 118.5,-456 118.5,-444 118.5,-444 118.5,-438 124.5,-432 130.5,-432 130.5,-432 177.5,-432 177.5,-432 183.5,-432 189.5,-438 189.5,-444 189.5,-444 189.5,-456 189.5,-456 189.5,-462 183.5,-468 177.5,-468"/>
+<text text-anchor="middle" x="154" y="-447.3" font-family="Arial" font-size="11.50" fill="#183247">XGBoost</text>
+</g>
+<!-- prep&#45;&gt;xgb -->
+<g id="edge3" class="edge">
+<title>prep&#45;&gt;xgb</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" d="M154,-503.7C154,-494.97 154,-484.24 154,-474.75"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="156.28,-474.6 154,-468.1 151.73,-474.6 156.28,-474.6"/>
+</g>
+<!-- ets -->
+<g id="node5" class="node">
+<title>ets</title>
+<path fill="#e2edf9" stroke="#a9c5e5" stroke-width="1.2" d="M270,-468C270,-468 224,-468 224,-468 218,-468 212,-462 212,-456 212,-456 212,-444 212,-444 212,-438 218,-432 224,-432 224,-432 270,-432 270,-432 276,-432 282,-438 282,-444 282,-444 282,-456 282,-456 282,-462 276,-468 270,-468"/>
+<text text-anchor="middle" x="247" y="-447.3" font-family="Arial" font-size="11.50" fill="#183247">AutoETS</text>
+</g>
+<!-- prep&#45;&gt;ets -->
+<g id="edge4" class="edge">
+<title>prep&#45;&gt;ets</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" d="M176.99,-503.7C189.71,-494.12 205.63,-482.14 219.07,-472.02"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="220.45,-473.83 224.28,-468.1 217.71,-470.2 220.45,-473.83"/>
+</g>
+<!-- sarimax -->
+<g id="node10" class="node">
+<title>sarimax</title>
+<path fill="#f4f4fa" stroke="#cacbe6" stroke-width="1.2" d="M472,-612C472,-612 276,-612 276,-612 270,-612 264,-606 264,-600 264,-600 264,-588 264,-588 264,-582 270,-576 276,-576 276,-576 472,-576 472,-576 478,-576 484,-582 484,-588 484,-588 484,-600 484,-600 484,-606 478,-612 472,-612"/>
+<text text-anchor="middle" x="374" y="-591.3" font-family="Arial" font-size="11.50" fill="#183247">SARIMAX\nbenchmark independente</text>
+</g>
+<!-- prep&#45;&gt;sarimax -->
+<g id="edge14" class="edge">
+<title>prep&#45;&gt;sarimax</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" stroke-dasharray="5,2" d="M207.78,-540.11C239.9,-550.33 280.76,-563.33 313.94,-573.89"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="313.58,-576.16 320.46,-575.97 314.96,-571.83 313.58,-576.16"/>
+</g>
+<!-- prophet -->
+<g id="node11" class="node">
+<title>prophet</title>
+<path fill="#f4f4fa" stroke="#cacbe6" stroke-width="1.2" d="M764,-612C764,-612 518,-612 518,-612 512,-612 506,-606 506,-600 506,-600 506,-588 506,-588 506,-582 512,-576 518,-576 518,-576 764,-576 764,-576 770,-576 776,-582 776,-588 776,-588 776,-600 776,-600 776,-606 770,-612 764,-612"/>
+<text text-anchor="middle" x="641" y="-591.3" font-family="Arial" font-size="11.50" fill="#183247">Prophet P80\ncenário conservador (planejado)</text>
+</g>
+<!-- prep&#45;&gt;prophet -->
+<g id="edge15" class="edge">
+<title>prep&#45;&gt;prophet</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" stroke-dasharray="5,2" d="M254.1,-537.39C329.85,-548.28 434.38,-563.3 515.69,-574.99"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="515.73,-577.29 522.49,-575.97 516.38,-572.79 515.73,-577.29"/>
+</g>
+<!-- oof -->
+<g id="node6" class="node">
+<title>oof</title>
+<path fill="#fff6e7" stroke="#dcc08c" stroke-width="1.2" d="M259,-396C259,-396 49,-396 49,-396 43,-396 37,-390 37,-384 37,-384 37,-372 37,-372 37,-366 43,-360 49,-360 49,-360 259,-360 259,-360 265,-360 271,-366 271,-372 271,-372 271,-384 271,-384 271,-390 265,-396 259,-396"/>
+<text text-anchor="middle" x="154" y="-375.3" font-family="Arial" font-size="11.50" fill="#183247">Previsões OOF temporais\nem memória</text>
+</g>
+<!-- light&#45;&gt;oof -->
+<g id="edge5" class="edge">
+<title>light&#45;&gt;oof</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" d="M81.73,-431.7C94.87,-422.12 111.29,-410.14 125.17,-400.02"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="126.63,-401.77 130.54,-396.1 123.95,-398.1 126.63,-401.77"/>
+</g>
+<!-- holdout -->
+<g id="node8" class="node">
+<title>holdout</title>
+<path fill="#f2f7fa" stroke="#c7d8e3" stroke-width="1.2" d="M296,-252C296,-252 12,-252 12,-252 6,-252 0,-246 0,-240 0,-240 0,-228 0,-228 0,-222 6,-216 12,-216 12,-216 296,-216 296,-216 302,-216 308,-222 308,-228 308,-228 308,-240 308,-240 308,-246 302,-252 296,-252"/>
+<text text-anchor="middle" x="154" y="-231.3" font-family="Arial" font-size="11.50" fill="#183247">Avaliação cronológica\nmodelos individuais + stacking</text>
+</g>
+<!-- light&#45;&gt;holdout -->
+<g id="edge10" class="edge">
+<title>light&#45;&gt;holdout</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" stroke-dasharray="5,2" d="M96.15,-436.03C102.99,-433.7 108,-432 108,-432 108,-432 282,-396 282,-396 282,-396 282,-360 282,-360 282,-360 250,-288 250,-288 250,-288 217.72,-270.18 190.6,-255.21"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="191.69,-253.21 184.9,-252.06 189.49,-257.19 191.69,-253.21"/>
+</g>
+<!-- xgb&#45;&gt;oof -->
+<g id="edge6" class="edge">
+<title>xgb&#45;&gt;oof</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" d="M154,-431.7C154,-422.97 154,-412.24 154,-402.75"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="156.28,-402.6 154,-396.1 151.73,-402.6 156.28,-402.6"/>
+</g>
+<!-- xgb&#45;&gt;holdout -->
+<g id="edge11" class="edge">
+<title>xgb&#45;&gt;holdout</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" stroke-dasharray="5,2" d="M189.62,-436.12C196.18,-433.74 201,-432 201,-432 201,-432 322,-396 322,-396 322,-396 322,-360 322,-360 322,-360 305,-288 305,-288 305,-288 252.08,-269.43 208.9,-254.27"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="209.5,-252.07 202.61,-252.06 207.99,-256.36 209.5,-252.07"/>
+</g>
+<!-- ets&#45;&gt;oof -->
+<g id="edge7" class="edge">
+<title>ets&#45;&gt;oof</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" d="M224.01,-431.7C211.29,-422.12 195.37,-410.14 181.93,-400.02"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="183.29,-398.2 176.72,-396.1 180.55,-401.83 183.29,-398.2"/>
+</g>
+<!-- ets&#45;&gt;holdout -->
+<g id="edge12" class="edge">
+<title>ets&#45;&gt;holdout</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" stroke-dasharray="5,2" d="M276.62,-431.94C303.51,-416.45 339,-396 339,-396 339,-396 339,-360 339,-360 339,-360 326,-288 326,-288 326,-288 264.98,-269.2 215.63,-253.99"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="216.25,-251.8 209.37,-252.06 214.91,-256.15 216.25,-251.8"/>
+</g>
+<!-- meta -->
+<g id="node7" class="node">
+<title>meta</title>
+<path fill="#dbf1ea" stroke="#7fb8a4" stroke-width="1.7" d="M226.5,-324C226.5,-324 81.5,-324 81.5,-324 75.5,-324 69.5,-318 69.5,-312 69.5,-312 69.5,-300 69.5,-300 69.5,-294 75.5,-288 81.5,-288 81.5,-288 226.5,-288 226.5,-288 232.5,-288 238.5,-294 238.5,-300 238.5,-300 238.5,-312 238.5,-312 238.5,-318 232.5,-324 226.5,-324"/>
+<text text-anchor="middle" x="154" y="-303.3" font-family="Arial" font-size="11.50" fill="#183247">Ridge Meta\nstacking D+15</text>
+</g>
+<!-- oof&#45;&gt;meta -->
+<g id="edge8" class="edge">
+<title>oof&#45;&gt;meta</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" d="M154,-359.7C154,-350.97 154,-340.24 154,-330.75"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="156.28,-330.6 154,-324.1 151.73,-330.6 156.28,-330.6"/>
+</g>
+<!-- meta&#45;&gt;holdout -->
+<g id="edge9" class="edge">
+<title>meta&#45;&gt;holdout</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" d="M154,-287.7C154,-278.97 154,-268.24 154,-258.75"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="156.28,-258.6 154,-252.1 151.73,-258.6 156.28,-258.6"/>
+</g>
+<!-- compare -->
+<g id="node9" class="node">
+<title>compare</title>
+<path fill="#e7f2f8" stroke="#c7d8e3" stroke-width="1.2" d="M279.5,-180C279.5,-180 28.5,-180 28.5,-180 22.5,-180 16.5,-174 16.5,-168 16.5,-168 16.5,-156 16.5,-156 16.5,-150 22.5,-144 28.5,-144 28.5,-144 279.5,-144 279.5,-144 285.5,-144 291.5,-150 291.5,-156 291.5,-156 291.5,-168 291.5,-168 291.5,-174 285.5,-180 279.5,-180"/>
+<text text-anchor="middle" x="154" y="-159.3" font-family="Arial" font-size="11.50" fill="#183247">Comparação de modelos\nprevisões e métricas</text>
+</g>
+<!-- holdout&#45;&gt;compare -->
+<g id="edge13" class="edge">
+<title>holdout&#45;&gt;compare</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" d="M154,-215.7C154,-206.97 154,-196.24 154,-186.75"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="156.28,-186.6 154,-180.1 151.73,-186.6 156.28,-186.6"/>
+</g>
+<!-- csv -->
+<g id="node12" class="node">
+<title>csv</title>
+<path fill="#f5faf8" stroke="#c7d8e3" stroke-width="1.2" stroke-dasharray="5,2" d="M230,-108C230,-108 78,-108 78,-108 72,-108 66,-102 66,-96 66,-96 66,-84 66,-84 66,-78 72,-72 78,-72 78,-72 230,-72 230,-72 236,-72 242,-78 242,-84 242,-84 242,-96 242,-96 242,-102 236,-108 230,-108"/>
+<text text-anchor="middle" x="154" y="-87.3" font-family="Arial" font-size="11.50" fill="#183247">CSV consolidado\nplanejado</text>
+</g>
+<!-- compare&#45;&gt;csv -->
+<g id="edge18" class="edge">
+<title>compare&#45;&gt;csv</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" stroke-dasharray="5,2" d="M154,-143.7C154,-134.97 154,-124.24 154,-114.75"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="156.28,-114.6 154,-108.1 151.73,-114.6 156.28,-114.6"/>
+</g>
+<!-- sarimax&#45;&gt;compare -->
+<g id="edge16" class="edge">
+<title>sarimax&#45;&gt;compare</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" stroke-dasharray="1,5" d="M362.41,-575.94C351.89,-560.45 338,-540 338,-540 338,-540 338,-504 338,-504 338,-504 356,-396 356,-396 356,-396 356,-360 356,-360 356,-360 346,-288 346,-288 346,-288 319,-216 319,-216 319,-216 260.7,-197.27 213.41,-182.08"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="214,-179.88 207.12,-180.06 212.61,-184.22 214,-179.88"/>
+</g>
+<!-- prophet&#45;&gt;compare -->
+<g id="edge17" class="edge">
+<title>prophet&#45;&gt;compare</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" stroke-dasharray="1,5" d="M627.38,-575.82C568.88,-502.07 342,-216 342,-216 342,-216 275.03,-197.12 221.03,-181.9"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="221.39,-179.64 214.52,-180.06 220.16,-184.01 221.39,-179.64"/>
+</g>
+<!-- looker -->
+<g id="node13" class="node">
+<title>looker</title>
+<path fill="#f5faf8" stroke="#c7d8e3" stroke-width="1.2" stroke-dasharray="5,2" d="M268.5,-36C268.5,-36 39.5,-36 39.5,-36 33.5,-36 27.5,-30 27.5,-24 27.5,-24 27.5,-12 27.5,-12 27.5,-6 33.5,0 39.5,0 39.5,0 268.5,0 268.5,0 274.5,0 280.5,-6 280.5,-12 280.5,-12 280.5,-24 280.5,-24 280.5,-30 274.5,-36 268.5,-36"/>
+<text text-anchor="middle" x="154" y="-15.3" font-family="Arial" font-size="11.50" fill="#183247">Looker Studio\nVisão Executiva (planejada)</text>
+</g>
+<!-- csv&#45;&gt;looker -->
+<g id="edge19" class="edge">
+<title>csv&#45;&gt;looker</title>
+<path fill="none" stroke="#8fa9bb" stroke-width="1.25" stroke-dasharray="5,2" d="M154,-71.7C154,-62.97 154,-52.24 154,-42.75"/>
+<polygon fill="#8fa9bb" stroke="#8fa9bb" stroke-width="1.25" points="156.28,-42.6 154,-36.1 151.73,-42.6 156.28,-42.6"/>
+</g>
+</g>
+</svg></div><figcaption>Esquema da arquitetura D+15: treinamento OOF e benchmarks independentes. Etapas futuras aparecem com bordas tracejadas.</figcaption><details class="source-code"><summary>Ver código Mermaid original</summary><pre><code>flowchart TD
+    A[&quot;salesdaily / todas as categorias ATC&quot;] --&gt; B[&quot;Engenharia temporal e preparação por origem&quot;]
+    B --&gt; L[&quot;LightGBM&quot;]
+    B --&gt; X[&quot;XGBoost&quot;]
+    B --&gt; E[&quot;AutoETS / histórico temporal&quot;]
+    L --&gt; O[&quot;Previsões OOF temporais em memória&quot;]
+    X --&gt; O
+    E --&gt; O
+    O --&gt; M[&quot;Ridge Meta — stacking global D+15&quot;]
+    M --&gt; H[&quot;Avaliação no holdout cronológico&quot;]
+    L --&gt; H
+    X --&gt; H
+    E --&gt; H
+    H --&gt; P[&quot;Comparação, previsões e métricas&quot;]
+    B --&gt; S[&quot;SARIMAX — benchmark independente&quot;]
+    B --&gt; Q[&quot;Prophet P80 — cenário conservador&quot;]
+    S --&gt; P
+    Q --&gt; P
+    P --&gt; C[&quot;CSV consolidado — planejado&quot;]
+    C --&gt; D[&quot;Looker Studio — Visão Executiva planejada&quot;]
+</code></pre></details></figure>
+<blockquote class="note"><p><strong>Nota sobre o diagrama:</strong> o SARIMAX e o Prophet P80 <strong>não participam do essemble e nem fornecem entradas ao Ridge Meta</strong>. A preparação de histórico necessária ao AutoETS é diferente da matriz tabular dos modelos de boosting. O fluxo do Prophet P80 é uma extensão de comparação/planejamento, não uma etapa já validada no mesmo holdout.</p>
+</blockquote>
+<h3 id="3-1-papel-e-escolha-dos-tres-modelos-base">3.1. Papel e escolha dos três modelos-base<a class="anchor" href="#3-1-papel-e-escolha-dos-tres-modelos-base" title="Link para esta seção" aria-label="Link para esta seção">#</a></h3>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Tabela rolável"><table>
+<thead>
+<tr>
+  <th>Modelo</th>
+  <th>Por que foi escolhido</th>
+  <th>Pontos fortes</th>
+  <th>Limitações a monitorar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>LightGBM</strong></td>
+  <td>Bom desempenho no experimento global; referência atual (<em>champion</em>)</td>
+  <td>Aprende relações não lineares, interações e efeitos de lags/estatísticas móveis com boa eficiência</td>
+  <td>Depende de engenharia correta de features; pode degradar com mudanças de regime e vazamento temporal</td>
+</tr>
+<tr>
+  <td><strong>XGBoost</strong></td>
+  <td>Alternativa de <em>gradient boosting</em> para observar erros complementares aos do LightGBM</td>
+  <td>Flexível, robusto a interações não lineares, permite regularização</td>
+  <td>Pode produzir erros altamente correlacionados aos do LightGBM e acrescentar pouco ao ensemble</td>
+</tr>
+<tr>
+  <td><strong>AutoETS</strong></td>
+  <td>Introduz uma família <strong>estatística</strong> diferente dos dois modelos de árvores</td>
+  <td>Captura componentes de nível, tendência e sazonalidade por série, com menos dependência de features tabulares</td>
+  <td>Pode responder pior a mudanças abruptas, anomalias e padrões exógenos; exige atualização correta do histórico disponível na origem</td>
+</tr>
+</tbody>
+</table></div>
+<p>A composição busca <strong>diversidade de hipóteses</strong>, não apenas a inclusão de algoritmos populares. LightGBM e XGBoost compartilham a família de boosting, mas podem divergir em regularização e erros; AutoETS fornece uma referência estatística estruturalmente distinta. <strong>Essa complementaridade é uma hipótese a validar</strong>, pois diversidade teórica não implica necessariamente ganho de RMSE.</p>
+<p><strong>Isolation Forest:</strong> permanece como componente de detecção e análise de anomalias. Caso <code>anomaly_score</code> ou <code>is_anomaly</code> respeita o corte temporal de cada previsão; a compatibilidade do pré-processamento existente ainda exige auditoria antes de uso operacional. Por enquanto existe uma &quot;percepcao&quot; que as features do Isolation Forest estão sendo usados. Mas um estudo mais robusto usando SHAP (Summary Plot e Dependence Plot) , avaliando justamente o uso da feature esta sendo avaliado.</p>
+<h3 id="3-2-por-que-ridge-regression-como-metamodelo">3.2. Por que Ridge Regression como metamodelo?<a class="anchor" href="#3-2-por-que-ridge-regression-como-metamodelo" title="Link para esta seção" aria-label="Link para esta seção">#</a></h3>
+<p>O Ridge Meta recebe, para cada origem e categoria, as previsões <strong><code>pred_lightgbm</code></strong>, <strong><code>pred_xgboost</code></strong> e <strong><code>pred_autoets</code></strong>. A implementação atual também considera <code>category</code> para permitir ajustes de intercepto por categoria. Os coeficientes são aprendidos a partir de previsões <strong>OOF (<em>out-of-fold</em>) temporais</strong>, e não diretamente sobre previsões geradas no próprio conjunto de ajuste dos modelos-base.</p>
+<p>O objetivo é aprender uma <strong>combinação linear regularizada</strong> que reduza o erro fora da amostra. A penalização L2 ajuda a estabilizar os coeficientes quando LightGBM e XGBoost produzem previsões correlacionadas. A escolha favorece um metamodelo relativamente simples, transparente e menos flexível do que uma árvore de decisão.</p>
+<h3 id="3-3-comparacao-tecnica-ridge-meta-arvore-de-decisao-como-metamodelo">3.3. Comparação técnica: Ridge Meta × árvore de decisão como metamodelo<a class="anchor" href="#3-3-comparacao-tecnica-ridge-meta-arvore-de-decisao-como-metamodelo" title="Link para esta seção" aria-label="Link para esta seção">#</a></h3>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Tabela rolável"><table>
+<thead>
+<tr>
+  <th>Critério</th>
+  <th><strong>Ridge Regression (escolhido)</strong></th>
+  <th><strong>Decision Tree Regressor (alternativa)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Combinação das previsões</td>
+  <td>Linear, com regularização L2</td>
+  <td>Não linear, dividida em regras/folhas</td>
+</tr>
+<tr>
+  <td>Complexidade</td>
+  <td>Baixa; poucos coeficientes para três entradas</td>
+  <td>Dependente da profundidade e do número de folhas</td>
+</tr>
+<tr>
+  <td>Dados OOF limitados</td>
+  <td>Tende a ser mais estável quando há poucos exemplos e previsores correlacionados</td>
+  <td>Maior risco de ajustar ruído ou particularidades dos folds</td>
+</tr>
+<tr>
+  <td>Interações e mudanças de regime</td>
+  <td>Não captura interações complexas sem features adicionais</td>
+  <td>Pode modelar regras condicionais, limiares e combinações locais</td>
+</tr>
+<tr>
+  <td>Interpretabilidade</td>
+  <td>Coeficientes e interceptos fáceis de inspecionar, com cautela sobre colinearidade</td>
+  <td>Regras legíveis se a árvore for pequena; complexas se crescer</td>
+</tr>
+<tr>
+  <td>Comportamento fora das faixas observadas</td>
+  <td>Extrapolação linear é possível, mas pode ser inadequada</td>
+  <td>Previsões tipicamente constantes por folha, sem extrapolação natural</td>
+</tr>
+<tr>
+  <td>Sensibilidade</td>
+  <td>Coeficientes afetados por regularização, escala e correlação</td>
+  <td>Divisões e resultados podem variar com pequenas mudanças nos dados</td>
+</tr>
+<tr>
+  <td>Motivo da decisão</td>
+  <td><strong>Simplicidade, regularização e facilidade de auditar em um MVP</strong></td>
+  <td>Manter como hipótese para experimento posterior, sem alegar que foi superada em testes ainda não executados</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="3-4-modelos-externos-ao-stacking">3.4. Modelos externos ao stacking<a class="anchor" href="#3-4-modelos-externos-ao-stacking" title="Link para esta seção" aria-label="Link para esta seção">#</a></h3>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Tabela rolável"><table>
+<thead>
+<tr>
+  <th>Modelo</th>
+  <th>Finalidade</th>
+  <th>Como avaliar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>SARIMAX</strong></td>
+  <td>Benchmark estatístico independente; alerta se um modelo complexo ficar abaixo de uma referência mais simples</td>
+  <td>Comparar MAE, RMSE, R² e WAPE <strong>nas mesmas origens/datas</strong>; resultados de experimentos com cortes diferentes não formam ranking justo</td>
+</tr>
+<tr>
+  <td><strong>Prophet P80</strong></td>
+  <td>Cenário de quantil superior da demanda para análise conservadora de planejamento</td>
+  <td>Verificar <strong>cobertura empírica</strong> (fração de realizações ≤ P80), excesso de previsão e potencial subprevisão; não julgar o P80 apenas pelo RMSE de modelos pontuais</td>
+</tr>
+</tbody>
+</table></div>
+<p>O <strong>P80 não significa acrescentar 20% à previsão</strong>. Ele representa o percentil 80 da distribuição preditiva estimada, sujeito a calibração.</p>
+<h2 id="4-preparacao-dos-dados">4. Preparação dos dados<a class="anchor" href="#4-preparacao-dos-dados" title="Link para esta seção" aria-label="Link para esta seção">#</a></h2>
+<p>A camada de engenharia de atributos considera:</p>
+<ul>
+<li><strong>Calendário:</strong> dia da semana, mês, fim de semana e demais indicadores disponíveis;</li>
+<li><strong>Defasagens:</strong> lags construídos exclusivamente com observações conhecidas na origem da previsão;</li>
+<li><strong>Janelas móveis:</strong> médias, somas e dispersões em janelas como 7, 15 e 30 dias;</li>
+<li><strong>Categoria ATC:</strong> identificador mantido para modelagem, avaliação e rastreabilidade;</li>
+<li><strong>Detecção de anomalias:</strong> indicadores do Isolation Forest, quando efetivamente disponíveis sem olhar o futuro;</li>
+<li><strong>Persistência de dados de entrada:</strong> arquivos Parquet para dados e features processados; modelos serializados como artefatos de inferência.</li>
+</ul>
+<p>Durante a inferência, as previsões dos modelos-base e do Ridge Meta são geradas <strong>em memória</strong>; não se cria um arquivo de previsões por solicitação da futura API. A exportação CSV será uma etapa <strong>deliberada de reporting</strong>, não uma dependência para executar o ensemble.</p>
+<h2 id="5-validacao-metodologia-e-resultados">5. Validação, metodologia e resultados<a class="anchor" href="#5-validacao-metodologia-e-resultados" title="Link para esta seção" aria-label="Link para esta seção">#</a></h2>
+<h3 id="5-1-procedimento-de-avaliacao-d-15">5.1. Procedimento de avaliação D+15<a class="anchor" href="#5-1-procedimento-de-avaliacao-d-15" title="Link para esta seção" aria-label="Link para esta seção">#</a></h3>
+<ol>
+<li>Separar treino e <strong>holdout cronológico</strong>, tendo como referência os últimos seis meses para avaliação.</li>
+<li>Preservar todas as categorias em cada corte e verificar o horizonte D+15, a origem da previsão e a data-alvo.</li>
+<li>Ajustar cópias temporárias dos modelos-base nos folds históricos, usando somente dados disponíveis até cada origem; reutilizar hiperparâmetros selecionados <strong>sem repetir toda a busca dos modelos-base</strong>.</li>
+<li>Gerar previsões OOF de LightGBM, XGBoost e AutoETS e treinar o Ridge Meta apenas com essas previsões e a categoria ATC.</li>
+<li>Aplicar validação temporal e embargo adequado ao horizonte na seleção de hiperparâmetros do metamodelo; manter o holdout fora do ajuste.</li>
+<li>Usar os modelos-base finais salvos e o metamodelo treinado para prever o <strong>mesmo holdout</strong>, comparando MAE, RMSE, R², WAPE e Bias, globalmente e por categoria.</li>
+<li>Para SARIMAX e Prophet P80, só acrescentar comparações quantitativas quando as previsões estiverem alinhadas às <strong>mesmas origens e datas-alvo</strong> e aos mesmos dados disponíveis.</li>
+</ol>
+<h3 id="5-2-resultados-disponiveis-do-experimento-global-d-15">5.2. Resultados disponíveis do experimento global D+15<a class="anchor" href="#5-2-resultados-disponiveis-do-experimento-global-d-15" title="Link para esta seção" aria-label="Link para esta seção">#</a></h3>
+<p>Na comparação dos modelos-base, o <strong>LightGBM</strong> foi o melhor modelo pontual em RMSE global. Os resultados do stacking com três entradas, enviados no CSV do experimento, permitem reconstruir seu RMSE global a partir dos RMSEs por categoria e seus respectivos tamanhos de amostra.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Tabela rolável"><table>
+<thead>
+<tr>
+  <th>Modelo</th>
+  <th>Papel</th>
+  <th style="text-align:right">RMSE global ↓</th>
+  <th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>LightGBM</strong></td>
+  <td>Modelo pontual principal (<em>champion</em>)</td>
+  <td style="text-align:right"><strong>4,5812</strong></td>
+  <td>Menor RMSE entre os modelos comparados</td>
+</tr>
+<tr>
+  <td>XGBoost</td>
+  <td>Modelo-base alternativo</td>
+  <td style="text-align:right">4,6795</td>
+  <td>Desempenho próximo ao LightGBM</td>
+</tr>
+<tr>
+  <td>AutoETS</td>
+  <td>Modelo-base estatístico</td>
+  <td style="text-align:right">5,0912</td>
+  <td>Contribui com abordagem diferente</td>
+</tr>
+<tr>
+  <td><strong>Stacking — 3 modelos + Ridge Meta</strong></td>
+  <td><em>Challenger</em></td>
+  <td style="text-align:right"><strong>≈ 4,8063</strong></td>
+  <td>RMSE reconstruído a partir de 8 categorias × 169 observações</td>
+</tr>
+<tr>
+  <td>Stacking anterior — 4 modelos + Ridge Meta</td>
+  <td>Experimento de ablação anterior</td>
+  <td style="text-align:right">≈ 4,8054</td>
+  <td>Diferença muito pequena em relação ao stacking de 3 modelos</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Leitura correta:</strong> a remoção do Ridge Base praticamente não alterou o RMSE global (diferença aproximada de 0,02% entre as duas variantes do stacking). Portanto, <strong>manter três modelos-base reduz complexidade sem perda global relevante demonstrada</strong>. Entretanto, <strong>o stacking ainda não supera o LightGBM no RMSE observado</strong>; não deve ser anunciado como vencedor do experimento.</p>
+<p>As oito categorias do CSV somam <strong>1.352 observações no holdout</strong>. O resultado global <strong>não elimina diferenças locais</strong>: o desempenho por ATC continua parte da auditoria técnica, inclusive onde R² é negativo ou WAPE é elevado. Ao agregar séries de escalas diferentes, R² e RMSE globais podem dar uma impressão mais favorável que a avaliação por categoria.</p>
+<p><strong>Métricas e agregação:</strong> para reproduzir o RMSE global a partir das categorias, utiliza-se a raiz da média ponderada dos <strong>RMSE²</strong>, com pesos proporcionais a <code>n</code>; não a média simples dos RMSEs. O WAPE global deve ser calculado por <code>100 × soma(|erro|) / soma(|real|)</code>, e não pela média dos WAPEs por categoria. MAE, Bias e R² do stacking de três entradas devem ser obtidos diretamente da execução correspondente, sem copiar valores do stacking antigo.</p>
+<p><figure class="document-figure"><a href="docs/Resultados.png" target="_blank" rel="noopener" title="Abrir imagem em tamanho original"><img src="docs/Resultados.png" alt="Resultados premilinares" loading="lazy"></a><figcaption>Resultados premilinares</figcaption></figure></p>
+<blockquote class="note"><p><strong>Imagem histórica preservada:</strong> <code>docs/Resultados.png</code> não foi alterada. Se ela contiver o ranking anterior, deve ser atualizada localmente antes da publicação. Resultados antigos de D+7, cortes de treino diferentes ou testes não alinhados não são comparáveis diretamente à tabela D+15 acima.</p>
+</blockquote>
+<h3 id="5-3-criterios-para-promover-um-modelo">5.3. Critérios para promover um modelo<a class="anchor" href="#5-3-criterios-para-promover-um-modelo" title="Link para esta seção" aria-label="Link para esta seção">#</a></h3>
+<p>O <strong>LightGBM</strong> permanece como <em>champion</em> com base no menor RMSE global observado. O <strong>Stacking Ridge Meta</strong> permanece como <em>challenger</em>. Antes de promover um modelo, avaliar simultaneamente: desempenho em múltiplas janelas temporais, estabilidade por categoria, Bias, WAPE, previsões negativas e custo de manutenção. A preferência por arquitetura mais complexa <strong>não substitui evidência fora da amostra</strong>.</p>
+<h2 id="6-roadmap-de-execucao">6. Roadmap de execução<a class="anchor" href="#6-roadmap-de-execucao" title="Link para esta seção" aria-label="Link para esta seção">#</a></h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Tabela rolável"><table>
+<thead>
+<tr>
+  <th>Etapa</th>
+  <th>Status em 06/11/2026</th>
+  <th>Entrega/observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Dados e engenharia temporal</td>
+  <td>✅ Experimentado</td>
+  <td>Dados processados, features e Parquet</td>
+</tr>
+<tr>
+  <td>Isolation Forest</td>
+  <td>✅ Experimentado</td>
+  <td>Scores e flags de anomalias; revisar prevenção de leakage</td>
+</tr>
+<tr>
+  <td>LightGBM</td>
+  <td>✅ Experimentado</td>
+  <td>Modelo-base e métricas D+15</td>
+</tr>
+<tr>
+  <td>XGBoost</td>
+  <td>✅ Experimentado</td>
+  <td>Modelo-base e métricas D+15</td>
+</tr>
+<tr>
+  <td>AutoETS</td>
+  <td>✅ Experimentado</td>
+  <td>Modelo-base estatístico e métricas D+15</td>
+</tr>
+<tr>
+  <td>Stacking global D+15 + Ridge Meta</td>
+  <td>✅ Experimentado</td>
+  <td>Três entradas, OOF temporal em memória e comparação no holdout</td>
+</tr>
+<tr>
+  <td>SARIMAX</td>
+  <td>✅ Experimentado isoladamente</td>
+  <td>Benchmark externo; alinhar holdout para comparação definitiva</td>
+</tr>
+<tr>
+  <td>Prophet P80</td>
+  <td>🟡 Planejado/estudo</td>
+  <td>Validar quantil e cobertura para análise conservadora</td>
+</tr>
+<tr>
+  <td>Exportação CSV consolidado</td>
+  <td>⬜ Próxima etapa</td>
+  <td>Dados de previsão e métricas para BI</td>
+</tr>
+<tr>
+  <td>Looker Studio — Visão Executiva</td>
+  <td>⬜ Próxima etapa</td>
+  <td>Painel único e indicadores executivos baseados em CSV</td>
+</tr>
+<tr>
+  <td>Insights dinâmicos</td>
+  <td>⬜ Planejado</td>
+  <td>Regras auditáveis sobre erros, desvios e cobertura</td>
+</tr>
+<tr>
+  <td>FastAPI</td>
+  <td>⬜ Planejado</td>
+  <td>Inferência sob demanda e versionamento</td>
+</tr>
+<tr>
+  <td>MLflow, Docker e observabilidade</td>
+  <td>⬜ Planejado</td>
+  <td>Reprodutibilidade e monitoramento técnico</td>
+</tr>
+<tr>
+  <td>Databricks</td>
+  <td>⬜ Fase posterior</td>
+  <td>Ingestão e análise depois de concluir o painel em CSV</td>
+</tr>
+<tr>
+  <td>LangGraph / LAYA / Groq / RAG</td>
+  <td>⬜ Fase posterior</td>
+  <td>Camada de explicações e análise assistida</td>
+</tr>
+<tr>
+  <td>Documentação</td>
+  <td>🟡 Em atualização</td>
+  <td>README, diagramas, resultados e portfólio</td>
+</tr>
+<tr>
+  <td>D+7 e horizontes maiores</td>
+  <td>🟡 Estudos separados / futuros</td>
+  <td>Não reutilizar artefatos D+15 em horizontes incompatíveis</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="note"><p>✅ indica experimentação documentada, <strong>não implantação em produção</strong>. A arquitetura, o pré-processamento, os artefatos de inferência e o protocolo temporal ainda precisam ser verificados em conjunto antes de uma operação real.</p>
+</blockquote>
+<h3 id="6-1-visao-executiva-planejada-looker-studio">6.1. Visão Executiva planejada (Looker Studio)<a class="anchor" href="#6-1-visao-executiva-planejada-looker-studio" title="Link para esta seção" aria-label="Link para esta seção">#</a></h3>
+<p>A ideia é manter <strong>uma única página</strong>, com todas as ATCs consolidadas, e o seguinte conteúdo:</p>
+<ul>
+<li><strong>KPIs:</strong> demanda prevista D+15, RMSE do <em>champion</em>, WAPE global, R² global e, quando validada, cobertura real do Prophet P80;</li>
+<li><strong>Série temporal:</strong> vendas observadas versus previsão principal, com séries opcionais de Stacking, SARIMAX e P80;</li>
+<li><strong>Comparação de modelos:</strong> métricas no mesmo período e identificação explícita do modelo principal;</li>
+<li><strong>Insights dinâmicos:</strong> alertas derivados de regras configuráveis (por exemplo, piora de RMSE, Bias fora do limite, cobertura P80 insuficiente);</li>
+<li><strong>Rastreabilidade:</strong> período, categoria, data de execução, horizonte, versão/modelo e origem das previsões.</li>
+</ul>
+<p>A <strong>visão pode ser agregada</strong>, mas o CSV deve preservar as linhas de <strong>categoria × origem × data-alvo</strong>, evitando perder a capacidade de investigar erros específicos. Para o reporting, um CSV tabular pode conter <code>forecast_origin</code>, <code>date</code>, <code>category</code>, <code>horizon_days</code>, <code>quantity</code>, <code>pred_lightgbm</code>, <code>pred_xgboost</code>, <code>pred_autoets</code>, <code>pred_stacking</code>, <code>pred_sarimax</code>, <code>pred_prophet_p80</code> e campos de versão e execução. Dados externos ainda não implementados devem ficar ausentes/nulos, <strong>nunca preenchidos com previsões inventadas</strong>.</p>
+<p><strong>D+15 diário ≠ soma de vendas dos próximos 15 dias.</strong> Caso se deseje um KPI de demanda acumulada para abastecimento, será necessário gerar/validar todos os dias do horizonte e somar previsões apropriadas, sem multiplicar simplesmente a previsão D+15.</p>
+<h2 id="7-organizacao-sugerida-do-repositorio">7. Organização sugerida do repositório<a class="anchor" href="#7-organizacao-sugerida-do-repositorio" title="Link para esta seção" aria-label="Link para esta seção">#</a></h2>
+<p>A estrutura abaixo ainda esta sendo construida as pastas abaixo já existe, poré novas pastas como (especificas para documentacao via MKDocs devem ser gerada).</p>
+<pre class="code-block"><code>PharmaDemand/
+├── README.md
+├── data/
+│   ├── raw/                    # Dataset original, quando permitido
+│   ├── features/               # Parquet de features e séries por horizonte
+│   └── exports/                # CSV consolidado para BI (planejado)
+├── notebooks/                  # EDA, modelos, backtests, stacking e reporting
+├── src/
+│   ├── features/               # Engenharia temporal e anomalias
+│   ├── models/                 # LightGBM, XGBoost, AutoETS, SARIMAX, Prophet
+│   ├── ensemble/               # OOF temporal e Ridge Meta
+│   └── evaluation/             # Métricas globais e diagnósticos por ATC
+├── models/                     # Artefatos de modelos e versionamento
+├── docs/
+│   ├── Roadmap.png
+│   └── Resultados.png
+├── tests/                      # Testes e verificações temporais (planejado)
+└── requirements.txt            # Dependências do projeto
+</code></pre>
+<h2 id="8-tecnologias-e-estado-de-uso">8. Tecnologias e estado de uso<a class="anchor" href="#8-tecnologias-e-estado-de-uso" title="Link para esta seção" aria-label="Link para esta seção">#</a></h2>
+<p><strong>Utilizadas nos experimentos:</strong> Python, Pandas, NumPy, scikit-learn, LightGBM, XGBoost, AutoETS/StatsForecast, SARIMAX/statsmodels, Isolation Forest, Parquet, Jupyter e avaliação temporal.</p>
+<p><strong>Arquitetura de análise consolidada:</strong> três modelos-base, Ridge Meta global D+15, holdout, comparação por categoria e benchmarks estatísticos independentes.</p>
+<p><strong>Em estudo/planejadas:</strong> Prophet P80 calibrado, CSV de reporting, Looker Studio, insights automáticos, FastAPI, MLflow, Docker, Databricks, LangGraph, LAYA, Groq e RAG. Esses itens <strong>não devem ser descritos como integrações concluídas</strong> antes de implementação e validação.</p>
+<p>A escolha atual é <strong>CSV → Looker Studio</strong> antes de Databricks, evitando aumentar o escopo do MVP prematuramente.</p>
+<h2 id="9-limitacoes-e-proximos-cuidados">9. Limitações e próximos cuidados<a class="anchor" href="#9-limitacoes-e-proximos-cuidados" title="Link para esta seção" aria-label="Link para esta seção">#</a></h2>
+<ul>
+<li>Dataset público de vendas; não representa um ERP ou uma cadeia real de suprimentos.</li>
+</ul>
+<p><strong>Dataset:</strong> <a href="https://www.kaggle.com/datasets/milanzdravkovic/pharma-sales-data">Kaggle — Pharma Sales Data</a>.</p>
+
+</article>
+<p class="footer">PharmaDemand — documento HTML5 gerado a partir do README.md. Imagens externas por caminhos relativos em <code>docs/</code>.</p>
+</div></main></div>
+<script>
+(() => {
+  const side=document.querySelector('.sidebar');
+  const overlay=document.querySelector('.nav-overlay');
+  const menu=document.querySelector('.menu-btn');
+  function setMenu(open){side.classList.toggle('open',open);overlay.classList.toggle('open',open);menu.setAttribute('aria-expanded',String(open));}
+  menu.addEventListener('click',()=>setMenu(!side.classList.contains('open')));
+  overlay.addEventListener('click',()=>setMenu(false));
+  document.querySelectorAll('.nav-item').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+  const navLinks=[...document.querySelectorAll('.nav-item')];
+  const targets=navLinks.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  if('IntersectionObserver' in window){
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting)return;
+        const id='#'+entry.target.id;
+        navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===id));
+      });
+    },{rootMargin:'-10% 0px -68% 0px'});
+    targets.forEach(t=>obs.observe(t));
+  }
+})();
+</script>
+</body></html>
